@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SiriusWallet</string>
+    <string name="wallet_text">КошелОк</string>
+    <string name="welcome_text">Добро пожаловать в КошелОК</string>
+    <string name="description_text">Тут вы сможете контролировать свои доходы и расходы</string>
+    <string name="buttonText">Войти с помощью Google</string>
 </resources>
