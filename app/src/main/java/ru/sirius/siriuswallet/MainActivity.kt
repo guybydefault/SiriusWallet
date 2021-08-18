@@ -15,18 +15,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     val gso: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestEmail()
         .build()
 
 
-
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             val data: Intent? = result.data
-
         }
     }
+
+    val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,20 +36,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
-
-         fun signIn() {
-            val signInIntent: Intent = mGoogleSignInClient.signInIntent
-            resultLauncher.launch(signInIntent)
-
-        }
-
-
-
         binding.identityButton.setOnClickListener {
             signIn()
         }
+    }
+
+    fun signIn() {
+        val signInIntent: Intent = mGoogleSignInClient.signInIntent
+        resultLauncher.launch(signInIntent)
     }
 
 
