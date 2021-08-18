@@ -9,5 +9,12 @@
     <item android:drawable="@drawable/ic_wallet" android:gravity="center"/>
 
 
+    <item android:top="120dp">
+        <bitmap
+        android:gravity="center"
+        android:src="@drawable/textwallet"/>
+    </item>
+
+
 
 </layer-list>

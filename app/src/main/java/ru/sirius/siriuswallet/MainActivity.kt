@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import ru.sirius.siriuswallet.databinding.ActivityMainBinding
-import androidx.core.app.ActivityCompat.startActivityForResult
+
 
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
