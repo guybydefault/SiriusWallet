@@ -1,15 +1,14 @@
 package ru.sirius.siriuswallet
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import ru.sirius.siriuswallet.databinding.ActivityOnboardingBinding
 
 
@@ -33,7 +32,7 @@ class OnBoardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.identityButton.setOnClickListener {
-           loginResultHandler.launch(getSignInIntent())
+            loginResultHandler.launch(getSignInIntent())
         }
     }
 
