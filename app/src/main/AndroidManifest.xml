@@ -10,12 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+            android:name=".MainActivity"/>
         <activity
-            android:name=".OnBoardingActivity"
-            android:exported="true" />
-        <activity android:name=".SplashActivity">
+            android:name=".OnBoardingActivity" />
+        <activity android:name=".SplashActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
