@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.sirius.siriuswallet.databinding.ActivityWalletListBinding
+import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 
 class WalletInfoActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityWalletListBinding
+    private lateinit var binding: ActivityWalletInfoBinding
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWalletListBinding.inflate(layoutInflater)
+        binding = ActivityWalletInfoBinding.inflate(layoutInflater)
         binding.backArrowBtn.setOnClickListener { onBackClick(it) }
         binding.settingsBtn.setOnClickListener { onSettingsClick(it) }
         binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick(it) }
