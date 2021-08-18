@@ -9,12 +9,14 @@ import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 
 class WalletInfoActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityWalletInfoBinding
-    private lateinit var recyclerView: RecyclerView
+    private val binding: ActivityWalletInfoBinding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivityWalletInfoBinding.inflate(
+            layoutInflater
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWalletInfoBinding.inflate(layoutInflater)
         binding.backArrowBtn.setOnClickListener { onBackClick(it) }
         binding.settingsBtn.setOnClickListener { onSettingsClick(it) }
         binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick(it) }
