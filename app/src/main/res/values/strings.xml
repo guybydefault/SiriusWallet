@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SiriusWallet</string>
     <string name="btn_add_operation">Добавить операцию</string>
+    <string name="main_font">sans-serif</string>
 </resources>

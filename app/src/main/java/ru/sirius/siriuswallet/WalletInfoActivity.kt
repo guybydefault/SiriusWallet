@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.databinding.ActivityWalletListBinding
 
-class WalletList : AppCompatActivity() {
+class WalletInfoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWalletListBinding
     private lateinit var recyclerView: RecyclerView
@@ -19,13 +19,12 @@ class WalletList : AppCompatActivity() {
         binding.backArrowBtn.setOnClickListener { onBackClick(it) }
         binding.settingsBtn.setOnClickListener { onSettingsClick(it) }
         binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick(it) }
-        recyclerView = binding.walletRecyclerView
-        recyclerView.apply {
-            adapter = WalletRecyclerViewAdapter
-            layoutManager = LinearLayoutManager(this@WalletList)
-            setHasFixedSize(true)
-        }
-
+//        recyclerView = binding.walletRecyclerView
+//        recyclerView.apply {
+//            adapter = WalletRecyclerViewAdapter
+//            layoutManager = LinearLayoutManager(this@WalletList)
+//            setHasFixedSize(true)
+//        }
         setContentView(binding.root)
     }
 
