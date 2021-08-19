@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SiriusWallet">
         <activity android:name=".WalletInfoActivity" />
+        <activity android:name=".EnterOperationSumActivity" />
+        <activity android:name=".SelectOperationCategoryActivity" />
         <activity
             android:name=".OnBoardingActivity"
             android:screenOrientation="portrait" />
