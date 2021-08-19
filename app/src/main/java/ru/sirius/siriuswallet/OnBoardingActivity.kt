@@ -42,7 +42,6 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun getSignInIntent(): Intent {
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
