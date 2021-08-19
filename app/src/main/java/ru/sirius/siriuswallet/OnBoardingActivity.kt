@@ -14,7 +14,9 @@ import ru.sirius.siriuswallet.databinding.ActivityOnboardingBinding
 
 class OnBoardingActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityOnboardingBinding
+    private val binding: ActivityOnboardingBinding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivityOnboardingBinding.inflate(layoutInflater)
+    }
 
     private val loginResultHandler =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
@@ -27,7 +29,6 @@ class OnBoardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.identityButton.setOnClickListener {
@@ -42,7 +43,6 @@ class OnBoardingActivity : AppCompatActivity() {
     }
 
     private fun getSignInIntent(): Intent {
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
