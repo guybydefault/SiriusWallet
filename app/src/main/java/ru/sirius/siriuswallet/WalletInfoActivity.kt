@@ -23,21 +23,21 @@ class WalletInfoActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.backArrowBtn.setOnClickListener { onBackClick(it) }
-        binding.settingsBtn.setOnClickListener { onSettingsClick(it) }
-        binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick(it) }
+        binding.backArrowBtn.setOnClickListener { onBackClick() }
+        binding.settingsBtn.setOnClickListener { onSettingsClick() }
+        binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick() }
     }
 
 
-    fun onBackClick(view: View) {
+    fun onBackClick() {
         Toast.makeText(this, "Back arrow click", Toast.LENGTH_LONG).show()
     }
 
-    fun onSettingsClick(view: View) {
+    fun onSettingsClick() {
         Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show()
     }
 
-    fun onAddOperationBtnClick(view: View) {
+    fun onAddOperationBtnClick() {
         val intent = Intent(this, SelectOperationCategoryActivity::class.java)
         val options = ActivityOptions.makeSceneTransitionAnimation(this);
         startActivity(intent, options.toBundle())
