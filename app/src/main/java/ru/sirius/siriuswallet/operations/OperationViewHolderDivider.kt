@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet
+package ru.sirius.siriuswallet.operations
 
 import android.content.Context
 import androidx.recyclerview.widget.DividerItemDecoration

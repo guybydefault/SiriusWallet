@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet
+package ru.sirius.siriuswallet.operations
 
 import android.content.Context
 import android.content.res.Resources
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
+import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListOperationViewBinding
 import ru.sirius.siriuswallet.model.Operation
 import java.time.format.DateTimeFormatter

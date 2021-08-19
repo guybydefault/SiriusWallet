@@ -1,10 +1,11 @@
-package ru.sirius.siriuswallet
+package ru.sirius.siriuswallet.operations
 
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
+import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListOperationViewBinding
 import ru.sirius.siriuswallet.model.Operation
 import java.math.BigDecimal

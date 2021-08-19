@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet
+package ru.sirius.siriuswallet.operations
 
 import android.app.ActivityOptions
 import android.content.Intent
@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.sirius.siriuswallet.SelectOperationCategoryActivity
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 
 class WalletInfoActivity : AppCompatActivity() {
