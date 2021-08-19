@@ -8,4 +8,5 @@
     <string name="buttonText">Войти с помощью Google</string>
     <string name="income_label">Доход</string>
     <string name="expense_label">Расход</string>
+    <string name="rub_symbol">₽</string>
 </resources>

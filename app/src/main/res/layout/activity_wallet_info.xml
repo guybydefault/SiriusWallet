@@ -60,12 +60,21 @@
         app:layout_constraintTop_toBottomOf="@id/wallet_name" />
 
     <include
+        android:id="@+id/wallet_income_expense"
         layout="@layout/wallet_income_expense_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/wallet_balance" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/operation_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/wallet_income_expense" />
 
     <Button
         android:id="@+id/add_operation_btn"
