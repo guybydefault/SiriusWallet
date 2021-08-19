@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".SelectOperationCategoryActivity">
 
+    <ImageButton
+        android:id="@+id/back_arrow_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginStart="20dp"
+        android:background="@color/white"
+        android:contentDescription="Back arrow"
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="asasdas" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

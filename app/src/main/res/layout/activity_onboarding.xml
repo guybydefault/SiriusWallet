@@ -15,7 +15,7 @@
         android:layout_marginEnd="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/onboarding"
-        app:shapeAppearanceOverlay="@style/roundImageView"
+        app:shapeAppearanceOverlay="@style/RoundImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
         android:layout_marginEnd="16dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="@string/buttonText"
+        android:text="@string/button_text"
         android:paddingVertical="14dp"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"

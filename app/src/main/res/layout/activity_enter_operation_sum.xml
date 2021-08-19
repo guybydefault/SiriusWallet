@@ -4,42 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EnterOperationSumActivity">
+    tools:context=".SelectOperationCategoryActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/navigation_bar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
+        android:background="@color/white"
+        android:minHeight="60dp"
+        app:contentInsetStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:logo="@drawable/ic_arrow_left"
+        app:title="@string/operation_sum"
+        app:titleMarginStart="44dp"
+        app:titleTextAppearance="@style/ToolbarTitleText" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/outlined_text_input_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/enter_sum_operation"
+        app:boxStrokeColor="@color/box_draw_color"
+        app:boxStrokeWidthFocused="1dp"
+
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <ImageButton
-            android:id="@+id/back_arrow_btn"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/outlined_edit_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:contentDescription="Back arrow"
-            android:src="@drawable/ic_arrow_left"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:layout_constraintLeft_toRightOf="@id/back_arrow_btn"
-            app:layout_constraintTop_toTopOf="@id/back_arrow_btn"
-            app:layout_constraintBottom_toBottomOf="@id/back_arrow_btn"
-            android:text="Введите сумму"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/next_btn"
+        android:id="@+id/doneButton"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_rounded"
-        android:text="Готово"
+        android:fontFamily="@font/roboto"
+        android:paddingVertical="14dp"
+        android:text="@string/button_done"
+        android:textAllCaps="false"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

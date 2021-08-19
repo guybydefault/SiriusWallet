@@ -5,5 +5,9 @@
     <string name="wallet_text">КошелОк</string>
     <string name="welcome_text">Добро пожаловать в КошелОК</string>
     <string name="description_text">Тут вы сможете контролировать свои доходы и расходы</string>
-    <string name="buttonText">Войти с помощью Google</string>
+    <string name="button_text">Войти с помощью Google</string>
+    <string name="button_done">Готово</string>
+    <string name="operation_sum">Введите сумму</string>
+    <string name="operation_type">Выберите тип операции</string>
+    <string name="enter_sum_operation">Сумма операции</string>
 </resources>

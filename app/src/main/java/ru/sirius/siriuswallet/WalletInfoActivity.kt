@@ -38,7 +38,7 @@ class WalletInfoActivity : AppCompatActivity() {
     }
 
     fun onAddOperationBtnClick(view: View) {
-        val intent = Intent(this, SelectOperationCategoryActivity::class.java)
+        val intent = Intent(this, EnterOperationSumActivity::class.java)
         val options = ActivityOptions.makeSceneTransitionAnimation(this);
         startActivity(intent, options.toBundle())
     }

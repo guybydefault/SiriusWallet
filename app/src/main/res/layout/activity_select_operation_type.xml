@@ -6,4 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".SelectOperationTypeActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="60dp"
+        app:contentInsetStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:logo="@drawable/ic_arrow_left"
+        app:title="@string/operation_type"
+        app:titleMarginStart="44dp"
+        app:titleTextAppearance="@style/ToolbarTitleText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
