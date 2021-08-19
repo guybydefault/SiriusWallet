@@ -6,4 +6,6 @@
     <string name="welcome_text">Добро пожаловать в КошелОК</string>
     <string name="description_text">Тут вы сможете контролировать свои доходы и расходы</string>
     <string name="buttonText">Войти с помощью Google</string>
+    <string name="income_label">Доход</string>
+    <string name="expense_label">Расход</string>
 </resources>
