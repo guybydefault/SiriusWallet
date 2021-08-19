@@ -2,4 +2,7 @@
 <resources>
     <dimen name="standart">16sp</dimen>
     <dimen name="standartHigh">24sp</dimen>
+    <dimen name="expense_income_wallet_info_text_size">9sp</dimen>
+    <dimen name="wallet_name_text_size">12sp</dimen>
+    <dimen name="wallet_balance_text_size">30sp</dimen>
 </resources>
