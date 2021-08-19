@@ -3,27 +3,29 @@ package ru.sirius.siriuswallet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import ru.sirius.siriuswallet.databinding.ActivityOnboardingBinding
+import ru.sirius.siriuswallet.databinding.ActivityEnterOperationSumBinding
 
 class EnterOperationSumActivity : AppCompatActivity() {
 
-    private val binding: ActivityOnboardingBinding by lazy(LazyThreadSafetyMode.NONE) {
-        ActivityOnboardingBinding.inflate(layoutInflater)
+    private val binding: ActivityEnterOperationSumBinding by lazy(LazyThreadSafetyMode.NONE) {
+        ActivityEnterOperationSumBinding.inflate(layoutInflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_enter_operation_sum)
-    }
+        setContentView(binding.root)
 
-    private fun startActivity(account: GoogleSignInAccount?) {
-        if (account != null) {
-            binding.identityButton.visibility = View.INVISIBLE
-            val intent = Intent(this, WalletInfoActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+        binding.doneButton.setOnClickListener {
+            startActivity()
         }
     }
+
+    private fun startActivity() {
+        val intent = Intent(this, SelectOperationTypeActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finish()
+    }
+
+
 }
