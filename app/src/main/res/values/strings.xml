@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SiriusWallet</string>
+    <string name="btn_add_operation">Добавить операцию</string>
+    <string name="main_font">sans-serif</string>
     <string name="wallet_text">КошелОк</string>
     <string name="welcome_text">Добро пожаловать в КошелОК</string>
     <string name="description_text">Тут вы сможете контролировать свои доходы и расходы</string>
