@@ -55,7 +55,7 @@ class OnBoardingActivity : AppCompatActivity() {
     private fun startSecondActivity(account: GoogleSignInAccount?) {
         if (account != null) {
             binding.identityButton.visibility = View.INVISIBLE
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, WalletInfoActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
