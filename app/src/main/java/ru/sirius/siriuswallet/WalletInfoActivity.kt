@@ -56,6 +56,4 @@ class WalletInfoActivity : AppCompatActivity() {
         val options = ActivityOptions.makeSceneTransitionAnimation(this);
         startActivity(intent, options.toBundle())
     }
-
-
 }
