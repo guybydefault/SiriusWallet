@@ -38,7 +38,7 @@
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/doneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,6 +50,7 @@
         android:paddingVertical="14dp"
         android:text="@string/button_done"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
         android:textSize="@dimen/standart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
