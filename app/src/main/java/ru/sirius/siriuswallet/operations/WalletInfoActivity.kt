@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.sirius.siriuswallet.SelectOperationCategoryActivity
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
+import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 
 class WalletInfoActivity : AppCompatActivity() {
 
