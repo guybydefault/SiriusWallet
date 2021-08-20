@@ -9,18 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SiriusWallet">
-        <activity android:name=".WalletInfoActivity" />
-        <activity android:name=".EnterOperationSumActivity" />
-        <activity android:name=".SelectOperationCategoryActivity" />
-        <activity android:name=".SelectOperationTypeActivity" />
-        <activity android:name=".EditOperationActivity" />
+        <activity
+            android:name=".WalletInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EnterOperationSumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectOperationCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectOperationTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditOperationActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".OnBoardingActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:noHistory="true"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

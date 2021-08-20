@@ -18,7 +18,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
 
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
-            backToTypeOperationActivity()
+            finish()
         }
 
         binding.doneButtonBlack.setOnClickListener {
@@ -26,9 +26,8 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun backToTypeOperationActivity() {
-        val intent = Intent(this, SelectOperationTypeActivity::class.java)
-        startActivity(intent)
+    override fun finish() {
+        super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 

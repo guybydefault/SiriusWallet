@@ -15,22 +15,15 @@ class EditOperationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
         binding.editOperationToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.editOperationToolbar.setNavigationOnClickListener {
-            backToEnterOperationActivity()
+           finish()
         }
     }
 
     override fun finish() {
         super.finish()
-        backToEnterOperationActivity()
-    }
-
-
-    private fun backToEnterOperationActivity() {
-        val intent = Intent(this, SelectOperationTypeActivity::class.java)
-        startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
+
 }
