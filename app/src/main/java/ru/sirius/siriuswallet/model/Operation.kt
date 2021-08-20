@@ -1,7 +1,6 @@
 package ru.sirius.siriuswallet.model
 
 import java.math.BigDecimal
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class Operation
@@ -11,5 +10,4 @@ data class Operation
     val categoryResourceId: Int,
     val operationDate: LocalDateTime,
     val amount: BigDecimal
-) {
-}
+)
