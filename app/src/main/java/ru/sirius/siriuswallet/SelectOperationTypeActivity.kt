@@ -22,6 +22,9 @@ class SelectOperationTypeActivity : AppCompatActivity() {
             backToEnterOperationActivity()
         }
 
+        binding.doneButton.setOnClickListener {
+            goToSelectOperationActivity()
+        }
 
     }
 
@@ -35,7 +38,12 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         val intent = Intent(this, EnterOperationSumActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
 
+    fun goToSelectOperationActivity() {
+        val intent = Intent(this, SelectOperationCategoryActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
 }

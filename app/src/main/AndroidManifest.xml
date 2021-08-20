@@ -13,6 +13,7 @@
         <activity android:name=".EnterOperationSumActivity" />
         <activity android:name=".SelectOperationCategoryActivity" />
         <activity android:name=".SelectOperationTypeActivity" />
+        <activity android:name=".EditOperationActivity" />
         <activity
             android:name=".OnBoardingActivity"
             android:screenOrientation="portrait" />

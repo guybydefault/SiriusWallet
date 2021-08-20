@@ -9,9 +9,13 @@
     <string name="button_done">Готово</string>
     <string name="operation_sum">Введите сумму</string>
     <string name="operation_type">Выберите тип операции</string>
+    <string name="operation_category">Выберите категорию</string>
+    <string name="new_operation">Новая операция</string>
     <string name="enter_sum_operation">Сумма операции</string>
     <string name="income_label">Доход</string>
     <string name="expense_label">Расход</string>
     <string name="button_next">Далее</string>
+    <string name="create_operation">Создать операцию</string>
+
 
 </resources>

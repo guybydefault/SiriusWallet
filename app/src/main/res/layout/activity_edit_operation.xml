@@ -6,4 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".EditOperationActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/editOperationToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/new_operation"
+        app:titleTextAppearance="@style/ToolbarTitleText" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/doneButtonBlack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_rounded"
+        android:fontFamily="@font/roboto"
+        android:paddingVertical="14dp"
+        android:text="@string/create_operation"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/standart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
