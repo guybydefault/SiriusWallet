@@ -30,8 +30,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         binding.firstRg.setOnCheckedChangeListener { _, checkedId ->
             findViewById<RadioButton>(checkedId)?.apply {
                 binding.doneButton.isEnabled = true
-                //  binding.doneButton.set(C)
-                // binding.doneButton.setTextColor(R.color.whiteIconColor)
+                binding.doneButton.setTextColor(getColor(R.color.white))
             }
         }
 
