@@ -2,61 +2,34 @@ package ru.sirius.siriuswallet.operations
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListDateViewBinding
 import ru.sirius.siriuswallet.databinding.WalletListOperationViewBinding
 import ru.sirius.siriuswallet.model.Operation
-import java.math.BigDecimal
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class OperationsRecyclerViewAdapter(val context: Context) :
+class OperationsRecyclerViewAdapter(
+    val context: Context
+) :
     RecyclerView.Adapter<AbstractOperationListViewHolder>(),
     IBindingVisitor {
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    val dataset: List<Operation> = mutableListOf(
-        Operation(
-            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-            LocalDateTime.now(), BigDecimal(-12000),
-        ),
-        Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now(), BigDecimal(130000),
-        ), Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(1), BigDecimal(130000),
-        ), Operation(
-            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-            LocalDateTime.now().minusDays(2), BigDecimal(-12000),
-        ), Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(2), BigDecimal(130000)
-        ),
-        Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(4), BigDecimal(130000)
-        ),
-        Operation(
-            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-            LocalDateTime.now().minusDays(4), BigDecimal(-12000)
-        )
-    )
-        get() {
-            return field.sortedByDescending { it.operationDate }
+    var dataset: List<Operation> = mutableListOf()
+        set(value) {
+            field = value.sortedByDescending { it.operationDate }
+            viewDataSet = initViewDataset(field)
         }
 
-    val viewDataSet = initViewDataset(dataset)
+    var viewDataSet = mutableListOf<Any>()
 
     @SuppressLint("NewApi")
-    fun initViewDataset(operations: List<Operation>): MutableList<Any> {
+    private fun initViewDataset(operations: List<Operation>): MutableList<Any> {
         val viewDataSet = mutableListOf<Any>()
         val it = operations.iterator()
         var next = if (it.hasNext()) it.next() else null
