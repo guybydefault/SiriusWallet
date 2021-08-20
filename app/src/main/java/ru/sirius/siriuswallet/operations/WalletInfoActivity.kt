@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
+import ru.sirius.siriuswallet.operations.OperationsViewModel
 
 class WalletInfoActivity : AppCompatActivity() {
 
@@ -20,6 +21,14 @@ class WalletInfoActivity : AppCompatActivity() {
 
     private val recyclerView: RecyclerView by lazy(LazyThreadSafetyMode.NONE) {
         binding.operationListRecyclerView
+    }
+
+    private val recyclerViewAdapter: OperationsRecyclerViewAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        recyclerView.adapter as OperationsRecyclerViewAdapter
+    }
+
+    private val viewModel: OperationsViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        getContainer().operationsViewModel
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +50,7 @@ class WalletInfoActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
+        viewModel.operations.observe(this) { recyclerViewAdapter.dataset = it }
     }
 
     private fun onBackClick() {
