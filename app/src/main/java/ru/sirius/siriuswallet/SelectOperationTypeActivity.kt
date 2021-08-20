@@ -3,8 +3,12 @@ package ru.sirius.siriuswallet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
+import android.widget.RadioButton
+import android.widget.Toast
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
 
 
@@ -19,8 +23,20 @@ class SelectOperationTypeActivity : AppCompatActivity() {
 
         binding.selectType.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.selectType.setNavigationOnClickListener {
-           finish()
+            finish()
         }
+        binding.firstRg.jumpDrawablesToCurrentState()
+
+        binding.firstRg.setOnCheckedChangeListener { _, checkedId ->
+            findViewById<RadioButton>(checkedId)?.apply {
+                binding.doneButton.isEnabled = true
+                //  binding.doneButton.set(C)
+                // binding.doneButton.setTextColor(R.color.whiteIconColor)
+            }
+        }
+
+
+
 
         binding.doneButton.setOnClickListener {
             goToSelectOperationActivity()
@@ -34,7 +50,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    fun goToSelectOperationActivity() {
+    private fun goToSelectOperationActivity() {
         val intent = Intent(this, SelectOperationCategoryActivity::class.java)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
