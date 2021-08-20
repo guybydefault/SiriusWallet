@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SiriusWallet">
-        <activity android:name=".WalletInfoActivity" />
+        <activity android:name=".operations.WalletInfoActivity" />
         <activity android:name=".EnterOperationSumActivity" />
         <activity android:name=".SelectOperationCategoryActivity" />
         <activity android:name=".SelectOperationTypeActivity" />

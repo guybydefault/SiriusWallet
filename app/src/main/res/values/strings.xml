@@ -14,6 +14,9 @@
     <string name="enter_sum_operation">Сумма операции</string>
     <string name="income_label">Доход</string>
     <string name="expense_label">Расход</string>
+    <string name="rub_symbol">₽</string>
+    <string name="operation_date_today">Сегодня</string>
+    <string name="operation_date_yesterday">Вчера</string>
     <string name="button_next">Далее</string>
     <string name="create_operation">Создать операцию</string>
 
