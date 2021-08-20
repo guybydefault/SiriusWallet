@@ -40,7 +40,6 @@ class WalletInfoActivity : AppCompatActivity() {
             adapter = OperationsRecyclerViewAdapter()
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            addItemDecoration(OperationViewHolderDivider(context))
         }
     }
 

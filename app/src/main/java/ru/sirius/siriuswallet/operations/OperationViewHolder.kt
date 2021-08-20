@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
-import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListOperationViewBinding
 import ru.sirius.siriuswallet.model.Operation
@@ -16,7 +15,7 @@ import java.time.format.DateTimeFormatter
 class OperationViewHolder(
     binding: WalletListOperationViewBinding,
     val parentContext: Context
-) : RecyclerView.ViewHolder(binding.root) {
+) : AbstractOperationListViewHolder(binding) {
 
     val operationIcon: ImageView
     val operationName: TextView
@@ -42,24 +41,12 @@ class OperationViewHolder(
         operationAmount = binding.operationSum
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun onBind(operation: Operation) {
-        operationName.text = operation.operationName
-        operationCategory.text = operation.operationCategory
-        operationAmount.text =
-            "${operation.amount.toPlainString()} ${resources.getString(R.string.rub_symbol)}"
-        operationDate.text = operation.operationDate.format(TIME_FORMATTER)
-        operationIcon.setImageDrawable(
-            ResourcesCompat.getDrawable(
-                resources,
-                operation.categoryResourceId,
-                theme
-            )
-        )
-    }
-
     companion object {
         @RequiresApi(Build.VERSION_CODES.O)
         var TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm")
+    }
+
+    override fun bind(bindingVisitor: IBindingVisitor, position: Int) {
+        bindingVisitor.bindOperationViewHolder(this, position)
     }
 }
