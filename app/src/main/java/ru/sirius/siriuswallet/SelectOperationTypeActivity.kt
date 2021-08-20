@@ -19,7 +19,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
 
         binding.selectType.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.selectType.setNavigationOnClickListener {
-            backToEnterOperationActivity()
+           finish()
         }
 
         binding.doneButton.setOnClickListener {
@@ -31,12 +31,6 @@ class SelectOperationTypeActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        backToEnterOperationActivity()
-    }
-
-    fun backToEnterOperationActivity() {
-        val intent = Intent(this, EnterOperationSumActivity::class.java)
-        startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 

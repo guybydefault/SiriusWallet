@@ -18,7 +18,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
 
         binding.enterSum.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.enterSum.setNavigationOnClickListener {
-            backToWalletInfoActivity()
+            finish()
         }
 
         binding.doneButton.setOnClickListener {
@@ -34,12 +34,6 @@ class EnterOperationSumActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
-        backToWalletInfoActivity()
-    }
-
-    fun backToWalletInfoActivity() {
-        val intent = Intent(this, WalletInfoActivity::class.java)
-        startActivity(intent)
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
