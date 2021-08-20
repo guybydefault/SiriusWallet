@@ -30,7 +30,7 @@
         android:text="@string/button_next"
         android:textAllCaps="false"
         android:textColor="@color/mainTextColor"
-        android:textSize="@dimen/standart"
+        android:textSize="@dimen/standard"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,9 +50,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/custom_radio_button_icon"
-            android:background="?selectableItemBackground"
+            android:background="@drawable/remove_ripple"
             android:text="@string/income_label"
-            android:textSize="@dimen/standart"
+            android:textSize="@dimen/standard"
             android:textColor="@color/mainTextColor"
             android:fontFamily="@font/roboto"
             android:layoutDirection="rtl" />
@@ -62,10 +62,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:button="@drawable/custom_radio_button_icon"
-            android:background="?selectableItemBackground"
+            android:background="@drawable/remove_ripple"
             android:text="@string/expense_label"
             android:textColor="@color/mainTextColor"
-            android:textSize="@dimen/standart"
+            android:textSize="@dimen/standard"
             android:fontFamily="@font/roboto"
             android:layoutDirection="rtl" />
 

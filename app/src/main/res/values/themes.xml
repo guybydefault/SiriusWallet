@@ -49,4 +49,9 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="transparent_theme">
+        <item name="colorControlHighlight">@android:color/transparent</item>
+        <item name="colorControlActivated">@android:color/transparent</item>
+    </style>
+
 </resources>
