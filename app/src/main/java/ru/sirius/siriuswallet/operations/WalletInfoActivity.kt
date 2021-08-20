@@ -37,7 +37,7 @@ class WalletInfoActivity : AppCompatActivity() {
 
     private fun setupOperationList() {
         recyclerView.apply {
-            adapter = OperationsRecyclerViewAdapter()
+            adapter = OperationsRecyclerViewAdapter(context)
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }

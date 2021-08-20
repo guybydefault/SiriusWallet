@@ -1,6 +1,7 @@
 package ru.sirius.siriuswallet.operations
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,7 +17,8 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class OperationsRecyclerViewAdapter : RecyclerView.Adapter<AbstractOperationListViewHolder>(),
+class OperationsRecyclerViewAdapter(val context: Context) :
+    RecyclerView.Adapter<AbstractOperationListViewHolder>(),
     IBindingVisitor {
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -29,6 +31,9 @@ class OperationsRecyclerViewAdapter : RecyclerView.Adapter<AbstractOperationList
             "Зарплата", "Пополнение", R.drawable.ic_salary,
             LocalDateTime.now(), BigDecimal(130000),
         ), Operation(
+            "Зарплата", "Пополнение", R.drawable.ic_salary,
+            LocalDateTime.now().minusDays(1), BigDecimal(130000),
+        ), Operation(
             "Супермаркеты", "Траты", R.drawable.ic_supermarket,
             LocalDateTime.now().minusDays(2), BigDecimal(-12000),
         ), Operation(
@@ -37,7 +42,11 @@ class OperationsRecyclerViewAdapter : RecyclerView.Adapter<AbstractOperationList
         ),
         Operation(
             "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(3), BigDecimal(130000)
+            LocalDateTime.now().minusDays(4), BigDecimal(130000)
+        ),
+        Operation(
+            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
+            LocalDateTime.now().minusDays(4), BigDecimal(-12000)
         )
     )
         get() {
@@ -131,9 +140,17 @@ class OperationsRecyclerViewAdapter : RecyclerView.Adapter<AbstractOperationList
         }
     }
 
+    @SuppressLint("NewApi")
     override fun bindDateViewHolder(viewHolder: OperationsDateViewHolder, position: Int) {
-        viewHolder.apply {
-            date.text = (viewDataSet[position] as LocalDate).format(DATE_FORMATTER)
+        val date = viewDataSet[position] as LocalDate
+        val dateStr: String
+        if (date.isEqual(LocalDate.now())) {
+            dateStr = context.getString(R.string.operation_date_today)
+        } else if (date.isEqual(LocalDate.now().minusDays(1))) {
+            dateStr = context.getString(R.string.operation_date_yesterday)
+        } else {
+            dateStr = date.format(DATE_FORMATTER)
         }
+        viewHolder.date.text = dateStr
     }
 }

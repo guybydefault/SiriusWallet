@@ -9,4 +9,6 @@
     <string name="income_label">Доход</string>
     <string name="expense_label">Расход</string>
     <string name="rub_symbol">₽</string>
+    <string name="operation_date_today">Сегодня</string>
+    <string name="operation_date_yesterday">Вчера</string>
 </resources>
