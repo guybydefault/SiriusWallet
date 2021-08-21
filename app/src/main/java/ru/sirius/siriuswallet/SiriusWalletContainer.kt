@@ -1,6 +1,7 @@
 package ru.sirius.siriuswallet
 
 import android.annotation.SuppressLint
+import ru.sirius.siriuswallet.network.DataRepository
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 
 class SiriusWalletContainer {

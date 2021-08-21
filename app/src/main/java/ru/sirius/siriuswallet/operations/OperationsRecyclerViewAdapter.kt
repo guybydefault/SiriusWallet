@@ -11,6 +11,7 @@ import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListDateViewBinding
 import ru.sirius.siriuswallet.databinding.WalletListOperationViewBinding
 import ru.sirius.siriuswallet.model.Operation
+import ru.sirius.siriuswallet.utils.formatForDisplay
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -101,7 +102,7 @@ class OperationsRecyclerViewAdapter(
             operationName.text = operation.operationName
             operationCategory.text = operation.operationCategory
             operationAmount.text =
-                "${operation.amount.toPlainString()} ${resources.getString(R.string.rub_symbol)}"
+                "${operation.amount.formatForDisplay()} ${resources.getString(R.string.rub_symbol)}"
             operationDate.text = operation.operationDate.format(OperationViewHolder.TIME_FORMATTER)
             operationIcon.setImageDrawable(
                 ResourcesCompat.getDrawable(
