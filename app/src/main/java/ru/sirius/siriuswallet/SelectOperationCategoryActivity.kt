@@ -3,6 +3,8 @@ package ru.sirius.siriuswallet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
@@ -16,7 +18,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     }
 
     private val listOfCategory = listOf(
-        CategoryItem(R.drawable.ic_icon_bg, "Зарплата", true),
+        CategoryItem(R.drawable.ic_icon_bg, "Зарплата", false),
         CategoryItem(R.drawable.ic_icon_bg, "Подработка", false),
         CategoryItem(R.drawable.ic_icon_present, "Подарок", false),
         CategoryItem(R.drawable.ic_icon_cap, "Капитализация", false),
@@ -42,6 +44,8 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = CategoryAdapter(listOfCategory)
         }
+
+
     }
 
     override fun finish() {

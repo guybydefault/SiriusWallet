@@ -1,9 +1,13 @@
 package ru.sirius.siriuswallet
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.graphics.drawable.toBitmap
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.model.CategoryItem
 
@@ -21,7 +25,13 @@ class CategoryHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     fun bind(categoryItem: CategoryItem) {
+        icon?.setImageResource(categoryItem.icon)
         category?.text = categoryItem.category
+        if (!categoryItem.arrow) {
+            arrow!!.visibility = GONE
+        }
     }
+
+
 
 }
