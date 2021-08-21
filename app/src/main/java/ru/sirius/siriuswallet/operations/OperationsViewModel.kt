@@ -17,18 +17,13 @@ class OperationsViewModel(container: SiriusWalletContainer) : ViewModel() {
     val operations: MutableLiveData<List<Operation>> = MutableLiveData()
 
     init {
-        operations.value = mutableListOf(
-            Operation(
-                "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-                LocalDateTime.now(), BigDecimal(-12000),
-            )
-        )
+        operations.value = container.operationsService.placeholderDataset
         viewModelScope.launch {
             val result = container.operationsService.getOperations(102)
             if (result is Response.Success) {
                 operations.value = result.responseBody
             } else {
-                TODO()
+                // TODO
             }
         }
     }
