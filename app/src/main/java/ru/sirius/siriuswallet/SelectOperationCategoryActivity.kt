@@ -41,9 +41,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         binding.operationListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = CategoryAdapter(listOfCategory)
-
         }
-
     }
 
     override fun finish() {
