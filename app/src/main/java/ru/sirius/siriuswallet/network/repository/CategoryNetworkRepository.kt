@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.network
+package ru.sirius.siriuswallet.network.repository
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,10 +8,9 @@ import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.Operation
 import java.math.BigDecimal
 import java.time.LocalDateTime
-import java.time.ZoneId
 
 @RequiresApi(Build.VERSION_CODES.O)
-class DataRepository {
+class CategoryNetworkRepository {
     val retrofit = Retrofit
 
     val dataset: List<Operation> = mutableListOf(
@@ -49,17 +48,4 @@ class DataRepository {
     suspend fun getOutcomeCategories(): List<Category>? {
         return retrofit.CATEGORIES_API.getCategories("OUTCOME").body()
     }
-
-    suspend fun getOperations(accountId: Int): List<Operation> {
-        return retrofit.OPERATIONS_API.getOperations(accountId).body()!!.map {
-            Operation(
-                it.category.name,
-                it.category.type.typeLocalizedName,
-                R.drawable.ic_salary,
-                LocalDateTime.ofInstant(it.creationDate, ZoneId.of("UTC")),
-                it.amount.toBigDecimal()
-            )
-        }
-    }
-
 }
