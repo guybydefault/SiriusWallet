@@ -25,6 +25,7 @@ class OperationsRecyclerViewAdapter(
         set(value) {
             field = value.sortedByDescending { it.operationDate }
             viewDataSet = initViewDataset(field)
+            notifyDataSetChanged()
         }
 
     var viewDataSet = mutableListOf<Any>()

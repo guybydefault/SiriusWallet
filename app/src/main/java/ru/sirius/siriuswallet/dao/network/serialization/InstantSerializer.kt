@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.network.serialization
+package ru.sirius.siriuswallet.dao.network.serialization
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.network.repository
+package ru.sirius.siriuswallet.dao.network.repository
 
 import android.os.Build
 import androidx.annotation.RequiresApi

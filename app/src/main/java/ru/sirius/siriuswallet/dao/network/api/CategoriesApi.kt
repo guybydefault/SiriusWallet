@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.network.api
+package ru.sirius.siriuswallet.dao.network.api
 
 import retrofit2.Response
 import retrofit2.http.GET

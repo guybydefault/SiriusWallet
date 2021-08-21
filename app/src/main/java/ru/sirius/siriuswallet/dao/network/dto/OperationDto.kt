@@ -1,10 +1,9 @@
-package ru.sirius.siriuswallet.network.dto
+package ru.sirius.siriuswallet.dao.network.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.sirius.siriuswallet.model.Category
-import ru.sirius.siriuswallet.network.serialization.InstantSerializer
-import java.math.BigDecimal
+import ru.sirius.siriuswallet.dao.network.serialization.InstantSerializer
 import java.time.Instant
 
 @Serializable

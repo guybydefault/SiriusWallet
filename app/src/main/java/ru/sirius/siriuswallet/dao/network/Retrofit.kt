@@ -2,16 +2,14 @@ package ru.guybydefault.minin.api
 
 import com.example.rxplusnetworklab.ApiTokenInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import ru.sirius.siriuswallet.network.api.CategoriesApi
-import ru.sirius.siriuswallet.network.api.OperationsApi
+import ru.sirius.siriuswallet.dao.network.api.CategoriesApi
+import ru.sirius.siriuswallet.dao.network.api.OperationsApi
 
 object Retrofit {
     const val BASE_URL = "http://bbcc-85-174-236-130.ngrok.io/api/"
