@@ -1,9 +1,8 @@
-package ru.sirius.siriuswallet.api
+package ru.sirius.siriuswallet.network.api
 
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.sirius.siriuswallet.model.Operation
 import ru.sirius.siriuswallet.network.dto.OperationDto
 
 interface OperationsApi {

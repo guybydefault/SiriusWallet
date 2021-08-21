@@ -10,8 +10,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import ru.sirius.siriuswallet.api.CategoriesApi
-import ru.sirius.siriuswallet.api.OperationsApi
+import ru.sirius.siriuswallet.network.api.CategoriesApi
+import ru.sirius.siriuswallet.network.api.OperationsApi
 
 object Retrofit {
     const val BASE_URL = "http://bbcc-85-174-236-130.ngrok.io/api/"
@@ -46,15 +46,5 @@ object Retrofit {
 
         CATEGORIES_API = retrofit.create(CategoriesApi::class.java)
         OPERATIONS_API = retrofit.create(OperationsApi::class.java)
-
-        runBlocking {
-            val cat = async {
-                CATEGORIES_API.getCategories("INCOME")
-            }.await()
-            val op = async {
-                OPERATIONS_API.getOperations(102)
-            }.await()
-            println("hey")
-        }
     }
 }
