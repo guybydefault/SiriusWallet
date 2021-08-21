@@ -21,8 +21,16 @@
     <string name="create_operation">Создать операцию</string>
     <string name="general_text">Основные</string>
     <string name="sum">Сумма</string>
+    <string name="category">Категория</string>
+    <string name="category_text">Зарплата</string>
+    <string name="date_operation">Дата операции</string>
+    <string name="date_operation_text">21 июля</string>
+    <string name="type_text">Тип</string>
+
+
     <string name="sum_rubles">130 000 ₽</string>
     <string name="arrow_right">arrow right</string>
+    <string name="additional_settings">Дополнительные настройки</string>
 
 
 </resources>

@@ -11,13 +11,21 @@ class EditOperationActivity : AppCompatActivity() {
         ActivityEditOperationBinding.inflate(layoutInflater)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.typeContainer.type.text = getString(R.string.type_text)
+        binding.typeContainer.value.text = getString(R.string.income_label)
+        binding.categoryContainer.type.text = getString(R.string.category)
+        binding.categoryContainer.value.text = getString(R.string.category_text)
+        binding.dateContainer.value.text = getString(R.string.date_operation)
+        binding.dateContainer.value.text = getString(R.string.date_operation_text)
+
         binding.editOperationToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.editOperationToolbar.setNavigationOnClickListener {
-           finish()
+            finish()
         }
     }
 
