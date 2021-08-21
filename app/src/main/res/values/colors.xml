@@ -10,4 +10,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="mainTextColor">#333333</color>
     <color name="whiteIconColor">#FAFAFA</color>
+    <color name="light_secondary">#9299A2</color>
 </resources>
