@@ -2,6 +2,8 @@ package ru.guybydefault.minin.api
 
 import com.example.rxplusnetworklab.ApiTokenInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -44,5 +46,15 @@ object Retrofit {
 
         CATEGORIES_API = retrofit.create(CategoriesApi::class.java)
         OPERATIONS_API = retrofit.create(OperationsApi::class.java)
+
+        runBlocking {
+            val cat = async {
+                CATEGORIES_API.getCategories("INCOME")
+            }.await()
+            val op = async {
+                OPERATIONS_API.getOperations(102)
+            }.await()
+            println("hey")
+        }
     }
 }

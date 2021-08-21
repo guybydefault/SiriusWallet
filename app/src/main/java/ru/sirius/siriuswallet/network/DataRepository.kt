@@ -57,7 +57,7 @@ class DataRepository {
                 it.category.type.typeLocalizedName,
                 R.drawable.ic_salary,
                 LocalDateTime.ofInstant(it.creationDate, ZoneId.of("UTC")),
-                it.amount
+                it.amount.toBigDecimal()
             )
         }
     }
