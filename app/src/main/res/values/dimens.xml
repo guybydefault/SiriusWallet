@@ -5,4 +5,5 @@
     <dimen name="expense_income_wallet_info_text_size">9sp</dimen>
     <dimen name="wallet_name_text_size">12sp</dimen>
     <dimen name="wallet_balance_text_size">30sp</dimen>
+    <dimen name="wallet_info_no_records_text_size">13sp</dimen>
 </resources>

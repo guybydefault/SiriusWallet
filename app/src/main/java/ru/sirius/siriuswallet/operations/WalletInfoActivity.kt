@@ -3,6 +3,7 @@ package ru.sirius.siriuswallet
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -50,7 +51,16 @@ class WalletInfoActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
-        viewModel.operations.observe(this) { recyclerViewAdapter.dataset = it }
+        viewModel.operations.observe(this) {
+            if (it.isEmpty()) {
+                binding.operationListRecyclerView.visibility = View.GONE
+                binding.noRecords.visibility = View.VISIBLE
+            } else {
+                binding.operationListRecyclerView.visibility = View.VISIBLE
+                binding.noRecords.visibility = View.GONE
+            }
+            recyclerViewAdapter.dataset = it
+        }
     }
 
     private fun onBackClick() {
