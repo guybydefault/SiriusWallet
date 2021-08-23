@@ -1,5 +1,7 @@
 package ru.sirius.siriuswallet.dao
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.dao.network.repository.OperationsNetworkRepository
 import ru.sirius.siriuswallet.model.Operation
@@ -40,7 +42,7 @@ class OperationService {
 
     suspend fun getOperations(
         accountId: Int
-    ): Response<List<Operation>> {
-        return operationNetworkRepository.getOperations(accountId)
+    ): Response<List<Operation>> = withContext(Dispatchers.IO) {
+        return@withContext operationNetworkRepository.getOperations(accountId)
     }
 }

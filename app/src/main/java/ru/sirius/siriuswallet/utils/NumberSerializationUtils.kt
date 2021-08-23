@@ -12,6 +12,7 @@ object DisplayFormatter {
 
     init {
         symbols.setGroupingSeparator(' ')
+        symbols.decimalSeparator = ','
         formatter.setDecimalFormatSymbols(symbols)
         formatter.isParseBigDecimal = true
     }
