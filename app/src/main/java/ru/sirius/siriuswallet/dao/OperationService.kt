@@ -4,6 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.dao.network.repository.OperationsNetworkRepository
+import ru.sirius.siriuswallet.model.Category
+import ru.sirius.siriuswallet.model.CategoryType
 import ru.sirius.siriuswallet.model.Operation
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -13,29 +15,10 @@ class OperationService {
 
     val placeholderDataset: List<Operation> = mutableListOf(
         Operation(
-            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-            LocalDateTime.now(), BigDecimal(-12000),
-        ),
-        Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now(), BigDecimal(130000),
-        ), Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(1), BigDecimal(130000),
-        ), Operation(
-            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-            LocalDateTime.now().minusDays(2), BigDecimal(-12000),
-        ), Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(2), BigDecimal(130000)
-        ),
-        Operation(
-            "Зарплата", "Пополнение", R.drawable.ic_salary,
-            LocalDateTime.now().minusDays(4), BigDecimal(130000)
-        ),
-        Operation(
-            "Супермаркеты", "Траты", R.drawable.ic_supermarket,
-            LocalDateTime.now().minusDays(4), BigDecimal(-12000)
+            1, LocalDateTime.now(), BigDecimal(-12000), Category(
+                1, 1, "Супермаркеты",
+                CategoryType.OUTCOME, R.drawable.ic_supermarket
+            )
         )
     )
 

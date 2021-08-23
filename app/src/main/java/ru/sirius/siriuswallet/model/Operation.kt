@@ -5,9 +5,10 @@ import java.time.LocalDateTime
 
 data class Operation
     (
-    val operationName: String,
-    val operationCategory: String,
-    val categoryResourceId: Int,
+    val id: Int,
     val operationDate: LocalDateTime,
-    val amount: BigDecimal
-)
+    val amount: BigDecimal,
+    val operationCategory: Category
+) {
+    val accountId = operationCategory.userId
+}

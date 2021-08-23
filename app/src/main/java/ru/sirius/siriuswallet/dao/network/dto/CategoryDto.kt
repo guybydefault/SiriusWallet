@@ -1,12 +1,12 @@
-package ru.sirius.siriuswallet.model
+package ru.sirius.siriuswallet.dao.network.dto
 
 import kotlinx.serialization.Serializable
 import ru.sirius.siriuswallet.model.CategoryType
 
-data class Category(
+@Serializable
+data class CategoryDto(
     val id: Int,
     val userId: Int,
     val name: String,
-    val type: CategoryType,
-    val categoryResourceId: Int
+    val type: CategoryType
 )

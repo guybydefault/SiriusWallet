@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListDateViewBinding
@@ -100,15 +99,15 @@ class OperationsRecyclerViewAdapter(
     ) {
         val operation = viewDataSet[position] as Operation
         viewHolder.apply {
-            operationName.text = operation.operationName
-            operationCategory.text = operation.operationCategory
+            operationName.text = operation.operationCategory.name
+            operationCategory.text = operation.operationCategory.type.typeLocalizedName
             operationAmount.text =
                 "${operation.amount.formatForDisplay()} ${resources.getString(R.string.rub_symbol)}"
             operationDate.text = operation.operationDate.format(OperationViewHolder.TIME_FORMATTER)
             operationIcon.setImageDrawable(
                 ResourcesCompat.getDrawable(
                     resources,
-                    operation.categoryResourceId,
+                    operation.operationCategory.categoryResourceId,
                     theme
                 )
             )

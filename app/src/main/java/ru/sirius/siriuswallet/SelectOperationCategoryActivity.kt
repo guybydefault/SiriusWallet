@@ -3,15 +3,10 @@ package ru.sirius.siriuswallet
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
-import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
-import ru.sirius.siriuswallet.model.Category
+import ru.sirius.siriuswallet.dao.network.dto.CategoryDto
 import ru.sirius.siriuswallet.model.CategoryItem
 
 class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener {
@@ -26,7 +21,7 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
         CategoryItem(R.drawable.ic_icon_cap, "Капитализация", false),
     )
 
-    val categories: MutableList<Category> = arrayListOf()
+    val categories: MutableList<CategoryDto> = arrayListOf()
 
 
 

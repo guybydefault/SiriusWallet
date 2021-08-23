@@ -2,7 +2,6 @@ package ru.sirius.siriuswallet.dao.network.dto
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.dao.network.serialization.InstantSerializer
 import java.time.Instant
 
@@ -14,5 +13,5 @@ data class OperationDto(
     @Serializable(with = InstantSerializer::class)
     val creationDate: Instant,
     @SerialName("categoryDTO")
-    val category: Category
+    val categoryDto: CategoryDto
 )
