@@ -1,33 +1,38 @@
 package ru.sirius.siriuswallet
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
 import ru.sirius.siriuswallet.dao.network.dto.CategoryDto
+import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
+import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryItem
+import ru.sirius.siriuswallet.model.CategoryType
 
 class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener {
     private val binding: ActivitySelectOperationCategoryBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySelectOperationCategoryBinding.inflate(layoutInflater)
     }
 
+    private val categoriesViewModel: CategoriesViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        getContainer().categoriesViewModel
+    }
+
     private var enterSum = ""
     private var typeOfOperation = ""
     private var nameOfOperation = ""
 
-    private val listOfCategory = listOf(
-        CategoryItem(R.drawable.ic_icon_bg, "Зарплата", false),
-        CategoryItem(R.drawable.ic_icon_bg, "Подработка", false),
-        CategoryItem(R.drawable.ic_icon_present, "Подарок", false),
-        CategoryItem(R.drawable.ic_icon_cap, "Капитализация", false),
+    private val listOfCategoryPlaceholder = listOf(
+        CategoryItem(Category(0, 0, "Зарплата", CategoryType.INCOME, R.drawable.ic_salary), false),
+        CategoryItem(Category(0, 0, "Подработка", CategoryType.INCOME, R.drawable.ic_salary), false),
+        CategoryItem(Category(0, 0, "Перевод", CategoryType.INCOME, R.drawable.ic_salary), false),
+        CategoryItem(Category(0, 0, "Подарок", CategoryType.INCOME, R.drawable.ic_gift), false)
     )
 
+    private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, this@SelectOperationCategoryActivity)
+
     val categories: MutableList<CategoryDto> = arrayListOf()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,10 +53,12 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
 
         binding.operationListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = CategoryAdapter(listOfCategory, this@SelectOperationCategoryActivity)
+            adapter = recyclerViewAdapter
         }
 
-
+        categoriesViewModel.categories.observe(this) {
+            recyclerViewAdapter.updateList(it.map { CategoryItem(it, false) })
+        }
     }
 
     override fun finish() {
@@ -70,7 +77,7 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
     }
 
     override fun onItemClicked(categoryItem: CategoryItem) {
-        nameOfOperation = categoryItem.category
+        nameOfOperation = categoryItem.category.name
 
         //Toast.makeText(this, categoryItem.category, Toast.LENGTH_LONG).show()
 

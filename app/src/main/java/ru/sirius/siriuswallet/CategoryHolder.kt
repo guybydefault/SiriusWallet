@@ -1,17 +1,14 @@
 package ru.sirius.siriuswallet
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.model.CategoryItem
+import ru.sirius.siriuswallet.model.CategoryType
 
 private var checkedPosition: Int = -1
 
@@ -20,6 +17,8 @@ class CategoryHolder(inflater: LayoutInflater, parent: ViewGroup) :
     private var icon: ImageView? = null
     private var category: TextView? = null
     private var arrow: ImageView? = null
+    private var resources = parent.resources
+    private var theme = parent.context.theme
 
 
     init {
@@ -29,11 +28,14 @@ class CategoryHolder(inflater: LayoutInflater, parent: ViewGroup) :
     }
 
     fun bind(categoryItem: CategoryItem, clickListener: OnItemClickListener) {
-        icon?.setImageResource(categoryItem.icon)
-        category?.text = categoryItem.category
+        icon?.setImageResource(categoryItem.category.categoryResourceId)
+        if (categoryItem.category.type == CategoryType.INCOME) {
+            icon?.background?.setTint(resources.getColor(R.color.income_category_background_color, theme))
+        } else {
+            icon?.background?.setTint(resources.getColor(R.color.outcome_category_background_color, theme))
+        }
+        category?.text = categoryItem.category.name
         arrow!!.visibility = GONE
-
-
 
         itemView.setOnClickListener {
             clickListener.onItemClicked(categoryItem)
@@ -47,10 +49,6 @@ class CategoryHolder(inflater: LayoutInflater, parent: ViewGroup) :
         }
 
     }
-
-
-
-
 
 
 }

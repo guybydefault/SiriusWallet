@@ -6,10 +6,15 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.model.CategoryItem
 
 class CategoryAdapter(
-    private val list: List<CategoryItem>,
+    private var list: List<CategoryItem>,
     val itemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<CategoryHolder>() {
+
+    fun updateList(list: List<CategoryItem>) {
+        this.list = list
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -19,7 +24,6 @@ class CategoryAdapter(
     override fun onBindViewHolder(holder: CategoryHolder, position: Int) {
         val categoryItem: CategoryItem = list[position]
         holder.bind(categoryItem, itemClickListener)
-
     }
 
     override fun getItemCount(): Int = list.size
