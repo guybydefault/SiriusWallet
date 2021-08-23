@@ -16,10 +16,18 @@ class SelectOperationTypeActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationTypeBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySelectOperationTypeBinding.inflate(layoutInflater)
     }
+    private var enterSum = ""
+    private var typeOfOperation = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val i = intent
+        enterSum = i.getStringExtra("ENTER_SUM_SESSION")!!
+
+
 
         binding.selectType.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.selectType.setNavigationOnClickListener {
@@ -30,7 +38,13 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         binding.firstRg.setOnCheckedChangeListener { _, checkedId ->
             findViewById<RadioButton>(checkedId)?.apply {
                 binding.doneButton.isEnabled = true
+
                 binding.doneButton.setTextColor(resources.getColor(R.color.white))
+                typeOfOperation = if (binding.firstRg.checkedRadioButtonId == 0) {
+                    getString(R.string.income_label)
+                } else {
+                    getString(R.string.expense_label)
+                }
             }
         }
 
@@ -46,8 +60,11 @@ class SelectOperationTypeActivity : AppCompatActivity() {
 
     private fun goToSelectOperationActivity() {
         val intent = Intent(this, SelectOperationCategoryActivity::class.java)
+        intent.putExtra("ENTER_SUM_SESSION", enterSum)
+        intent.putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
+
 
 }

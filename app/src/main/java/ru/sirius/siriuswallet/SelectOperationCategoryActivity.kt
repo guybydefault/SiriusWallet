@@ -14,6 +14,10 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
         ActivitySelectOperationCategoryBinding.inflate(layoutInflater)
     }
 
+    private var enterSum = ""
+    private var typeOfOperation = ""
+    private var nameOfOperation = ""
+
     private val listOfCategory = listOf(
         CategoryItem(R.drawable.ic_icon_bg, "Зарплата", false),
         CategoryItem(R.drawable.ic_icon_bg, "Подработка", false),
@@ -28,6 +32,10 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        val i = intent
+        enterSum = i.getStringExtra("ENTER_SUM_SESSION")!!
+        typeOfOperation = i.getStringExtra("ENTER_TYPE_OPERATION")!!
 
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
@@ -54,12 +62,17 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
 
     fun goToSelectOperationActivity() {
         val intent = Intent(this, EditOperationActivity::class.java)
+        intent.putExtra("ENTER_SUM_SESSION", enterSum)
+        intent.putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
+        intent.putExtra("SELECT_OPERATION_CATEGORY", nameOfOperation)
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     override fun onItemClicked(categoryItem: CategoryItem) {
-        Toast.makeText(this, categoryItem.category, Toast.LENGTH_LONG).show()
+        nameOfOperation = categoryItem.category
+
+        //Toast.makeText(this, categoryItem.category, Toast.LENGTH_LONG).show()
 
 
     }

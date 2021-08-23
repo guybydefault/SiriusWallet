@@ -14,6 +14,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
         ActivityEnterOperationSumBinding.inflate(layoutInflater)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -27,6 +28,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
 
         binding.doneButton.setOnClickListener {
             if (validateUserName()) {
+
                 startActivity()
             }
 
@@ -64,6 +66,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
 
     private fun startActivity() {
         val intent = Intent(this, SelectOperationTypeActivity::class.java)
+        intent.putExtra("ENTER_SUM_SESSION", binding.sumOperation.text.toString())
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }

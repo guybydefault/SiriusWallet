@@ -37,7 +37,6 @@ class CategoryHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
         itemView.setOnClickListener {
             clickListener.onItemClicked(categoryItem)
-
             if (arrow!!.visibility == VISIBLE && checkedPosition == adapterPosition) {
                 arrow!!.visibility = GONE
                 checkedPosition = adapterPosition
@@ -45,8 +44,6 @@ class CategoryHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 arrow!!.visibility = VISIBLE
                 checkedPosition = adapterPosition
             }
-
-
         }
 
     }
