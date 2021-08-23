@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.WalletListDateViewBinding
 import ru.sirius.siriuswallet.databinding.WalletListOperationViewBinding
+import ru.sirius.siriuswallet.model.CategoryType
 import ru.sirius.siriuswallet.model.Operation
 import ru.sirius.siriuswallet.utils.formatForDisplay
 import java.time.LocalDate
@@ -111,6 +112,11 @@ class OperationsRecyclerViewAdapter(
                     theme
                 )
             )
+            if (operation.operationCategory.type == CategoryType.INCOME) {
+                operationIcon.background.setTint(resources.getColor(R.color.income_category_background_color, theme))
+            } else {
+                operationIcon.background.setTint(resources.getColor(R.color.outcome_category_background_color, theme))
+            }
         }
     }
 
