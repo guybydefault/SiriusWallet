@@ -9,7 +9,7 @@ class CategoryService {
     private val categoryNetworkRepository = CategoryNetworkRepository()
 
     suspend fun getCategories(categoryType: CategoryType) = withContext(Dispatchers.IO) {
-        return@withContext categoryNetworkRepository.getIncomeCategories(categoryType)
+        return@withContext categoryNetworkRepository.getCategories(categoryType)
     }
 
 

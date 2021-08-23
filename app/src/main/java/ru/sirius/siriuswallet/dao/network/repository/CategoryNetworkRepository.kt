@@ -14,7 +14,7 @@ class CategoryNetworkRepository {
     val retrofit = Retrofit
     val categoryDtoMapper = CategoryDtoMapper(CategoryResourceIdResolver())
 
-    suspend fun getIncomeCategories(categoryType: CategoryType): Response<List<Category>> {
+    suspend fun getCategories(categoryType: CategoryType): Response<List<Category>> {
         return retrofit.CATEGORIES_API.getCategories(categoryType.name)
             .handleResponse { it.map { categoryDtoMapper.mapToObj(it) } }
     }
