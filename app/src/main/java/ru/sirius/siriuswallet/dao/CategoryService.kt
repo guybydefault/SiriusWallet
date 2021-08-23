@@ -6,7 +6,7 @@ import ru.sirius.siriuswallet.dao.network.repository.CategoryNetworkRepository
 import ru.sirius.siriuswallet.model.CategoryType
 
 class CategoryService {
-    val categoryNetworkRepository = CategoryNetworkRepository()
+    private val categoryNetworkRepository = CategoryNetworkRepository()
 
     suspend fun getCategories(categoryType: CategoryType) = withContext(Dispatchers.IO) {
         return@withContext categoryNetworkRepository.getIncomeCategories(categoryType)

@@ -11,7 +11,7 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 
 class OperationService {
-    val operationNetworkRepository = OperationsNetworkRepository()
+    private val operationNetworkRepository = OperationsNetworkRepository()
 
     val placeholderDataset: List<Operation> = mutableListOf(
         Operation(
