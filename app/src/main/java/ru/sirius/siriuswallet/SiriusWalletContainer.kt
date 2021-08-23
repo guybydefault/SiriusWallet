@@ -1,12 +1,12 @@
 package ru.sirius.siriuswallet
 
-import android.annotation.SuppressLint
+import ru.sirius.siriuswallet.dao.CategoryService
 import ru.sirius.siriuswallet.dao.OperationService
-import ru.sirius.siriuswallet.dao.network.repository.CategoryNetworkRepository
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 
 class SiriusWalletContainer {
-    @SuppressLint("NewApi")
     val operationsService = OperationService()
-    val operationsViewModel = OperationsViewModel(this)
+    val categoriesService = CategoryService()
+    val operationsViewModel: OperationsViewModel by lazy(LazyThreadSafetyMode.NONE) { OperationsViewModel(this) }
+    val categoriesViewModel: CategoriesViewModel by lazy(LazyThreadSafetyMode.NONE) { CategoriesViewModel(this) }
 }

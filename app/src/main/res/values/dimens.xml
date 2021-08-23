@@ -6,4 +6,7 @@
     <dimen name="wallet_name_text_size">12sp</dimen>
     <dimen name="wallet_balance_text_size">30sp</dimen>
     <dimen name="wallet_info_no_records_text_size">13sp</dimen>
+    <dimen name="category_icon_padding">10dp</dimen>
+    <dimen name="category_icon_height">40dp</dimen>
+    <dimen name="category_icon_width">40dp</dimen>
 </resources>

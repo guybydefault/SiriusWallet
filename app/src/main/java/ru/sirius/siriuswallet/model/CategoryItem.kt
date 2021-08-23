@@ -1,5 +1,5 @@
 package ru.sirius.siriuswallet.model
 
-import android.graphics.drawable.Drawable
+import android.app.ActivityManager
 
-data class CategoryItem(val icon: Int, val category: String, var arrow: Boolean)
+data class CategoryItem(val categoryImage: Int, val description: String)

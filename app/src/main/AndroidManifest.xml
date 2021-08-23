@@ -16,17 +16,17 @@
             android:name=".WalletInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EnterOperationSumActivity"
+            android:name=".view.transition.EnterOperationSumActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".SelectOperationCategoryActivity"
+            android:name=".view.transition.SelectOperationCategoryActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SelectOperationTypeActivity"
+            android:name=".view.transition.SelectOperationTypeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EditOperationActivity"
+            android:name=".view.transition.EditOperationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".OnBoardingActivity"
