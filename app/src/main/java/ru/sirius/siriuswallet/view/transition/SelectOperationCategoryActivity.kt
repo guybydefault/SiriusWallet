@@ -19,6 +19,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         getContainer().categoriesViewModel
     }
 
+    private var checkActivity: String = "false"
     private var enterSum = ""
     private lateinit var typeOfOperation: CategoryType
     private var nameOfOperation = ""
@@ -40,10 +41,13 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val i = intent
-        enterSum = i.getStringExtra("ENTER_SUM_SESSION")!!
-        typeOfOperation = i.getSerializableExtra("ENTER_TYPE_OPERATION")!! as CategoryType
-        categoriesViewModel.categoryType = typeOfOperation
+        checkActivity = intent.getStringExtra("checkedActivity").toString()
+        if (checkActivity != "true") {
+            enterSum = intent.getStringExtra("ENTER_SUM_SESSION")!!
+            typeOfOperation = intent.getSerializableExtra("ENTER_TYPE_OPERATION")!! as CategoryType
+            categoriesViewModel.categoryType = typeOfOperation
+        }
+
 
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
@@ -69,13 +73,20 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-
     fun goToSelectOperationActivity() {
-        val intent = Intent(this, EditOperationActivity::class.java)
-        intent.putExtra("ENTER_SUM_SESSION", enterSum)
-        intent.putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
-        intent.putExtra("SELECT_OPERATION_CATEGORY", nameOfOperation)
-        startActivity(intent)
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        if (checkActivity != "true") {
+            val intent = Intent(this, EditOperationActivity::class.java)
+            intent.putExtra("ENTER_SUM_SESSION", enterSum)
+            intent.putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
+            intent.putExtra("SELECT_OPERATION_CATEGORY", nameOfOperation)
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        } else {
+            val i = Intent()
+            i.putExtra("key3", nameOfOperation)
+            setResult(RESULT_OK, i)
+            finish()
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
     }
 }

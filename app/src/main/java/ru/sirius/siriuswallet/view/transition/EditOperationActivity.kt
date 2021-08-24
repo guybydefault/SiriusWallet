@@ -1,9 +1,7 @@
 package ru.sirius.siriuswallet.view.transition
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,6 +10,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEditOperationBinding
+import ru.sirius.siriuswallet.model.CategoryType
 import java.util.*
 
 class EditOperationActivity : AppCompatActivity() {
@@ -19,8 +18,8 @@ class EditOperationActivity : AppCompatActivity() {
         ActivityEditOperationBinding.inflate(layoutInflater)
     }
     private var launcher: ActivityResultLauncher<Intent>? = null
-
-    private var checkActivity: Boolean = true
+    private var launcherType: ActivityResultLauncher<Intent>? = null
+    private var launcherCategory: ActivityResultLauncher<Intent>? = null
 
     val months =
         arrayOf(
@@ -35,8 +34,22 @@ class EditOperationActivity : AppCompatActivity() {
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                val text = result.data?.getStringExtra("key1")
-                binding.sumContainer.value.text = text
+                val sumOperationText = result.data?.getStringExtra("key1")
+                binding.sumContainer.value.text = sumOperationText
+            }
+        }
+
+        launcherType = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val typeOperationCheck = result.data?.getStringExtra("key2")
+                binding.typeContainer.value.text = typeOperationCheck
+            }
+        }
+
+        launcherCategory = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val typeCategoryCheck = result.data?.getStringExtra("key3")
+                binding.categoryContainer.value.text = typeCategoryCheck
             }
         }
 
@@ -45,11 +58,10 @@ class EditOperationActivity : AppCompatActivity() {
         val categoryContainer: ConstraintLayout = findViewById(R.id.category_container)
         val dateContainer: ConstraintLayout = findViewById(R.id.date_container)
 
-
         binding.sumContainer.value.text = intent.getStringExtra("ENTER_SUM_SESSION").toString() + " " +
                 getString(R.string.rub_symbol)
         binding.typeContainer.type.text = getString(R.string.type_text)
-        binding.typeContainer.value.text = intent.getStringExtra("OPERATION_CATEGORY").toString()
+        binding.typeContainer.value.text = (intent.getSerializableExtra("ENTER_TYPE_OPERATION") as CategoryType).typeLocalizedName
         binding.categoryContainer.type.text = getString(R.string.category)
         binding.categoryContainer.value.text = intent.getStringExtra("SELECT_OPERATION_CATEGORY").toString()
         binding.dateContainer.type.text = getString(R.string.date_operation)
@@ -62,19 +74,21 @@ class EditOperationActivity : AppCompatActivity() {
 
         sumContainer.setOnClickListener {
             sumContainerBackData()
-            Toast.makeText(this, "sumContainer", Toast.LENGTH_LONG).show()
         }
 
         typeContainer.setOnClickListener {
-            Toast.makeText(this, "typeContainer", Toast.LENGTH_LONG).show()
+            typeContainerBackData()
         }
 
         categoryContainer.setOnClickListener {
-            Toast.makeText(this, "categoryContainer", Toast.LENGTH_LONG).show()
+            categoryContainerBackData()
         }
 
         dateContainer.setOnClickListener {
             dataPickerSet()
+        }
+
+        binding.doneButtonBlackConfirm.setOnClickListener {
         }
     }
 
@@ -93,15 +107,36 @@ class EditOperationActivity : AppCompatActivity() {
     }
 
     fun sumContainerBackData() {
-        val i = Intent()
-        i.putExtra("checkedActivity", "true")
-        launcher?.launch(Intent(this, EnterOperationSumActivity::class.java).putExtra())
+        launcher?.launch(
+            Intent(this, EnterOperationSumActivity::class.java)
+                .putExtra("checkedActivity", "true")
+                .putExtra("value", binding.sumContainer.value.text.toString().replace(" ₽", ""))
+        )
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
+    fun typeContainerBackData() {
+        launcherType?.launch(
+            Intent(this, SelectOperationTypeActivity::class.java)
+                .putExtra("checkedActivity", "true")
+                .putExtra("sumComponent", binding.sumContainer.value.text.toString().replace(" ₽", ""))
+                .putExtra("typeComponent", binding.typeContainer.value.text.toString())
+        )
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
+    fun categoryContainerBackData() {
+        launcherCategory?.launch(
+            Intent(this, SelectOperationCategoryActivity::class.java)
+                .putExtra("checkedActivity", "true")
+                .putExtra("sumComponent", binding.sumContainer.value.toString())
+        )
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+
+    }
 
     override fun finish() {
         super.finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
-
 }

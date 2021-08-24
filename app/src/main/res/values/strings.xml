@@ -12,8 +12,8 @@
     <string name="operation_category">Выберите категорию</string>
     <string name="new_operation">Новая операция</string>
     <string name="enter_sum_operation">Сумма операции</string>
-    <string name="income_label">Доход</string>
-    <string name="expense_label">Расход</string>
+    <string name="income_label">Пополнение</string>
+    <string name="expense_label">Траты</string>
     <string name="rub_symbol">₽</string>
     <string name="operation_date_today">Сегодня</string>
     <string name="operation_date_yesterday">Вчера</string>

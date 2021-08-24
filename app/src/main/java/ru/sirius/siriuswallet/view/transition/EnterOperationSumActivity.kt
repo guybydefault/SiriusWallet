@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEnterOperationSumBinding
@@ -15,8 +14,6 @@ class EnterOperationSumActivity : AppCompatActivity() {
     private val binding: ActivityEnterOperationSumBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityEnterOperationSumBinding.inflate(layoutInflater)
     }
-
-
     private var checkActivity: String = "false"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,16 +26,19 @@ class EnterOperationSumActivity : AppCompatActivity() {
         }
         setupListeners()
         checkActivity = intent.getStringExtra("checkedActivity").toString()
-
+        if (checkActivity == "true") {
+            binding.sumOperation.setText(intent.getStringExtra("value"))
+        }
 
         binding.doneButton.setOnClickListener {
             if (validateUserName() && checkActivity != "true") {
                 goToSelectOperationType()
             } else {
                 val i = Intent()
-                i.putExtra("key1", binding.sumOperation.text.toString())
+                i.putExtra("key1", binding.sumOperation.text.toString() + " ₽")
                 setResult(RESULT_OK, i)
                 finish()
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
     }
