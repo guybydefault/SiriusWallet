@@ -6,22 +6,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.CategoryFragmentBinding
 import ru.sirius.siriuswallet.model.CategoryItem
 
 internal class CategoryAdapter(
     private val list: List<CategoryItem>,
     private val categoryClickListener: OnCategoryClickListener
-) : RecyclerView.Adapter<CategoryAdapter.OperationViewHolder>() {
+) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     var selectedItemPos = -1
     var lastItemSelectedPos = -1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OperationViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val viewBinding = CategoryFragmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        val viewHolder = OperationViewHolder(viewBinding)
+        val viewHolder = CategoryViewHolder(viewBinding)
 
         viewBinding.root.setOnClickListener {
             val adapterPosition = viewHolder.adapterPosition
@@ -41,7 +40,7 @@ internal class CategoryAdapter(
         return viewHolder
     }
 
-    override fun onBindViewHolder(holder: OperationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val categoryItem = list[position]
         holder.apply {
             categoryIcon.setImageResource(categoryItem.categoryImage)
@@ -53,7 +52,7 @@ internal class CategoryAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    inner class OperationViewHolder(private val viewBinding: CategoryFragmentBinding) : RecyclerView.ViewHolder(viewBinding.root) {
+    inner class CategoryViewHolder(private val viewBinding: CategoryFragmentBinding) : RecyclerView.ViewHolder(viewBinding.root) {
         val categoryIcon: ImageView = viewBinding.imageCategory
         val categoryText: TextView = viewBinding.categoryText
         val arrowIcon: ImageView = viewBinding.arrowRightChange
