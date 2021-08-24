@@ -1,9 +1,9 @@
-package ru.sirius.siriuswallet.dao.network.api
+package ru.sirius.siriuswallet.data.network.api
 
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.sirius.siriuswallet.dao.network.dto.OperationDto
+import ru.sirius.siriuswallet.data.network.dto.OperationDto
 
 interface OperationsApi {
 
