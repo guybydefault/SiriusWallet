@@ -1,14 +1,13 @@
 package ru.sirius.siriuswallet
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.sirius.siriuswallet.dao.network.dto.CategoryDto
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
-import ru.sirius.siriuswallet.model.Category
+import ru.sirius.siriuswallet.dao.network.dto.CategoryDto
 import ru.sirius.siriuswallet.model.CategoryItem
-import ru.sirius.siriuswallet.model.CategoryType
 
 class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener {
     private val binding: ActivitySelectOperationCategoryBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -33,6 +32,8 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
     private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, this@SelectOperationCategoryActivity)
 
     val categories: MutableList<CategoryDto> = arrayListOf()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

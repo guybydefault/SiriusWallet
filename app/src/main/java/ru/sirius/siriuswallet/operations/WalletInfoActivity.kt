@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
