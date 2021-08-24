@@ -1,15 +1,16 @@
-package ru.sirius.siriuswallet
+package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import ru.sirius.siriuswallet.*
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
-import ru.sirius.siriuswallet.dao.network.dto.CategoryDto
+import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryItem
+import ru.sirius.siriuswallet.model.CategoryType
 
-class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener {
+class SelectOperationCategoryActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationCategoryBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySelectOperationCategoryBinding.inflate(layoutInflater)
     }
@@ -19,7 +20,7 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
     }
 
     private var enterSum = ""
-    private var typeOfOperation = ""
+    private lateinit var typeOfOperation: CategoryType
     private var nameOfOperation = ""
 
     private val listOfCategoryPlaceholder = listOf(
@@ -29,11 +30,11 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
         CategoryItem(Category(0, 0, "Подарок", CategoryType.INCOME, R.drawable.ic_gift), false)
     )
 
-    private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, this@SelectOperationCategoryActivity)
-
-    val categories: MutableList<CategoryDto> = arrayListOf()
-
-
+    private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, object : OnCategoryClickListener {
+        override fun onCategoryClicked(categoryItem: CategoryItem) {
+            nameOfOperation = categoryItem.category.name
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,8 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
 
         val i = intent
         enterSum = i.getStringExtra("ENTER_SUM_SESSION")!!
-        typeOfOperation = i.getStringExtra("ENTER_TYPE_OPERATION")!!
+        typeOfOperation = i.getSerializableExtra("ENTER_TYPE_OPERATION")!! as CategoryType
+        categoriesViewModel.categoryType = typeOfOperation
 
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
@@ -76,14 +78,4 @@ class SelectOperationCategoryActivity : AppCompatActivity(), OnItemClickListener
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
-
-    override fun onItemClicked(categoryItem: CategoryItem) {
-        nameOfOperation = categoryItem.category.name
-
-        //Toast.makeText(this, categoryItem.category, Toast.LENGTH_LONG).show()
-
-
-    }
-
-
 }
