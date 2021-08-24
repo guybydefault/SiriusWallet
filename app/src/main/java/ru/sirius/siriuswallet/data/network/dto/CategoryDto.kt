@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.dao.network.dto
+package ru.sirius.siriuswallet.data.network.dto
 
 import kotlinx.serialization.Serializable
 import ru.sirius.siriuswallet.model.CategoryType

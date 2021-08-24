@@ -1,9 +1,9 @@
-package ru.sirius.siriuswallet.dao
+package ru.sirius.siriuswallet.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import ru.sirius.siriuswallet.R
-import ru.sirius.siriuswallet.dao.network.repository.OperationsNetworkRepository
+import ru.sirius.siriuswallet.data.network.repository.OperationsNetworkRepository
 import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryType
 import ru.sirius.siriuswallet.model.Operation

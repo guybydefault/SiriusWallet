@@ -1,8 +1,8 @@
-package ru.sirius.siriuswallet.dao
+package ru.sirius.siriuswallet.data
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import ru.sirius.siriuswallet.dao.network.repository.CategoryNetworkRepository
+import ru.sirius.siriuswallet.data.network.repository.CategoryNetworkRepository
 import ru.sirius.siriuswallet.model.CategoryType
 
 class CategoryService {

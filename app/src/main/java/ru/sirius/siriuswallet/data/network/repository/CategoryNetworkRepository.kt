@@ -1,11 +1,11 @@
-package ru.sirius.siriuswallet.dao.network.repository
+package ru.sirius.siriuswallet.data.network.repository
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import ru.guybydefault.minin.api.Retrofit
-import ru.sirius.siriuswallet.dao.Response
-import ru.sirius.siriuswallet.dao.network.dto.mappers.CategoryDtoMapper
-import ru.sirius.siriuswallet.dao.network.dto.mappers.CategoryResourceIdResolver
+import ru.sirius.siriuswallet.data.Response
+import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryDtoMapper
+import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryResourceIdResolver
 import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryType
 

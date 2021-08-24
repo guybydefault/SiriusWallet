@@ -1,9 +1,9 @@
-package ru.sirius.siriuswallet.dao.network.repository
+package ru.sirius.siriuswallet.data.network.repository
 
 import ru.guybydefault.minin.api.Retrofit
-import ru.sirius.siriuswallet.dao.Response
-import ru.sirius.siriuswallet.dao.network.dto.mappers.CategoryDtoMapper
-import ru.sirius.siriuswallet.dao.network.dto.mappers.CategoryResourceIdResolver
+import ru.sirius.siriuswallet.data.Response
+import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryDtoMapper
+import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryResourceIdResolver
 import ru.sirius.siriuswallet.model.Operation
 import java.time.LocalDateTime
 import java.time.ZoneId
