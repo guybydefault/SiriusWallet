@@ -119,6 +119,7 @@ class EditOperationActivity : AppCompatActivity() {
                 .putExtra("sumComponent", binding.sumContainer.value.text.toString().replace(" ₽", ""))
                 .putExtra("typeComponent", binding.typeContainer.value.text.toString())
         )
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
