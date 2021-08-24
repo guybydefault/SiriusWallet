@@ -20,6 +20,8 @@ class EditOperationActivity : AppCompatActivity() {
     }
     private var launcher: ActivityResultLauncher<Intent>? = null
 
+    private var checkActivity: Boolean = true
+
     val months =
         arrayOf(
             "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
@@ -31,6 +33,12 @@ class EditOperationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                val text = result.data?.getStringExtra("key1")
+                binding.sumContainer.value.text = text
+            }
+        }
 
         val sumContainer: ConstraintLayout = findViewById(R.id.sum_container)
         val typeContainer: ConstraintLayout = findViewById(R.id.type_container)
@@ -53,6 +61,7 @@ class EditOperationActivity : AppCompatActivity() {
         }
 
         sumContainer.setOnClickListener {
+            sumContainerBackData()
             Toast.makeText(this, "sumContainer", Toast.LENGTH_LONG).show()
         }
 
@@ -84,11 +93,9 @@ class EditOperationActivity : AppCompatActivity() {
     }
 
     fun sumContainerBackData() {
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == RESULT_OK) {
-                val text = result.data?.getStringExtra("key1")
-            }
-        }
+        val i = Intent()
+        i.putExtra("checkedActivity", "true")
+        launcher?.launch(Intent(this, EnterOperationSumActivity::class.java).putExtra())
     }
 
 

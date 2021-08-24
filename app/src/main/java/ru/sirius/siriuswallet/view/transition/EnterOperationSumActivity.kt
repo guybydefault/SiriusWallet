@@ -1,15 +1,12 @@
 package ru.sirius.siriuswallet.view.transition
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEnterOperationSumBinding
 
@@ -18,6 +15,9 @@ class EnterOperationSumActivity : AppCompatActivity() {
     private val binding: ActivityEnterOperationSumBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityEnterOperationSumBinding.inflate(layoutInflater)
     }
+
+
+    private var checkActivity: String = "false"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +28,18 @@ class EnterOperationSumActivity : AppCompatActivity() {
             finish()
         }
         setupListeners()
+        checkActivity = intent.getStringExtra("checkedActivity").toString()
+
 
         binding.doneButton.setOnClickListener {
-            if (validateUserName()) {
+            if (validateUserName() && checkActivity != "true") {
                 goToSelectOperationType()
+            } else {
+                val i = Intent()
+                i.putExtra("key1", binding.sumOperation.text.toString())
+                setResult(RESULT_OK, i)
+                finish()
             }
-
         }
     }
 

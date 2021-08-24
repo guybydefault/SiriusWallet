@@ -45,7 +45,7 @@ internal class CategoryAdapter(
         val categoryItem = list[position]
         holder.apply {
             categoryIcon.setImageResource(categoryItem.categoryImage)
-            // operationIcon.background.setTint(resources.getColor(R.color.income_category_background_color, theme))
+            //operationIcon.background.setTint(resources.getColor(R.color.income_category_background_color, theme))
             categoryText.text = categoryItem.description
             arrowIcon.isVisible = position == selectedItemPos
         }
