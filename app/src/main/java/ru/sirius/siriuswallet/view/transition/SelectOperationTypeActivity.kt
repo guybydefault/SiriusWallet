@@ -1,11 +1,12 @@
 package ru.sirius.siriuswallet.view.transition
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
+import android.os.Bundle
 import android.widget.RadioButton
+import androidx.appcompat.app.AppCompatActivity
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
+import ru.sirius.siriuswallet.model.CategoryType
 
 
 class SelectOperationTypeActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
     }
 
     private var enterOperationSum = ""
-    private var typeOfOperation = ""
+    private var typeOfOperation: CategoryType? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +34,13 @@ class SelectOperationTypeActivity : AppCompatActivity() {
                 binding.doneButton.isEnabled = true
 
                 binding.doneButton.setTextColor(resources.getColor(R.color.white))
-                typeOfOperation = if (binding.firstRg.checkedRadioButtonId == 0) {
-                    getString(R.string.income_label)
+                if (binding.firstRg.checkedRadioButtonId == 0) {
+                    typeOfOperation = CategoryType.INCOME
                 } else {
-                    getString(R.string.expense_label)
+                    typeOfOperation = CategoryType.OUTCOME
                 }
             }
         }
-
         binding.doneButton.setOnClickListener {
             goToSelectOperationActivity()
         }
@@ -54,11 +54,9 @@ class SelectOperationTypeActivity : AppCompatActivity() {
     private fun goToSelectOperationActivity() {
         val intent = Intent(this, SelectOperationCategoryActivity::class.java).apply {
             putExtra("ENTER_SUM_SESSION", enterOperationSum)
-            putExtra("OPERATION_CATEGORY", typeOfOperation)
+            putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
         }
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
-
-
 }
