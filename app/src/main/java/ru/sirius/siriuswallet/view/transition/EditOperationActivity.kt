@@ -58,15 +58,13 @@ class EditOperationActivity : AppCompatActivity() {
         val categoryContainer: ConstraintLayout = findViewById(R.id.category_container)
         val dateContainer: ConstraintLayout = findViewById(R.id.date_container)
 
-        binding.sumContainer.value.text = intent.getStringExtra("ENTER_SUM_SESSION").toString() + " " +
-                getString(R.string.rub_symbol)
+        binding.sumContainer.value.text = intent.getStringExtra("ENTER_SUM_SESSION").toString() + " " + getString(R.string.rub_symbol)
         binding.typeContainer.type.text = getString(R.string.type_text)
         binding.typeContainer.value.text = (intent.getSerializableExtra("ENTER_TYPE_OPERATION") as CategoryType).typeLocalizedName
         binding.categoryContainer.type.text = getString(R.string.category)
         binding.categoryContainer.value.text = intent.getStringExtra("SELECT_OPERATION_CATEGORY").toString()
         binding.dateContainer.type.text = getString(R.string.date_operation)
-        binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " +
-                "${months.get(calendar.get(Calendar.MONTH))}"
+        binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " + "${months.get(calendar.get(Calendar.MONTH))}"
         binding.editOperationToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.editOperationToolbar.setNavigationOnClickListener {
             finish()
@@ -100,8 +98,7 @@ class EditOperationActivity : AppCompatActivity() {
         val datePicker = builder.build()
         datePicker.addOnPositiveButtonClickListener {
             calendar.time = Date(it)
-            binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " +
-                    "${months.get(calendar.get(Calendar.MONTH))}"
+            binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " + "${months.get(calendar.get(Calendar.MONTH))}"
         }
         datePicker.show(supportFragmentManager, "MyTAG")
     }
@@ -115,7 +112,7 @@ class EditOperationActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    fun typeContainerBackData() {
+    private fun typeContainerBackData() {
         launcherType?.launch(
             Intent(this, SelectOperationTypeActivity::class.java)
                 .putExtra("checkedActivity", "true")
@@ -125,14 +122,13 @@ class EditOperationActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    fun categoryContainerBackData() {
+    private fun categoryContainerBackData() {
         launcherCategory?.launch(
             Intent(this, SelectOperationCategoryActivity::class.java)
                 .putExtra("checkedActivity", "true")
                 .putExtra("sumComponent", binding.sumContainer.value.toString())
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-
     }
 
     override fun finish() {

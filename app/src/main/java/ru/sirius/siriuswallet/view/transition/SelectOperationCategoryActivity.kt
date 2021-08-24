@@ -48,14 +48,13 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
             categoriesViewModel.categoryType = typeOfOperation
         }
 
-
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
             finish()
         }
 
         binding.doneButtonBlack.setOnClickListener {
-            goToSelectOperationActivity()
+            goToEditOperationActivity()
         }
 
         binding.operationListRecyclerView.apply {
@@ -73,7 +72,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
-    fun goToSelectOperationActivity() {
+    fun goToEditOperationActivity() {
         if (checkActivity != "true") {
             val intent = Intent(this, EditOperationActivity::class.java)
             intent.putExtra("ENTER_SUM_SESSION", enterSum)

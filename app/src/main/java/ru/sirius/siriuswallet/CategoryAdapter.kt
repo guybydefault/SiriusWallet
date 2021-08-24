@@ -45,7 +45,6 @@ internal class CategoryAdapter(
         notifyDataSetChanged()
     }
 
-
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val categoryItem = list[position]
         holder.apply {

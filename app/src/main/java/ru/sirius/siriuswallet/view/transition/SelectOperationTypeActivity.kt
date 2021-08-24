@@ -9,7 +9,6 @@ import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
 import ru.sirius.siriuswallet.model.CategoryType
 
-
 class SelectOperationTypeActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationTypeBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySelectOperationTypeBinding.inflate(layoutInflater)
@@ -23,16 +22,17 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        if (checkActivity == "true") {
-            if (intent.getStringExtra("typeComponent").equals("Пополнение")) {
-                binding.radioButtonIncome.isEnabled = true
-            } else {
-                binding.radioButtonExpense.isEnabled = true
-            }
-        }
-
         checkActivity = intent.getStringExtra("checkedActivity").toString()
         enterOperationSum = intent.getStringExtra("ENTER_SUM_SESSION").toString()
+        val checkTypeActivity = intent.getStringExtra("typeComponent").toString()
+
+        if (checkActivity == "true") {
+            if (checkTypeActivity == "Пополнение") {
+                binding.radioButtonIncome.isChecked = true
+            } else {
+                binding.radioButtonExpense.isChecked = true
+            }
+        }
 
         binding.selectType.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.selectType.setNavigationOnClickListener {
@@ -78,6 +78,5 @@ class SelectOperationTypeActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
-
     }
 }
