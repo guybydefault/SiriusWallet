@@ -1,7 +1,7 @@
 package ru.sirius.siriuswallet
 
-import ru.sirius.siriuswallet.dao.CategoryService
-import ru.sirius.siriuswallet.dao.OperationService
+import ru.sirius.siriuswallet.data.CategoryService
+import ru.sirius.siriuswallet.data.OperationService
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 
 class SiriusWalletContainer {

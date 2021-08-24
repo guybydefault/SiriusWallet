@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ru.sirius.siriuswallet.dao.Response
+import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryType
 

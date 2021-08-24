@@ -1,6 +1,6 @@
-package ru.sirius.siriuswallet.dao.network.dto.mappers
+package ru.sirius.siriuswallet.data.network.dto.mappers
 
-import ru.sirius.siriuswallet.dao.network.dto.CategoryDto
+import ru.sirius.siriuswallet.data.network.dto.CategoryDto
 import ru.sirius.siriuswallet.model.Category
 
 class CategoryDtoMapper(

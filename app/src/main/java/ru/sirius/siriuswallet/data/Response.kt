@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.dao
+package ru.sirius.siriuswallet.data
 
 sealed class Response<out T> {
     data class Success<T>(val responseBody: T) : Response<T>() {

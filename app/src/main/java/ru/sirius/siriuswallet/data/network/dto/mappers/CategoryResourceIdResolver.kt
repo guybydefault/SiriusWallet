@@ -1,4 +1,4 @@
-package ru.sirius.siriuswallet.dao.network.dto.mappers
+package ru.sirius.siriuswallet.data.network.dto.mappers
 
 class CategoryResourceIdResolver {
     fun resolveDrawableIdByCategoryName(name: String): Int {

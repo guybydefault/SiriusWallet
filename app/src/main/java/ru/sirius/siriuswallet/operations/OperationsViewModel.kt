@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import ru.sirius.siriuswallet.SiriusWalletContainer
-import ru.sirius.siriuswallet.dao.Response
+import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Operation
 
 @SuppressLint("NewApi")

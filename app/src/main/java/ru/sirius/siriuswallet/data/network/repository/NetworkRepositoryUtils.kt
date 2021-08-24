@@ -1,6 +1,6 @@
-package ru.sirius.siriuswallet.dao.network.repository
+package ru.sirius.siriuswallet.data.network.repository
 
-import ru.sirius.siriuswallet.dao.Response
+import ru.sirius.siriuswallet.data.Response
 
 fun <T> retrofit2.Response<T>.handleResponse(): Response<T> {
     return this.handleResponse { it }
