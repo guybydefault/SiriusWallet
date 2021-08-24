@@ -19,10 +19,10 @@ class OperationsViewModel(container: SiriusWalletContainer) : ViewModel() {
             operations.postValue(
                 mutableListOf<Operation>()
             )
-            delay(3000)
+            delay(1000)
             operations.postValue(container.operationsService.placeholderDataset)
-            delay(3000)
-            val result = container.operationsService.getOperations(102)
+            delay(1000)
+            val result = container.operationsService.getOperations(103)
             if (result is Response.Success) {
                 operations.postValue(result.responseBody)
             } else {
