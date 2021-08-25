@@ -20,6 +20,8 @@ class EditOperationActivity : AppCompatActivity() {
     private var launcher: ActivityResultLauncher<Intent>? = null
     private var launcherType: ActivityResultLauncher<Intent>? = null
     private var launcherCategory: ActivityResultLauncher<Intent>? = null
+    private val checkedActivityFlag = "CHECKED_ACTIVITY"
+    private val backSumComponentFlag = "SUM_COMPONENT"
 
     val months =
         arrayOf(
@@ -106,7 +108,7 @@ class EditOperationActivity : AppCompatActivity() {
     fun sumContainerBackData() {
         launcher?.launch(
             Intent(this, EnterOperationSumActivity::class.java)
-                .putExtra("checkedActivity", "true")
+                .putExtra(checkedActivityFlag, true)
                 .putExtra("value", binding.sumContainer.value.text.toString().replace(" ₽", ""))
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
@@ -114,8 +116,8 @@ class EditOperationActivity : AppCompatActivity() {
 
     private fun typeContainerBackData() {
         val intent = Intent(this, SelectOperationTypeActivity::class.java).apply {
-            putExtra("checkedActivity", "true")
-            putExtra("sumComponent", binding.sumContainer.value.text.toString().replace(" ₽", ""))
+            putExtra(checkedActivityFlag, true)
+            putExtra(backSumComponentFlag, binding.sumContainer.value.text.toString().replace(" ₽", ""))
             putExtra("typeComponent", binding.typeContainer.value.text.toString())
         }
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -126,8 +128,8 @@ class EditOperationActivity : AppCompatActivity() {
     private fun categoryContainerBackData() {
         launcherCategory?.launch(
             Intent(this, SelectOperationCategoryActivity::class.java)
-                .putExtra("checkedActivity", "true")
-                .putExtra("sumComponent", binding.sumContainer.value.toString())
+                .putExtra(checkedActivityFlag, true)
+                .putExtra(backSumComponentFlag, binding.sumContainer.value.toString())
                 .putExtra("typeComponent", intent.getSerializableExtra("ENTER_TYPE_OPERATION"))
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

@@ -14,19 +14,24 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         ActivitySelectOperationTypeBinding.inflate(layoutInflater)
     }
 
-    private var checkActivity: String = "false"
+    private var checkActivity = false
     private var enterOperationSum = ""
     private var typeOfOperation: CategoryType? = null
+    private val enterSumFlag = "ENTER_SUM_SESSION"
+    private val enterTypeFlag = "ENTER_TYPE_OPERATION"
+    private val checkedActivityFlag = "CHECKED_ACTIVITY"
+    private val backSumComponentFlag = "SUM_COMPONENT"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        checkActivity = intent.getStringExtra("checkedActivity").toString()
-        enterOperationSum = intent.getStringExtra("ENTER_SUM_SESSION").toString()
+        enterOperationSum = intent.getStringExtra(enterSumFlag).toString()
+        checkActivity = intent.getBooleanExtra(checkedActivityFlag, false)
         val checkTypeActivity = intent.getStringExtra("typeComponent").toString()
 
-        if (checkActivity == "true") {
+        if (checkActivity) {
             if (checkTypeActivity == "Пополнение") {
                 binding.radioButtonIncome.isChecked = true
             } else {
@@ -49,7 +54,6 @@ class SelectOperationTypeActivity : AppCompatActivity() {
                 } else {
                     CategoryType.OUTCOME
                 }
-                Log.i("radiogroup", "$typeOfOperation")
             }
         }
         binding.doneButton.setOnClickListener {
@@ -63,18 +67,18 @@ class SelectOperationTypeActivity : AppCompatActivity() {
     }
 
     private fun goToSelectOperationActivity() {
-        if (checkActivity != "true") {
-            startActivityOperation("ENTER_SUM_SESSION")
+        if (!checkActivity) {
+            startActivityOperation(enterSumFlag)
         } else {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivityOperation("sumComponent")
+            startActivityOperation(backSumComponentFlag)
         }
     }
 
     private fun startActivityOperation(value: String) {
         val intent = Intent(this, SelectOperationCategoryActivity::class.java).apply {
-            putExtra("ENTER_SUM_SESSION", intent.getStringExtra(value).toString())
-            putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
+            putExtra(enterSumFlag, intent.getStringExtra(value).toString())
+            putExtra(enterTypeFlag, typeOfOperation)
         }
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

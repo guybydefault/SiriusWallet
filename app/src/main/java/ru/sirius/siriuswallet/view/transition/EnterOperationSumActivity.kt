@@ -14,7 +14,10 @@ class EnterOperationSumActivity : AppCompatActivity() {
     private val binding: ActivityEnterOperationSumBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityEnterOperationSumBinding.inflate(layoutInflater)
     }
-    private var checkActivity: String = "false"
+    private var checkActivity: Boolean = false
+
+    private val enterSumFlag = "ENTER_SUM_SESSION"
+    private val checkedActivityFlag = "CHECKED_ACTIVITY"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,13 +28,13 @@ class EnterOperationSumActivity : AppCompatActivity() {
             finish()
         }
         setupListeners()
-        checkActivity = intent.getStringExtra("checkedActivity").toString()
-        if (checkActivity == "true") {
+        checkActivity = intent.getBooleanExtra(checkedActivityFlag, false)
+        if (checkActivity) {
             binding.sumOperation.setText(intent.getStringExtra("value"))
         }
 
         binding.doneButton.setOnClickListener {
-            if (validateEnterSum() && checkActivity != "true") {
+            if (validateEnterSum() && !checkActivity) {
                 goToSelectOperationType()
             } else if (validateEnterSum()) {
                 val i = Intent()
@@ -68,7 +71,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
 
     private fun goToSelectOperationType() {
         val intent = Intent(this, SelectOperationTypeActivity::class.java).apply {
-            putExtra("ENTER_SUM_SESSION", binding.sumOperation.text.toString())
+            putExtra(enterSumFlag, binding.sumOperation.text.toString())
         }
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

@@ -2,8 +2,8 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.sirius.siriuswallet.*
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
@@ -19,8 +19,11 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     private val categoriesViewModel: CategoriesViewModel by lazy(LazyThreadSafetyMode.NONE) {
         getContainer().categoriesViewModel
     }
-
-    private var checkActivity: String = "false"
+    private var checkActivity = false
+    private val enterSumFlag = "ENTER_SUM_SESSION"
+    private val enterTypeFlag = "ENTER_TYPE_OPERATION"
+    private val enterCategoryFlag = "SELECT_OPERATION_CATEGORY"
+    private val checkedActivityFlag = "CHECKED_ACTIVITY"
     private var enterSum = ""
     private lateinit var typeOfOperation: CategoryType
     private var nameOfOperation = ""
@@ -35,7 +38,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, object : OnCategoryClickListener {
         override fun onCategoryClicked(categoryItem: CategoryItem) {
             binding.doneButtonBlack.isEnabled = true
-            binding.doneButtonBlack.setTextColor(resources.getColor(R.color.white))
+            binding.doneButtonBlack.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
             nameOfOperation = categoryItem.category.name
         }
     })
@@ -44,10 +47,10 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        checkActivity = intent.getStringExtra("checkedActivity").toString()
-        if (checkActivity != "true") {
-            enterSum = intent.getStringExtra("ENTER_SUM_SESSION")!!
-            typeOfOperation = intent.getSerializableExtra("ENTER_TYPE_OPERATION")!! as CategoryType
+        checkActivity = intent.getBooleanExtra(checkedActivityFlag, false)
+        if (!checkActivity) {
+            enterSum = intent.getStringExtra(enterSumFlag)!!
+            typeOfOperation = intent.getSerializableExtra(enterTypeFlag)!! as CategoryType
             categoriesViewModel.categoryType = typeOfOperation
         }
 
@@ -66,17 +69,17 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
             adapter = recyclerViewAdapter
         }
 
-        categoriesViewModel.categories.observe(this) {
+        categoriesViewModel.categories.observe(this) { it ->
             recyclerViewAdapter.updateList(it.map { CategoryItem(it, false) })
         }
     }
 
-    fun goToEditOperationActivity() {
-        if (checkActivity != "true") {
+    private fun goToEditOperationActivity() {
+        if (!checkActivity) {
             val intent = Intent(this, EditOperationActivity::class.java)
-            intent.putExtra("ENTER_SUM_SESSION", enterSum)
-            intent.putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
-            intent.putExtra("SELECT_OPERATION_CATEGORY", nameOfOperation)
+            intent.putExtra(enterSumFlag, enterSum)
+            intent.putExtra(enterTypeFlag, typeOfOperation)
+            intent.putExtra(enterCategoryFlag, nameOfOperation)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         } else {
