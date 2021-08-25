@@ -1,31 +1,29 @@
 package ru.sirius.siriuswallet.data
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import ru.sirius.siriuswallet.R
-import ru.sirius.siriuswallet.data.network.repository.OperationsNetworkRepository
-import ru.sirius.siriuswallet.model.Category
-import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.data.local.repository.OperationCacheRepository
 import ru.sirius.siriuswallet.model.Operation
-import java.math.BigDecimal
-import java.time.LocalDateTime
 
-class OperationService {
-    private val operationNetworkRepository = OperationsNetworkRepository()
+class OperationService(
+    private val operationNetworkRepository: OperationRepository,
+    private val operationLocalRepository: OperationCacheRepository
+) {
+    suspend fun loadOperations(accountId: Int, onLoad: (Response<List<Operation>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            val localResp = operationLocalRepository.getOperationsByAccountId(accountId)
+            onLoad(localResp)
 
-    val placeholderDataset: List<Operation> = mutableListOf(
-        Operation(
-            1, LocalDateTime.now(), BigDecimal(-12000), Category(
-                1, 1, "Супермаркеты",
-                CategoryType.OUTCOME, R.drawable.ic_supermarket
-            )
-        )
-    )
-
-
-    suspend fun getOperations(
-        accountId: Int
-    ): Response<List<Operation>> = withContext(Dispatchers.IO) {
-        return@withContext operationNetworkRepository.getOperations(accountId)
+            delay(1000) // TODO remove
+            val networkResp = operationNetworkRepository.getOperationsByAccountId(accountId)
+            if (networkResp is Response.Success) {
+                onLoad(networkResp)
+                operationLocalRepository.deleteOperationsWithCategories()
+                networkResp.responseBody.forEach {
+                    operationLocalRepository.insertOperation(it)
+                }
+            }
+        }
     }
 }

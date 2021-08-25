@@ -1,12 +1,37 @@
 package ru.sirius.siriuswallet.data.local.dao
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
+import ru.sirius.siriuswallet.data.local.entities.CategoryEntity
+import ru.sirius.siriuswallet.data.local.entities.OperationEntity
+import ru.sirius.siriuswallet.data.local.entities.OperationWithCategory
 
 @Dao
 abstract class CategoryWithOperationsDao {
-    @Query("SELECT * FROM category")
+    @Query("SELECT * FROM operation o JOIN category c ON c.id = o.operationCategoryId WHERE userId = :userId")
     @Transaction
-    abstract fun getAll(): List<CategoryWithOperationsDao>
+    abstract fun getOperationsByUserId(userId: Int): List<OperationWithCategory>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertCategory(categoryEntity: CategoryEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertOperation(operationEntity: OperationEntity): Long
+
+    @Query("DELETE FROM category")
+    abstract fun deleteCategories(): Int
+
+    @Query("DELETE FROM operation")
+    abstract fun deleteOperations(): Int
+
+    @Transaction
+    open fun insertOperationWithCategory(operationEntity: OperationEntity, categoryEntity: CategoryEntity): Long {
+        insertCategory(categoryEntity)
+        return insertOperation(operationEntity)
+    }
+
+    @Transaction
+    open fun deleteAll() {
+        deleteOperations()
+        deleteCategories()
+    }
 }
