@@ -113,14 +113,14 @@ class EditOperationActivity : AppCompatActivity() {
     }
 
     private fun typeContainerBackData() {
-        launcherType?.launch(
-            Intent(this, SelectOperationTypeActivity::class.java)
-                .putExtra("checkedActivity", "true")
-                .putExtra("sumComponent", binding.sumContainer.value.text.toString().replace(" ₽", ""))
-                .putExtra("typeComponent", binding.typeContainer.value.text.toString())
-        )
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        val intent = Intent(this, SelectOperationTypeActivity::class.java).apply {
+            putExtra("checkedActivity", "true")
+            putExtra("sumComponent", binding.sumContainer.value.text.toString().replace(" ₽", ""))
+            putExtra("typeComponent", binding.typeContainer.value.text.toString())
+        }
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     private fun categoryContainerBackData() {
@@ -128,6 +128,7 @@ class EditOperationActivity : AppCompatActivity() {
             Intent(this, SelectOperationCategoryActivity::class.java)
                 .putExtra("checkedActivity", "true")
                 .putExtra("sumComponent", binding.sumContainer.value.toString())
+                .putExtra("typeComponent", intent.getSerializableExtra("ENTER_TYPE_OPERATION"))
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }

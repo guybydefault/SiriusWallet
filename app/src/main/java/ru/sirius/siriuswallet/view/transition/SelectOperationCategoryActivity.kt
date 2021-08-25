@@ -2,6 +2,7 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.sirius.siriuswallet.*
@@ -33,6 +34,8 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
 
     private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, object : OnCategoryClickListener {
         override fun onCategoryClicked(categoryItem: CategoryItem) {
+            binding.doneButtonBlack.isEnabled = true
+            binding.doneButtonBlack.setTextColor(resources.getColor(R.color.white))
             nameOfOperation = categoryItem.category.name
         }
     })
@@ -51,6 +54,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
             finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         binding.doneButtonBlack.setOnClickListener {
@@ -67,11 +71,6 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         }
     }
 
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-    }
-
     fun goToEditOperationActivity() {
         if (checkActivity != "true") {
             val intent = Intent(this, EditOperationActivity::class.java)
@@ -81,7 +80,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         } else {
-            val i = Intent()
+            val i = Intent(this, EditOperationActivity::class.java)
             i.putExtra("key3", nameOfOperation)
             setResult(RESULT_OK, i)
             finish()

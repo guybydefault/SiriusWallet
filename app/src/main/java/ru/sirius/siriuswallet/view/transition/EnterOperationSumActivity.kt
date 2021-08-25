@@ -31,9 +31,9 @@ class EnterOperationSumActivity : AppCompatActivity() {
         }
 
         binding.doneButton.setOnClickListener {
-            if (validateUserName() && checkActivity != "true") {
+            if (validateEnterSum() && checkActivity != "true") {
                 goToSelectOperationType()
-            } else {
+            } else if (validateEnterSum()) {
                 val i = Intent()
                 i.putExtra("key1", binding.sumOperation.text.toString() + " ₽")
                 setResult(RESULT_OK, i)
@@ -47,11 +47,11 @@ class EnterOperationSumActivity : AppCompatActivity() {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            validateUserName()
+            validateEnterSum()
         }
     }
 
-    private fun validateUserName(): Boolean {
+    private fun validateEnterSum(): Boolean {
         if (binding.sumOperation.text.toString().trim().isEmpty()) {
             binding.sumOperationInputLayout.error = getString(R.string.warning_text_input)
             binding.sumOperation.requestFocus()

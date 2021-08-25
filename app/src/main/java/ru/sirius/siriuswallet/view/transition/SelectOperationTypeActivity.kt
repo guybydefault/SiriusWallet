@@ -64,19 +64,19 @@ class SelectOperationTypeActivity : AppCompatActivity() {
 
     private fun goToSelectOperationActivity() {
         if (checkActivity != "true") {
-            val intent = Intent(this, SelectOperationCategoryActivity::class.java).apply {
-                putExtra("ENTER_SUM_SESSION", intent.getStringExtra("ENTER_SUM_SESSION").toString())
-                putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            startActivityOperation("ENTER_SUM_SESSION")
         } else {
-            val intent = Intent(this, SelectOperationCategoryActivity::class.java).apply {
-                putExtra("ENTER_SUM_SESSION", intent.getStringExtra("sumComponent"))
-                putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
-            }
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivityOperation("sumComponent")
         }
+    }
+
+    private fun startActivityOperation(value: String) {
+        val intent = Intent(this, SelectOperationCategoryActivity::class.java).apply {
+            putExtra("ENTER_SUM_SESSION", intent.getStringExtra(value).toString())
+            putExtra("ENTER_TYPE_OPERATION", typeOfOperation)
+        }
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }

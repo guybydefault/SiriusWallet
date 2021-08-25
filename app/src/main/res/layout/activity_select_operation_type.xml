@@ -17,6 +17,41 @@
         app:titleTextAppearance="@style/ToolbarTitleText" />
 
 
+    <RadioGroup
+        android:id="@+id/firstRg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/selectType">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radioButtonIncome"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/remove_ripple"
+            android:button="@drawable/custom_radio_button_icon"
+            android:text="@string/income_label"
+            android:textSize="@dimen/standard"
+            android:textColor="@color/mainTextColor"
+            android:fontFamily="@font/roboto"
+            android:layoutDirection="rtl" />
+
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/radioButtonExpense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:button="@drawable/custom_radio_button_icon"
+            android:background="@drawable/remove_ripple"
+            android:text="@string/expense_label"
+            android:textColor="@color/mainTextColor"
+            android:textSize="@dimen/standard"
+            android:fontFamily="@font/roboto"
+            android:layoutDirection="rtl" />
+    </RadioGroup>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/doneButton"
         android:layout_width="match_parent"
@@ -35,41 +70,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:enabled="false" />
-
-    <RadioGroup
-        android:id="@+id/firstRg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="35dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/selectType">
-
-        <RadioButton
-            android:id="@+id/radioButtonIncome"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:button="@drawable/custom_radio_button_icon"
-            android:background="@drawable/remove_ripple"
-            android:text="@string/income_label"
-            android:textSize="@dimen/standard"
-            android:textColor="@color/mainTextColor"
-            android:fontFamily="@font/roboto"
-            android:layoutDirection="rtl" />
-
-        <RadioButton
-            android:id="@+id/radioButtonExpense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:button="@drawable/custom_radio_button_icon"
-            android:background="@drawable/remove_ripple"
-            android:text="@string/expense_label"
-            android:textColor="@color/mainTextColor"
-            android:textSize="@dimen/standard"
-            android:fontFamily="@font/roboto"
-            android:layoutDirection="rtl" />
-
-    </RadioGroup>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
