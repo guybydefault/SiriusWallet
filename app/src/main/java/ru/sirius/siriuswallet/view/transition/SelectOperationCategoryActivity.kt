@@ -10,6 +10,11 @@ import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
 import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryItem
 import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.model.Constants.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_TYPE_OPERATION_FLAG
+import ru.sirius.siriuswallet.model.Constants.RESULT_OPERATION_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.Constants.SELECT_OPERATION_CATEGORY_FLAG
 
 class SelectOperationCategoryActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationCategoryBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -20,10 +25,6 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         getContainer().categoriesViewModel
     }
     private var checkActivity = false
-    private val enterSumFlag = "ENTER_SUM_SESSION"
-    private val enterTypeFlag = "ENTER_TYPE_OPERATION"
-    private val enterCategoryFlag = "SELECT_OPERATION_CATEGORY"
-    private val checkedActivityFlag = "CHECKED_ACTIVITY"
     private var enterSum = ""
     private lateinit var typeOfOperation: CategoryType
     private var nameOfOperation = ""
@@ -47,10 +48,10 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        checkActivity = intent.getBooleanExtra(checkedActivityFlag, false)
+        checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
         if (!checkActivity) {
-            enterSum = intent.getStringExtra(enterSumFlag)!!
-            typeOfOperation = intent.getSerializableExtra(enterTypeFlag)!! as CategoryType
+            enterSum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG)!!
+            typeOfOperation = intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG)!! as CategoryType
             categoriesViewModel.categoryType = typeOfOperation
         }
 
@@ -77,14 +78,14 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     private fun goToEditOperationActivity() {
         if (!checkActivity) {
             val intent = Intent(this, EditOperationActivity::class.java)
-            intent.putExtra(enterSumFlag, enterSum)
-            intent.putExtra(enterTypeFlag, typeOfOperation)
-            intent.putExtra(enterCategoryFlag, nameOfOperation)
+            intent.putExtra(ENTER_SUM_SESSION_FLAG, enterSum)
+            intent.putExtra(ENTER_TYPE_OPERATION_FLAG, typeOfOperation)
+            intent.putExtra(SELECT_OPERATION_CATEGORY_FLAG, nameOfOperation)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         } else {
             val i = Intent(this, EditOperationActivity::class.java)
-            i.putExtra("key3", nameOfOperation)
+            i.putExtra(RESULT_OPERATION_COMPONENT_FLAG, nameOfOperation)
             setResult(RESULT_OK, i)
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

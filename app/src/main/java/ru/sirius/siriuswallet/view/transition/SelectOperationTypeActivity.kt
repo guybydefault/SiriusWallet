@@ -2,12 +2,17 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
 import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.model.Constants.BACK_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.Constants.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_TYPE_OPERATION_FLAG
+import ru.sirius.siriuswallet.model.Constants.RESULT_TYPE_COMPONENT_FLAG
 
 class SelectOperationTypeActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationTypeBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -17,19 +22,14 @@ class SelectOperationTypeActivity : AppCompatActivity() {
     private var checkActivity = false
     private var enterOperationSum = ""
     private var typeOfOperation: CategoryType? = null
-    private val enterSumFlag = "ENTER_SUM_SESSION"
-    private val enterTypeFlag = "ENTER_TYPE_OPERATION"
-    private val checkedActivityFlag = "CHECKED_ACTIVITY"
-    private val backSumComponentFlag = "SUM_COMPONENT"
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        enterOperationSum = intent.getStringExtra(enterSumFlag).toString()
-        checkActivity = intent.getBooleanExtra(checkedActivityFlag, false)
-        val checkTypeActivity = intent.getStringExtra("typeComponent").toString()
+        enterOperationSum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG).toString()
+        checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
+        val checkTypeActivity = intent.getStringExtra(RESULT_TYPE_COMPONENT_FLAG).toString()
 
         if (checkActivity) {
             if (checkTypeActivity == "Пополнение") {
@@ -48,7 +48,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         binding.firstRg.setOnCheckedChangeListener { _, checkedId ->
             findViewById<RadioButton>(checkedId)?.apply {
                 binding.doneButton.isEnabled = true
-                binding.doneButton.setTextColor(resources.getColor(R.color.white))
+                binding.doneButton.setTextColor(ContextCompat.getColor(context, R.color.white))
                 typeOfOperation = if (binding.firstRg.checkedRadioButtonId == binding.radioButtonIncome.id) {
                     CategoryType.INCOME
                 } else {
@@ -68,17 +68,17 @@ class SelectOperationTypeActivity : AppCompatActivity() {
 
     private fun goToSelectOperationActivity() {
         if (!checkActivity) {
-            startActivityOperation(enterSumFlag)
+            startActivityOperation(ENTER_SUM_SESSION_FLAG)
         } else {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivityOperation(backSumComponentFlag)
+            startActivityOperation(BACK_SUM_COMPONENT_FLAG)
         }
     }
 
     private fun startActivityOperation(value: String) {
         val intent = Intent(this, SelectOperationCategoryActivity::class.java).apply {
-            putExtra(enterSumFlag, intent.getStringExtra(value).toString())
-            putExtra(enterTypeFlag, typeOfOperation)
+            putExtra(ENTER_SUM_SESSION_FLAG, intent.getStringExtra(value).toString())
+            putExtra(ENTER_TYPE_OPERATION_FLAG, typeOfOperation)
         }
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

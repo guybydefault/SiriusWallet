@@ -8,6 +8,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEnterOperationSumBinding
+import ru.sirius.siriuswallet.model.Constants.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.model.Constants.RESULT_SUM_COMPONENT_FLAG
+
 
 class EnterOperationSumActivity : AppCompatActivity() {
 
@@ -15,9 +19,6 @@ class EnterOperationSumActivity : AppCompatActivity() {
         ActivityEnterOperationSumBinding.inflate(layoutInflater)
     }
     private var checkActivity: Boolean = false
-
-    private val enterSumFlag = "ENTER_SUM_SESSION"
-    private val checkedActivityFlag = "CHECKED_ACTIVITY"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
             finish()
         }
         setupListeners()
-        checkActivity = intent.getBooleanExtra(checkedActivityFlag, false)
+        checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
         if (checkActivity) {
             binding.sumOperation.setText(intent.getStringExtra("value"))
         }
@@ -38,7 +39,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
                 goToSelectOperationType()
             } else if (validateEnterSum()) {
                 val i = Intent()
-                i.putExtra("key1", binding.sumOperation.text.toString() + " ₽")
+                i.putExtra(RESULT_SUM_COMPONENT_FLAG, binding.sumOperation.text.toString() + " ₽")
                 setResult(RESULT_OK, i)
                 finish()
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
@@ -71,7 +72,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
 
     private fun goToSelectOperationType() {
         val intent = Intent(this, SelectOperationTypeActivity::class.java).apply {
-            putExtra(enterSumFlag, binding.sumOperation.text.toString())
+            putExtra(ENTER_SUM_SESSION_FLAG, binding.sumOperation.text.toString())
         }
         startActivity(intent)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

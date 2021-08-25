@@ -11,6 +11,14 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEditOperationBinding
 import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.model.Constants.BACK_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.Constants.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.model.Constants.ENTER_TYPE_OPERATION_FLAG
+import ru.sirius.siriuswallet.model.Constants.RESULT_OPERATION_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.Constants.RESULT_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.Constants.RESULT_TYPE_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.Constants.SELECT_OPERATION_CATEGORY_FLAG
 import java.util.*
 
 class EditOperationActivity : AppCompatActivity() {
@@ -20,8 +28,6 @@ class EditOperationActivity : AppCompatActivity() {
     private var launcher: ActivityResultLauncher<Intent>? = null
     private var launcherType: ActivityResultLauncher<Intent>? = null
     private var launcherCategory: ActivityResultLauncher<Intent>? = null
-    private val checkedActivityFlag = "CHECKED_ACTIVITY"
-    private val backSumComponentFlag = "SUM_COMPONENT"
 
     val months =
         arrayOf(
@@ -36,7 +42,7 @@ class EditOperationActivity : AppCompatActivity() {
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                val sumOperationText = result.data?.getStringExtra("key1")
+                val sumOperationText = result.data?.getStringExtra(RESULT_SUM_COMPONENT_FLAG)
                 binding.sumContainer.value.text = sumOperationText
             }
         }
@@ -50,7 +56,7 @@ class EditOperationActivity : AppCompatActivity() {
 
         launcherCategory = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                val typeCategoryCheck = result.data?.getStringExtra("key3")
+                val typeCategoryCheck = result.data?.getStringExtra(RESULT_OPERATION_COMPONENT_FLAG)
                 binding.categoryContainer.value.text = typeCategoryCheck
             }
         }
@@ -60,11 +66,11 @@ class EditOperationActivity : AppCompatActivity() {
         val categoryContainer: ConstraintLayout = findViewById(R.id.category_container)
         val dateContainer: ConstraintLayout = findViewById(R.id.date_container)
 
-        binding.sumContainer.value.text = intent.getStringExtra("ENTER_SUM_SESSION").toString() + " " + getString(R.string.rub_symbol)
+        binding.sumContainer.value.text = intent.getStringExtra(ENTER_SUM_SESSION_FLAG).toString() + " " + getString(R.string.rub_symbol)
         binding.typeContainer.type.text = getString(R.string.type_text)
-        binding.typeContainer.value.text = (intent.getSerializableExtra("ENTER_TYPE_OPERATION") as CategoryType).typeLocalizedName
+        binding.typeContainer.value.text = (intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG) as CategoryType).typeLocalizedName
         binding.categoryContainer.type.text = getString(R.string.category)
-        binding.categoryContainer.value.text = intent.getStringExtra("SELECT_OPERATION_CATEGORY").toString()
+        binding.categoryContainer.value.text = intent.getStringExtra(SELECT_OPERATION_CATEGORY_FLAG).toString()
         binding.dateContainer.type.text = getString(R.string.date_operation)
         binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " + "${months.get(calendar.get(Calendar.MONTH))}"
         binding.editOperationToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
@@ -105,10 +111,10 @@ class EditOperationActivity : AppCompatActivity() {
         datePicker.show(supportFragmentManager, "MyTAG")
     }
 
-    fun sumContainerBackData() {
+    private fun sumContainerBackData() {
         launcher?.launch(
             Intent(this, EnterOperationSumActivity::class.java)
-                .putExtra(checkedActivityFlag, true)
+                .putExtra(CHECKED_ACTIVITY_FLAG, true)
                 .putExtra("value", binding.sumContainer.value.text.toString().replace(" ₽", ""))
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
@@ -116,9 +122,9 @@ class EditOperationActivity : AppCompatActivity() {
 
     private fun typeContainerBackData() {
         val intent = Intent(this, SelectOperationTypeActivity::class.java).apply {
-            putExtra(checkedActivityFlag, true)
-            putExtra(backSumComponentFlag, binding.sumContainer.value.text.toString().replace(" ₽", ""))
-            putExtra("typeComponent", binding.typeContainer.value.text.toString())
+            putExtra(CHECKED_ACTIVITY_FLAG, true)
+            putExtra(BACK_SUM_COMPONENT_FLAG, binding.sumContainer.value.text.toString().replace(" ₽", ""))
+            putExtra(RESULT_TYPE_COMPONENT_FLAG, binding.typeContainer.value.text.toString())
         }
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
@@ -128,9 +134,9 @@ class EditOperationActivity : AppCompatActivity() {
     private fun categoryContainerBackData() {
         launcherCategory?.launch(
             Intent(this, SelectOperationCategoryActivity::class.java)
-                .putExtra(checkedActivityFlag, true)
-                .putExtra(backSumComponentFlag, binding.sumContainer.value.toString())
-                .putExtra("typeComponent", intent.getSerializableExtra("ENTER_TYPE_OPERATION"))
+                .putExtra(CHECKED_ACTIVITY_FLAG, true)
+                .putExtra(BACK_SUM_COMPONENT_FLAG, binding.sumContainer.value.toString())
+            //  .putExtra("typeComponent", intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG))
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
