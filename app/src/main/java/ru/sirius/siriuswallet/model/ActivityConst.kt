@@ -1,6 +1,6 @@
 package ru.sirius.siriuswallet.model
 
-object Constants {
+object ActivityConst {
     const val ENTER_SUM_SESSION_FLAG = "ENTER_SUM_SESSION"
     const val ENTER_TYPE_OPERATION_FLAG = "ENTER_TYPE_OPERATION"
     const val CHECKED_ACTIVITY_FLAG = "CHECKED_ACTIVITY"
@@ -9,5 +9,4 @@ object Constants {
     const val RESULT_SUM_COMPONENT_FLAG = "RESULT_SUM_COMPONENT"
     const val RESULT_TYPE_COMPONENT_FLAG = "RESULT_TYPE_COMPONENT"
     const val RESULT_OPERATION_COMPONENT_FLAG = "RESULT_OPERATION_COMPONENT"
-
 }

@@ -8,11 +8,11 @@ import androidx.core.content.ContextCompat
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
 import ru.sirius.siriuswallet.model.CategoryType
-import ru.sirius.siriuswallet.model.Constants.BACK_SUM_COMPONENT_FLAG
-import ru.sirius.siriuswallet.model.Constants.CHECKED_ACTIVITY_FLAG
-import ru.sirius.siriuswallet.model.Constants.ENTER_SUM_SESSION_FLAG
-import ru.sirius.siriuswallet.model.Constants.ENTER_TYPE_OPERATION_FLAG
-import ru.sirius.siriuswallet.model.Constants.RESULT_TYPE_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.BACK_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.RESULT_TYPE_COMPONENT_FLAG
 
 class SelectOperationTypeActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationTypeBinding by lazy(LazyThreadSafetyMode.NONE) {

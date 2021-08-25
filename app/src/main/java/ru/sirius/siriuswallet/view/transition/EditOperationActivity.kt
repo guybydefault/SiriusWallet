@@ -11,14 +11,14 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEditOperationBinding
 import ru.sirius.siriuswallet.model.CategoryType
-import ru.sirius.siriuswallet.model.Constants.BACK_SUM_COMPONENT_FLAG
-import ru.sirius.siriuswallet.model.Constants.CHECKED_ACTIVITY_FLAG
-import ru.sirius.siriuswallet.model.Constants.ENTER_SUM_SESSION_FLAG
-import ru.sirius.siriuswallet.model.Constants.ENTER_TYPE_OPERATION_FLAG
-import ru.sirius.siriuswallet.model.Constants.RESULT_OPERATION_COMPONENT_FLAG
-import ru.sirius.siriuswallet.model.Constants.RESULT_SUM_COMPONENT_FLAG
-import ru.sirius.siriuswallet.model.Constants.RESULT_TYPE_COMPONENT_FLAG
-import ru.sirius.siriuswallet.model.Constants.SELECT_OPERATION_CATEGORY_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.BACK_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.RESULT_OPERATION_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.RESULT_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.RESULT_TYPE_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.ActivityConst.SELECT_OPERATION_CATEGORY_FLAG
 import java.util.*
 
 class EditOperationActivity : AppCompatActivity() {
