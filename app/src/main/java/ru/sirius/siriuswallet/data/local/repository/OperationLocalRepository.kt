@@ -13,14 +13,21 @@ class OperationLocalRepository(private val db: Database) : OperationCacheReposit
         return Response.Success(true)
     }
 
+//    override suspend fun getOperationsByAccountId(accountId: Int): Response<List<Operation>> {
+//        return Response.Success(db.categoryWithOperationsDao().getOperationsByUserId(accountId).map { it.toOperation() })
+//    }
+
     override suspend fun getOperationsByAccountId(accountId: Int): Response<List<Operation>> {
-        return Response.Success(db.categoryWithOperationsDao().getOperationsByUserId(accountId).map { it.toOperation() })
+        return Response.Success(
+            db.categoryWithOperationsDao().getCategoriesWithOperationsByUserId(accountId)
+                .flatMap { cat -> cat.operations.map { op -> op.toOperation(cat.category) } })
     }
 
     override suspend fun insertOperation(operation: Operation): Response<Operation> {
         db.categoryWithOperationsDao().insertOperationWithCategory(
-                operation.toOperationEntity(),
-                operation.operationCategory.toCategoryEntity())
+            operation.toOperationEntity(),
+            operation.operationCategory.toCategoryEntity()
+        )
         return Response.Success(operation)
     }
 

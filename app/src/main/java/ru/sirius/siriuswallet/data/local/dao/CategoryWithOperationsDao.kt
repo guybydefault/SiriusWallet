@@ -1,16 +1,18 @@
 package ru.sirius.siriuswallet.data.local.dao
 
 import androidx.room.*
-import ru.sirius.siriuswallet.data.local.entities.CategoryEntity
-import ru.sirius.siriuswallet.data.local.entities.DatabaseCategoryType
-import ru.sirius.siriuswallet.data.local.entities.OperationEntity
-import ru.sirius.siriuswallet.data.local.entities.OperationWithCategory
+import ru.sirius.siriuswallet.data.local.entities.*
 
 @Dao
 abstract class CategoryWithOperationsDao {
-    @Query("SELECT * FROM operation o JOIN category c ON c.id = o.operationCategoryId WHERE userId = :userId")
-    @Transaction
+    @Query("SELECT * FROM operation o JOIN category c ON c.id = o.operationCategoryId WHERE c.userId = :userId")
+//    @Transaction
     abstract fun getOperationsByUserId(userId: Int): List<OperationWithCategory>
+
+//    @Query("SELECT * FROM operation o JOIN category c ON c.id = o.operationCategoryId WHERE c.userId = :userId")
+    @Query("SELECT * FROM category WHERE userId = :userId")
+//    @Transaction
+    abstract fun getCategoriesWithOperationsByUserId(userId: Int): List<CategoryWithOperations>
 
     @Query("SELECT * FROM category c WHERE c.categoryType = :type")
     abstract fun getCategoriesByType(type: DatabaseCategoryType): List<CategoryEntity>
