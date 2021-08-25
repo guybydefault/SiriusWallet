@@ -23,6 +23,8 @@ class OperationService(
                 networkResp.responseBody.forEach {
                     operationLocalRepository.insertOperation(it)
                 }
+                val t = operationLocalRepository.getOperationsByAccountId(103)
+                println(t)
             }
         }
     }

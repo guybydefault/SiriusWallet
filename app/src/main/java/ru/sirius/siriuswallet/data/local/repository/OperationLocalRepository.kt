@@ -18,7 +18,9 @@ class OperationLocalRepository(private val db: Database) : OperationCacheReposit
     }
 
     override suspend fun insertOperation(operation: Operation): Response<Operation> {
-        db.categoryWithOperationsDao().insertOperationWithCategory(operation.toOperationEntity(), operation.operationCategory.toCategoryEntity())
+        db.categoryWithOperationsDao().insertOperationWithCategory(
+                operation.toOperationEntity(),
+                operation.operationCategory.toCategoryEntity())
         return Response.Success(operation)
     }
 

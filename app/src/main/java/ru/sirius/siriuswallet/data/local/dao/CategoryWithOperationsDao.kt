@@ -16,7 +16,7 @@ abstract class CategoryWithOperationsDao {
     abstract fun getCategoriesByType(type: DatabaseCategoryType): List<CategoryEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertCategory(categoryEntity: CategoryEntity)
+    abstract fun insertCategory(categoryEntity: CategoryEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertOperation(operationEntity: OperationEntity): Long

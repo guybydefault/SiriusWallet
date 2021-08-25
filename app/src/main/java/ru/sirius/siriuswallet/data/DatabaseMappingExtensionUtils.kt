@@ -30,10 +30,6 @@ fun Operation.toOperationEntity(): OperationEntity {
     return OperationEntity(this.id, this.operationDate, this.amount, this.operationCategory.id)
 }
 
-fun Operation.categoryToEntity(): CategoryEntity {
-    return this.operationCategory.toCategoryEntity()
-}
-
 fun OperationEntity.toOperation(categoryEntity: CategoryEntity): Operation {
     return Operation(this.id, this.operationDate, this.amount, categoryEntity.toCategory())
 }
