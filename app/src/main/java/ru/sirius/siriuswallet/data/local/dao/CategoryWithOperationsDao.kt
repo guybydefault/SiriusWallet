@@ -24,6 +24,9 @@ abstract class CategoryWithOperationsDao {
     @Query("DELETE FROM category")
     abstract fun deleteCategories(): Int
 
+    @Query("DELETE FROM category WHERE categoryType = :type")
+    abstract fun deleteCategoriesByType(type: DatabaseCategoryType)
+
     @Query("DELETE FROM operation")
     abstract fun deleteOperations(): Int
 

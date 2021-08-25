@@ -7,6 +7,7 @@ import ru.sirius.siriuswallet.data.CategoryRepository
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryDtoMapper
 import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryResourceIdResolver
+import ru.sirius.siriuswallet.data.toCategoryDto
 import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryType
 
@@ -19,6 +20,12 @@ class CategoryNetworkRepository : CategoryRepository {
         return retrofitRequestExceptionHandler {
             retrofit.CATEGORIES_API.getCategories(categoryType.name)
                 .handleResponse { it.map { categoryDtoMapper.mapToObj(it) } }
+        }
+    }
+
+    override suspend fun addCategory(category: Category): Response<Category> {
+        return retrofitRequestExceptionHandler {
+            retrofit.CATEGORIES_API.postCategory(category.toCategoryDto()).handleResponse { categoryDtoMapper.mapToObj(it) }
         }
     }
 }

@@ -1,6 +1,7 @@
 package ru.sirius.siriuswallet.data
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import ru.sirius.siriuswallet.data.local.repository.CategoryLocalRepository
 import ru.sirius.siriuswallet.model.Category
@@ -10,16 +11,17 @@ class CategoryService(
     private val categoryNetworkRepository: CategoryRepository,
     private val categoryLocalRepository: CategoryLocalRepository
 ) {
-    suspend fun getCategories(categoryType: CategoryType): Response<List<Category>> = withContext(Dispatchers.IO) {
-        val response = categoryNetworkRepository.getCategoriesByType(categoryType)
-        if (response is Response.Success) {
-            response.responseBody.forEach {
-                // TODO update categories
-//                db.categoryWithOperationsDao().insertCategory(
-//                    it.toCategoryEntity()
-//                )
+    suspend fun getCategories(categoryType: CategoryType, onLoad: (Response<List<Category>>) -> Unit): Response<List<Category>> = withContext(Dispatchers.IO) {
+        val localResp = categoryLocalRepository.getCategoriesByType(categoryType)
+        onLoad(localResp)
+        delay(1000)
+        val networkResp = categoryNetworkRepository.getCategoriesByType(categoryType)
+        if (networkResp is Response.Success) {
+            networkResp.responseBody.forEach {
+                categoryLocalRepository.deleteCategoriesByType(categoryType)
+                networkResp.responseBody.forEach { categoryLocalRepository.addCategory(it) }
             }
         }
-        return@withContext response
+        return@withContext networkResp
     }
 }
