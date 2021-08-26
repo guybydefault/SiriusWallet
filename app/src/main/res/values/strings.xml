@@ -33,6 +33,7 @@
     <string name="warning_text_input">Обязательно к заполнению!</string>
     <string name="wallet_balance_format">%1$s ₽</string>
     <string name="wallet_number">Кошелек 1</string>
+    <string name="something_wrong">Что-то пошло не так</string>
 
 
 </resources>

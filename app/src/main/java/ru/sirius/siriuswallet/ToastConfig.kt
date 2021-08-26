@@ -1,14 +1,12 @@
 package ru.sirius.siriuswallet
 
-import android.graphics.Typeface
-import androidx.annotation.NonNull
-import es.dmoral.toasty.Toasty
+import android.R
+import android.content.Context
+
+import android.view.LayoutInflater
+import android.view.View
 
 
 object ToastConfig {
-    val toasty = Toasty.Config.getInstance()
-        .tintIcon(true) // optional (apply textColor also to the icon)
-        .setTextSize(16) // optional
-        .allowQueue(true) // optional (prevents several Toastys from queuing)
-        .apply(); // required
+
 }
