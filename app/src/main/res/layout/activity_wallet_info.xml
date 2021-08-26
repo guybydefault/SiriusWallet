@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="14dp"
     tools:context=".WalletInfoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
+        android:paddingTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -41,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
+        android:layout_marginTop="28dp"
         android:text="Кошелек 1"
         android:textSize="@dimen/wallet_name_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -51,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
+        android:layout_marginTop="6dp"
         android:text="0 ₽"
         android:textSize="@dimen/wallet_balance_text_size"
         android:textStyle="bold"
@@ -60,6 +63,7 @@
     <include
         android:id="@+id/wallet_income_expense"
         layout="@layout/wallet_income_expense_group"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -70,6 +74,7 @@
         android:id="@+id/operation_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="15dp"
         android:nestedScrollingEnabled="true"
         android:overScrollMode="never"
         android:visibility="gone"
@@ -102,6 +107,7 @@
         android:textSize="@dimen/standard"
         android:fontFamily="@font/roboto"
         android:paddingVertical="14dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/btn_add_operation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
