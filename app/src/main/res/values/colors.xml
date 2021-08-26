@@ -14,4 +14,5 @@
     <color name="wallet_info_no_records_text_color">#9299A2</color>
     <color name="income_category_background_color">#00B92D</color>
     <color name="outcome_category_background_color">#7765C0</color>
+    <color name="btn_disabled_color">#808080</color>
 </resources>

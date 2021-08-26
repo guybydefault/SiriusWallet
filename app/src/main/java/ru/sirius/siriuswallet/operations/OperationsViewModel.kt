@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.sirius.siriuswallet.WalletAndUserConstants
+import ru.sirius.siriuswallet.ApplicationConstants
 import ru.sirius.siriuswallet.data.OperationService
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Operation
@@ -21,6 +21,7 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
     val outcome = MutableLiveData<BigDecimal>()
     val totalBalance = MutableLiveData<BigDecimal>()
     val err = MutableLiveData<String>()
+    val operationsLoadingInProgress = MutableLiveData<Boolean>()
 
     init {
     }
@@ -30,17 +31,27 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
             operations.postValue(
                 mutableListOf<Operation>()
             )
-            delay(1000) // TODO remove
-            operationService.loadOperations(WalletAndUserConstants.WALLET_ID) { response ->
-                if (response is Response.Success) {
-                    operations.postValue(response.responseBody)
-                    income.postValue(response.responseBody.income())
-                    outcome.postValue(response.responseBody.outcome())
-                    totalBalance.postValue(response.responseBody.income().minus(response.responseBody.outcome()))
-                } else {
-                    err.postValue((response as Response.Error).errorMessage)
-                }
+            if (ApplicationConstants.TEST_DELAY > 0) {
+                delay(ApplicationConstants.TEST_DELAY)
             }
+            operationsLoadingInProgress.postValue(true)
+            operationService.loadOperations(ApplicationConstants.WALLET_ID, onCacheLoaded = {
+                onLoad(it)
+            }, onNetworkLoaded = {
+                operationsLoadingInProgress.postValue(false)
+                onLoad(it)
+            })
+        }
+    }
+
+    private fun onLoad(response: Response<List<Operation>>) {
+        if (response is Response.Success) {
+            operations.postValue(response.responseBody)
+            income.postValue(response.responseBody.income())
+            outcome.postValue(response.responseBody.outcome())
+            totalBalance.postValue(response.responseBody.income().minus(response.responseBody.outcome()))
+        } else {
+            err.postValue((response as Response.Error).errorMessage)
         }
     }
 }

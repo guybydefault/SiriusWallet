@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.datepicker.MaterialDatePicker
 import ru.sirius.siriuswallet.R
+import ru.sirius.siriuswallet.WalletInfoActivity
 import ru.sirius.siriuswallet.databinding.ActivityEditOperationBinding
 import ru.sirius.siriuswallet.getContainer
 import ru.sirius.siriuswallet.model.ActivityConst.BACK_SUM_COMPONENT_FLAG
@@ -45,7 +46,7 @@ class EditOperationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        editOperationViewModel = getContainer().editOperationViewModel
+        editOperationViewModel = getContainer().createEditOperationViewModel()
         setupEditActivitiesForResult()
         setupErrorToasts()
 
@@ -62,7 +63,7 @@ class EditOperationActivity : AppCompatActivity() {
         binding.categoryContainer.type.text = getString(R.string.category)
         updateCategoryId(intent.getIntExtra(SELECT_OPERATION_CATEGORY_FLAG, 0))
         binding.dateContainer.type.text = getString(R.string.date_operation)
-        editOperationViewModel.dateTime = LocalDateTime.ofInstant(calendar.toInstant(), ZoneId.of("UTC"))
+        updateDateTime(calendar)
         binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " + "${months.get(calendar.get(Calendar.MONTH))}"
         binding.editOperationToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.editOperationToolbar.setNavigationOnClickListener {
@@ -95,7 +96,9 @@ class EditOperationActivity : AppCompatActivity() {
 
         editOperationViewModel.successfullyCreatedOperationId.observe(this) {
             Toast.makeText(this, "Операция успешно добавлена", Toast.LENGTH_LONG).show()
-            finish()
+            val intent = Intent(this, WalletInfoActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
     }
 
@@ -138,8 +141,14 @@ class EditOperationActivity : AppCompatActivity() {
         datePicker.addOnPositiveButtonClickListener {
             calendar.time = Date(it)
             binding.dateContainer.value.text = "${calendar.get(Calendar.DAY_OF_MONTH)} " + "${months.get(calendar.get(Calendar.MONTH))}"
+            updateDateTime(calendar)
         }
+
         datePicker.show(supportFragmentManager, "MyTAG")
+    }
+
+    private fun updateDateTime(calendar: Calendar) {
+        editOperationViewModel.dateTime = LocalDateTime.ofInstant(calendar.toInstant(), ZoneId.of("UTC"))
     }
 
     private fun sumContainerBackData() {

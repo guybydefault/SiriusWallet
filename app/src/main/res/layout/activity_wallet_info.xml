@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="16dp"
-    android:paddingEnd="16dp"
     android:paddingTop="16dp"
+    android:paddingEnd="16dp"
     tools:context=".WalletInfoActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -64,7 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="400dp"
             android:text="@string/wallet_info_no_operations"
-            android:textSize="@dimen/wallet_name_text_size"
+            android:textColor="@color/wallet_info_no_records_text_color"
+            android:textSize="@dimen/wallet_info_no_records_text_size"
             app:layout_anchor="@+id/operation_list_recycler_view"
             app:layout_anchorGravity="top|center" />
 
@@ -81,16 +82,31 @@
             android:id="@+id/add_operation_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/btn_rounded"
-            android:textSize="@dimen/standard"
+            android:backgroundTint="@color/btn_disabled_color"
             android:fontFamily="@font/roboto"
             android:paddingVertical="14dp"
-            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/standard"
             app:layout_anchor="@id/operation_list_recycler_view"
             app:layout_anchorGravity="bottom|right|end"
-            android:text="@string/btn_add_operation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/operations_progress_bar"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="22dp"
+            android:elevation="2dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
