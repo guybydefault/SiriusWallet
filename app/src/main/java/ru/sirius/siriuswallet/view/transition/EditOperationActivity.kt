@@ -14,7 +14,6 @@ import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.WalletInfoActivity
 import ru.sirius.siriuswallet.databinding.ActivityEditOperationBinding
 import ru.sirius.siriuswallet.getContainer
-import ru.sirius.siriuswallet.model.ActivityConst.BACK_SUM_COMPONENT_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
@@ -183,7 +182,7 @@ class EditOperationActivity : AppCompatActivity() {
     private fun typeContainerBackData() {
         val intent = Intent(this, SelectOperationTypeActivity::class.java).apply {
             putExtra(CHECKED_ACTIVITY_FLAG, true)
-            putExtra(BACK_SUM_COMPONENT_FLAG, binding.sumContainer.value.text.toString().replace(" ₽", ""))
+            putExtra(ENTER_SUM_SESSION_FLAG, binding.sumContainer.value.text.toString().replace(" ₽", ""))
             putExtra(RESULT_TYPE_COMPONENT_FLAG, binding.typeContainer.value.text.toString())
         }
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -196,7 +195,7 @@ class EditOperationActivity : AppCompatActivity() {
             Intent(this, SelectOperationCategoryActivity::class.java)
                 .putExtra(CHECKED_ACTIVITY_FLAG, true)
                 .putExtra(ENTER_TYPE_OPERATION_FLAG, categoryType)
-                .putExtra(BACK_SUM_COMPONENT_FLAG, binding.sumContainer.value.toString())
+                .putExtra(ENTER_SUM_SESSION_FLAG, binding.sumContainer.value.toString())
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
