@@ -26,4 +26,8 @@ class OperationService(
             }
         }
     }
+
+    suspend fun createOperation(operation: Operation): Response<Operation> = withContext(Dispatchers.IO) {
+        return@withContext operationNetworkRepository.insertOperation(operation)
+    }
 }

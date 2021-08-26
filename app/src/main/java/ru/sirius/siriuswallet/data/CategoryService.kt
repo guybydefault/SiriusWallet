@@ -25,4 +25,8 @@ class CategoryService(
         }
         return@withContext networkResp
     }
+
+    suspend fun getCachedCategoryById(categoryId: Int): Category = withContext(Dispatchers.IO) {
+        return@withContext categoryLocalRepository.getCategoryById(categoryId)
+    }
 }

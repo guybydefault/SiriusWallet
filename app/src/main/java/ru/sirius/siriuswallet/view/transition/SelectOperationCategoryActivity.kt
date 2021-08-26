@@ -25,13 +25,13 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         ActivitySelectOperationCategoryBinding.inflate(layoutInflater)
     }
 
-    private val editOperationViewModel: EditOperationViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        getContainer().editOperationViewModel
+    private val selectOperationCategoryViewModel: SelectOperationCategoryViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        getContainer().selectOperationCategoryViewModel
     }
     private var checkActivity = false
     private var enterSum = ""
-    private lateinit var typeOfOperation: CategoryType
-    private var nameOfOperation = ""
+    private var typeOfOperation: CategoryType? = null
+    private var selectedCategoryId: Int = 0
 
     private val listOfCategoryPlaceholder = listOf(
         CategoryItem(Category(0, 0, "Зарплата", CategoryType.INCOME, R.drawable.ic_salary), false),
@@ -44,7 +44,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         override fun onCategoryClicked(categoryItem: CategoryItem) {
             binding.doneButtonBlack.isEnabled = true
             binding.doneButtonBlack.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
-            nameOfOperation = categoryItem.category.name
+            selectedCategoryId = categoryItem.category.id
         }
     })
 
@@ -69,7 +69,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        editOperationViewModel.categoryType = typeOfOperation
+        selectOperationCategoryViewModel.categoryType = typeOfOperation
     }
 
     private fun setupNavigation() {
@@ -85,13 +85,13 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerViewAdapter
         }
-        editOperationViewModel.categories.observe(this) { it ->
+        selectOperationCategoryViewModel.categories.observe(this) { it ->
             recyclerViewAdapter.updateList(it.map { CategoryItem(it, false) })
         }
     }
 
     private fun setupErrorToasts() {
-        editOperationViewModel.err.observe(this) {
+        selectOperationCategoryViewModel.err.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }
@@ -107,12 +107,12 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
             val intent = Intent(this, EditOperationActivity::class.java)
             intent.putExtra(ENTER_SUM_SESSION_FLAG, enterSum)
             intent.putExtra(ENTER_TYPE_OPERATION_FLAG, typeOfOperation)
-            intent.putExtra(SELECT_OPERATION_CATEGORY_FLAG, nameOfOperation)
+            intent.putExtra(SELECT_OPERATION_CATEGORY_FLAG, selectedCategoryId)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         } else {
             val i = Intent(this, EditOperationActivity::class.java)
-            i.putExtra(RESULT_OPERATION_COMPONENT_FLAG, nameOfOperation)
+            i.putExtra(RESULT_OPERATION_COMPONENT_FLAG, selectedCategoryId)
             setResult(RESULT_OK, i)
             finish()
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
