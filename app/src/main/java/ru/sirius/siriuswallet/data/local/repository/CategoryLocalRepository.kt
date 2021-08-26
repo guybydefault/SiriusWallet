@@ -20,7 +20,7 @@ class CategoryLocalRepository(private val db: Database) : CategoryCacheRepositor
     }
 
     override suspend fun addCategory(category: Category): Response<Category> {
-        db.categoryWithOperationsDao().insertCategory(category.toCategoryEntity())
+        db.categoryWithOperationsDao().insertCategoryIfNotExists(category.toCategoryEntity())
         return Response.Success(category)
     }
 }

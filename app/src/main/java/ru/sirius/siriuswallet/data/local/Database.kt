@@ -12,7 +12,7 @@ import ru.sirius.siriuswallet.data.local.entities.OperationEntity
 
 @Database(
     entities = [CategoryEntity::class, OperationEntity::class],
-    version = 1
+    version = 3
 )
 @TypeConverters(CategoryTypeConverter::class, LocalDateConverter::class, BigDecimalConverter::class)
 abstract class Database : RoomDatabase() {

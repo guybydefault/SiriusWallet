@@ -39,7 +39,7 @@ fun CategoryEntity.toCategory(): Category {
 }
 
 fun OperationWithCategory.toOperation(): Operation {
-    return this.operation.toOperation(this.categoryEntity)
+    return this.operationEntity.toOperation(this.categoryEntity)
 }
 
 fun OperationWithCategory.toCategory(): Category {

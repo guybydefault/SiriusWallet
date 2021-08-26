@@ -17,14 +17,12 @@ class OperationService(
 
             delay(1000) // TODO remove
             val networkResp = operationNetworkRepository.getOperationsByAccountId(accountId)
+            onLoad(networkResp)
             if (networkResp is Response.Success) {
-                onLoad(networkResp)
                 operationLocalRepository.deleteOperationsWithCategories()
                 networkResp.responseBody.forEach {
                     operationLocalRepository.insertOperation(it)
                 }
-                val t = operationLocalRepository.getOperationsByAccountId(103)
-                println(t)
             }
         }
     }

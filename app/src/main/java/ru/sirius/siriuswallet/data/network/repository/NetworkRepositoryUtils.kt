@@ -2,6 +2,7 @@ package ru.sirius.siriuswallet.data.network.repository
 
 import retrofit2.HttpException
 import ru.sirius.siriuswallet.data.Response
+import java.io.IOException
 import java.net.ConnectException
 
 fun <T> retrofit2.Response<T>.handleResponse(): Response<T> {
@@ -27,5 +28,7 @@ inline fun <T> retrofitRequestExceptionHandler(retrofitRequest: () -> Response<T
         return Response.Error(e.message())
     } catch (e: ConnectException) {
         return Response.Error(e.localizedMessage ?: "Connect exception")
+    } catch (e: IOException) {
+        return Response.Error(e.message ?: "IOException")
     }
 }

@@ -5,20 +5,18 @@ import ru.sirius.siriuswallet.data.local.entities.*
 
 @Dao
 abstract class CategoryWithOperationsDao {
-    @Query("SELECT * FROM operation o JOIN category c ON c.id = o.operationCategoryId WHERE c.userId = :userId")
-//    @Transaction
+    @Query("SELECT o.id as o_id, o.amount as o_amount, o.operationDate as o_operationDate, o.operationCategoryId as o_operationCategoryId, c.id as c_id, c.userId as c_userId, c.categoryType as c_categoryType, c.name as c_name, c.categoryResourceId as c_categoryResourceId FROM operation o JOIN category AS c ON c.id = o.operationCategoryId WHERE c.userId = :userId")
     abstract fun getOperationsByUserId(userId: Int): List<OperationWithCategory>
 
-//    @Query("SELECT * FROM operation o JOIN category c ON c.id = o.operationCategoryId WHERE c.userId = :userId")
     @Query("SELECT * FROM category WHERE userId = :userId")
-//    @Transaction
+    @Transaction
     abstract fun getCategoriesWithOperationsByUserId(userId: Int): List<CategoryWithOperations>
 
     @Query("SELECT * FROM category c WHERE c.categoryType = :type")
     abstract fun getCategoriesByType(type: DatabaseCategoryType): List<CategoryEntity>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract fun insertCategory(categoryEntity: CategoryEntity): Long
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    abstract fun insertCategoryIfNotExists(categoryEntity: CategoryEntity): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract fun insertOperation(operationEntity: OperationEntity): Long
@@ -34,7 +32,7 @@ abstract class CategoryWithOperationsDao {
 
     @Transaction
     open fun insertOperationWithCategory(operationEntity: OperationEntity, categoryEntity: CategoryEntity): Long {
-        insertCategory(categoryEntity)
+        insertCategoryIfNotExists(categoryEntity)
         return insertOperation(operationEntity)
     }
 

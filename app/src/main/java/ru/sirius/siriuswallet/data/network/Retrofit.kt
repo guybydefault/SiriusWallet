@@ -7,11 +7,10 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import ru.sirius.siriuswallet.data.network.api.CategoriesApi
 import ru.sirius.siriuswallet.data.network.api.OperationsApi
-import java.lang.reflect.Type
+import java.util.concurrent.TimeUnit
 
 object Retrofit {
     const val BASE_URL = "http://bbcc-85-174-236-130.ngrok.io/api/"
@@ -26,6 +25,9 @@ object Retrofit {
     }
 
     private val okHttpClient = OkHttpClient.Builder()
+        .readTimeout(2, TimeUnit.SECONDS)
+        .connectTimeout(2, TimeUnit.SECONDS)
+        .callTimeout(3, TimeUnit.SECONDS)
         .addInterceptor(ApiTokenInterceptor("test"))
         .addInterceptor(httpLoggingInterceptor)
         .build()

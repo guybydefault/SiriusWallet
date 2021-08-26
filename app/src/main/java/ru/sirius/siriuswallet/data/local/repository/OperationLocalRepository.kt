@@ -13,6 +13,7 @@ class OperationLocalRepository(private val db: Database) : OperationCacheReposit
         return Response.Success(true)
     }
 
+    // TODO make this version of method working (now there's a problem: all operations get ID of category)
 //    override suspend fun getOperationsByAccountId(accountId: Int): Response<List<Operation>> {
 //        return Response.Success(db.categoryWithOperationsDao().getOperationsByUserId(accountId).map { it.toOperation() })
 //    }
