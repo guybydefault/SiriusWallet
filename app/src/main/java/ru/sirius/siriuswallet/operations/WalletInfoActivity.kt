@@ -40,6 +40,7 @@ class WalletInfoActivity : AppCompatActivity() {
         setupBalanceInfo()
         setupOperationList()
         setupErrorToasts()
+        setupProgressBar()
         setContentView(binding.root)
     }
 
@@ -69,6 +70,20 @@ class WalletInfoActivity : AppCompatActivity() {
                 binding.noRecords.visibility = View.GONE
             }
             recyclerViewAdapter.dataset = it
+        }
+    }
+
+    private fun setupProgressBar() {
+        viewModel.operationsLoadingInProgress.observe(this) { inProgress ->
+            if (inProgress) {
+                binding.addOperationBtn.text = ""
+                binding.addOperationBtn.background.setTint(resources.getColor(R.color.btn_disabled_color, theme))
+                binding.operationsProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.addOperationBtn.text = resources.getString(R.string.btn_add_operation)
+                binding.addOperationBtn.background.setTint(resources.getColor(R.color.blackColorButton, theme))
+                binding.operationsProgressBar.visibility = View.INVISIBLE
+            }
         }
     }
 

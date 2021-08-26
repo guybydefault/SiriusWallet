@@ -11,15 +11,15 @@ class OperationService(
     private val operationNetworkRepository: OperationRepository,
     private val operationLocalRepository: OperationCacheRepository
 ) {
-    suspend fun loadOperations(accountId: Int, onLoad: (Response<List<Operation>>) -> Unit) {
+    suspend fun loadOperations(accountId: Int, onCacheLoaded: (Response<List<Operation>>) -> Unit, onNetworkLoaded: (Response<List<Operation>>) -> Unit) {
         withContext(Dispatchers.IO) {
             val localResp = operationLocalRepository.getOperationsByAccountId(accountId)
-            onLoad(localResp)
+            onCacheLoaded(localResp)
             if (ApplicationConstants.TEST_DELAY > 0) {
                 delay(ApplicationConstants.TEST_DELAY)
             }
             val networkResp = operationNetworkRepository.getOperationsByAccountId(accountId)
-            onLoad(networkResp)
+            onNetworkLoaded(networkResp)
             if (networkResp is Response.Success) {
                 operationLocalRepository.deleteOperationsWithCategories()
                 networkResp.responseBody.forEach {

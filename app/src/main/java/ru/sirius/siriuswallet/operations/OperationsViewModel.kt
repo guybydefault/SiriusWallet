@@ -21,6 +21,7 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
     val outcome = MutableLiveData<BigDecimal>()
     val totalBalance = MutableLiveData<BigDecimal>()
     val err = MutableLiveData<String>()
+    val operationsLoadingInProgress = MutableLiveData<Boolean>()
 
     init {
     }
@@ -33,16 +34,24 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
             if (ApplicationConstants.TEST_DELAY > 0) {
                 delay(ApplicationConstants.TEST_DELAY)
             }
-            operationService.loadOperations(ApplicationConstants.WALLET_ID) { response ->
-                if (response is Response.Success) {
-                    operations.postValue(response.responseBody)
-                    income.postValue(response.responseBody.income())
-                    outcome.postValue(response.responseBody.outcome())
-                    totalBalance.postValue(response.responseBody.income().minus(response.responseBody.outcome()))
-                } else {
-                    err.postValue((response as Response.Error).errorMessage)
-                }
-            }
+            operationsLoadingInProgress.postValue(true)
+            operationService.loadOperations(ApplicationConstants.WALLET_ID, onCacheLoaded = {
+                onLoad(it)
+            }, onNetworkLoaded = {
+                operationsLoadingInProgress.postValue(false)
+                onLoad(it)
+            })
+        }
+    }
+
+    private fun onLoad(response: Response<List<Operation>>) {
+        if (response is Response.Success) {
+            operations.postValue(response.responseBody)
+            income.postValue(response.responseBody.income())
+            outcome.postValue(response.responseBody.outcome())
+            totalBalance.postValue(response.responseBody.income().minus(response.responseBody.outcome()))
+        } else {
+            err.postValue((response as Response.Error).errorMessage)
         }
     }
 }
