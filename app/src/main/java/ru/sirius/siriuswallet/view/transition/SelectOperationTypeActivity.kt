@@ -29,7 +29,8 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        Toasty.error(this, "Some trouble", Toasty.LENGTH_LONG).setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 0).initInputParameters()
+        val err = Toasty.error(this, "Some trouble", Toasty.LENGTH_LONG).show()
+
         initNavigation()
 
         binding.firstRg.jumpDrawablesToCurrentState()
