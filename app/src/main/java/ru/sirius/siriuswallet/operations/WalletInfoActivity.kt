@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
+import ru.sirius.siriuswallet.utils.formatForDisplay
 import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
 import android.view.animation.TranslateAnimation
 import android.R
@@ -43,6 +44,7 @@ class WalletInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupListeners()
+        setupBalanceInfo()
         setupOperationList()
         setupErrorToasts()
         setContentView(binding.root)
@@ -60,7 +62,7 @@ class WalletInfoActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.init()
+        viewModel.reloadViewModel()
     }
 
     fun slideUp(view: View) {
@@ -102,6 +104,18 @@ class WalletInfoActivity : AppCompatActivity() {
                 binding.noRecords.visibility = View.GONE
             }
             recyclerViewAdapter.dataset = it
+        }
+    }
+
+    private fun setupBalanceInfo() {
+        viewModel.income.observe(this) {
+            binding.walletIncomeExpense.income.text = resources.getString(R.string.wallet_balance_format, it.formatForDisplay())
+        }
+        viewModel.outcome.observe(this) {
+            binding.walletIncomeExpense.outcome.text = resources.getString(R.string.wallet_balance_format, it.formatForDisplay())
+        }
+        viewModel.totalBalance.observe(this) {
+            binding.walletBalance.text = resources.getString(R.string.wallet_balance_format, it.formatForDisplay())
         }
     }
 

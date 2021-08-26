@@ -31,6 +31,7 @@
     <string name="additional_settings">Дополнительные настройки</string>
     <string name="wallet_info_no_operations">У вас пока нет записей</string>
     <string name="warning_text_input">Обязательно к заполнению!</string>
+    <string name="wallet_balance_format">%1$s ₽</string>
     <string name="wallet_number">Кошелек 1</string>
 
 
