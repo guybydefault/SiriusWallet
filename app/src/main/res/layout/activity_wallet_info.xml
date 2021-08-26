@@ -58,10 +58,10 @@
 
         <TextView
             android:id="@+id/no_records"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="400dp"
-            android:text="@string/description_text"
+            android:text="@string/wallet_info_no_operations"
             android:textSize="@dimen/wallet_name_text_size"
             app:layout_anchor="@+id/operation_list_recycler_view"
             app:layout_anchorGravity="top|center" />
