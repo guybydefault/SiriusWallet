@@ -30,7 +30,9 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
             operations.postValue(
                 mutableListOf<Operation>()
             )
-            delay(1000) // TODO remove
+            if (ApplicationConstants.TEST_DELAY > 0) {
+                delay(ApplicationConstants.TEST_DELAY)
+            }
             operationService.loadOperations(ApplicationConstants.WALLET_ID) { response ->
                 if (response is Response.Success) {
                     operations.postValue(response.responseBody)
