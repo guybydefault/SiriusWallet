@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/invome_label"
+            android:id="@+id/income_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
@@ -44,7 +44,7 @@
             android:id="@+id/income"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12 000 ₽"
+            android:text="0 ₽"
             android:fontFamily="@font/roboto"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -91,10 +91,10 @@
 
 
         <TextView
-            android:id="@+id/expenses"
+            android:id="@+id/outcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12 000 ₽"
+            android:text="0 ₽"
             android:fontFamily="@font/roboto"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -102,15 +102,15 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
-            android:id="@+id/expenses_limit"
+            android:id="@+id/outcome_limit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.6"
             android:fontFamily="@font/roboto"
-            android:text="/ 100 000 ₽"
+            android:text="/ ∞ ₽"
             android:textColor="@color/white"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@id/expenses"
-            app:layout_constraintLeft_toRightOf="@id/expenses" />
+            app:layout_constraintBottom_toBottomOf="@id/outcome"
+            app:layout_constraintLeft_toRightOf="@id/outcome" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

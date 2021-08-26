@@ -10,13 +10,21 @@ import ru.sirius.siriuswallet.WalletAndUserConstants
 import ru.sirius.siriuswallet.data.OperationService
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Operation
+import ru.sirius.siriuswallet.model.income
+import ru.sirius.siriuswallet.model.outcome
+import java.math.BigDecimal
 
 @SuppressLint("NewApi")
 class OperationsViewModel(val operationService: OperationService) : ViewModel() {
     val operations: MutableLiveData<List<Operation>> = MutableLiveData()
+    val income = MutableLiveData<BigDecimal>()
+    val outcome = MutableLiveData<BigDecimal>()
     val err = MutableLiveData<String>()
 
-    fun init() {
+    init {
+    }
+
+    fun reloadViewModel() {
         viewModelScope.launch {
             operations.postValue(
                 mutableListOf<Operation>()
@@ -25,6 +33,8 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
             operationService.loadOperations(WalletAndUserConstants.WALLET_ID) { response ->
                 if (response is Response.Success) {
                     operations.postValue(response.responseBody)
+                    income.postValue(response.responseBody.income())
+                    outcome.postValue(response.responseBody.outcome())
                 } else {
                     err.postValue((response as Response.Error).errorMessage)
                 }
