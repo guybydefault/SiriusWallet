@@ -2,6 +2,7 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -26,8 +27,9 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     }
 
     private val selectOperationCategoryViewModel: SelectOperationCategoryViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        getContainer().selectOperationCategoryViewModel
+        getContainer().createSelectOperationCategoryViewModel()
     }
+
     private var checkActivity = false
     private var enterSum = ""
     private var typeOfOperation: CategoryType? = null
@@ -57,6 +59,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         setupErrorToasts()
         setupNavigation()
         setupRecyclerView()
+        setupProgressBar()
         setupDoneButton()
     }
 
@@ -70,6 +73,16 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
 
     private fun setupViewModel() {
         selectOperationCategoryViewModel.categoryType = typeOfOperation
+    }
+
+    private fun setupProgressBar() {
+        selectOperationCategoryViewModel.operationsLoadingInProgress.observe(this) {
+            if (it) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.INVISIBLE
+            }
+        }
     }
 
     private fun setupNavigation() {

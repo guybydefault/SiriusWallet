@@ -12,14 +12,14 @@ class CategoryService(
     private val categoryNetworkRepository: CategoryRepository,
     private val categoryLocalRepository: CategoryLocalRepository
 ) {
-    suspend fun getCategories(categoryType: CategoryType, onLoad: (Response<List<Category>>) -> Unit): Response<List<Category>> = withContext(Dispatchers.IO) {
+    suspend fun getCategories(categoryType: CategoryType, onLoad: (Response<List<Category>>, Boolean) -> Unit): Response<List<Category>> = withContext(Dispatchers.IO) {
         val localResp = categoryLocalRepository.getCategoriesByType(categoryType)
-        onLoad(localResp)
+        onLoad(localResp, false)
         if (ApplicationConstants.TEST_DELAY > 0) {
             delay(ApplicationConstants.TEST_DELAY)
         }
         val networkResp = categoryNetworkRepository.getCategoriesByType(categoryType)
-        onLoad(networkResp)
+        onLoad(networkResp, true)
         if (networkResp is Response.Success) {
             networkResp.responseBody.forEach {
                 categoryLocalRepository.deleteCategoriesByType(categoryType)

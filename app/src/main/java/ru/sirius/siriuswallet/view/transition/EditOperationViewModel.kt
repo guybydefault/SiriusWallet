@@ -21,6 +21,7 @@ class EditOperationViewModel(val operationService: OperationService, val categor
     var amount: BigDecimal = BigDecimal.ZERO
     var dateTime: LocalDateTime = LocalDateTime.now()
 
+    val isCreationInProgress = MutableLiveData<Boolean>(false)
     val successfullyCreatedOperationId = MutableLiveData<Int>()
     val err = MutableLiveData<String>()
 
@@ -33,9 +34,11 @@ class EditOperationViewModel(val operationService: OperationService, val categor
 
     fun createOperation() {
         viewModelScope.launch {
+            isCreationInProgress.postValue(true)
             val response = operationService.createOperation(
                 Operation(0, dateTime, amount, category.value!!)
             )
+            isCreationInProgress.postValue(false)
             if (response is Response.Success) {
                 successfullyCreatedOperationId.postValue(response.responseBody)
             } else {

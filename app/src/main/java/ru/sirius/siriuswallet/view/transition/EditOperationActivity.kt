@@ -2,6 +2,7 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -98,6 +99,22 @@ class EditOperationActivity : AppCompatActivity() {
             val intent = Intent(this, WalletInfoActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+        }
+
+        setupProgressBar()
+    }
+
+    private fun setupProgressBar() {
+        editOperationViewModel.isCreationInProgress.observe(this) { inProgress ->
+            if (inProgress) {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.doneButtonBlackConfirm.isEnabled = false
+            } else {
+                binding.progressBar.visibility = View.INVISIBLE
+                if (editOperationViewModel.successfullyCreatedOperationId.value == null) {
+                    binding.doneButtonBlackConfirm.isEnabled = true
+                }
+            }
         }
     }
 

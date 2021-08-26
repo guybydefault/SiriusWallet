@@ -18,6 +18,8 @@ class SelectOperationCategoryViewModel(container: SiriusWalletContainer) : ViewM
             }
         }
 
+    val operationsLoadingInProgress = MutableLiveData<Boolean>()
+
     val err = MutableLiveData<String>()
 
     val categories = MutableLiveData<List<Category>>()
@@ -25,11 +27,15 @@ class SelectOperationCategoryViewModel(container: SiriusWalletContainer) : ViewM
 
     private fun updateCategories(categoryType: CategoryType) {
         viewModelScope.launch {
-            categoriesService.getCategories(categoryType) { response ->
+            operationsLoadingInProgress.postValue(true)
+            categoriesService.getCategories(categoryType) { response, lastStage ->
                 if (response is Response.Success) {
                     categories.postValue(response.responseBody)
                 } else {
                     err.postValue((response as Response.Error).errorMessage)
+                }
+                if (lastStage) {
+                    operationsLoadingInProgress.postValue(false)
                 }
             }
         }
