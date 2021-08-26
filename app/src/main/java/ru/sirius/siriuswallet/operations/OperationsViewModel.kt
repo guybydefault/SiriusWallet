@@ -19,6 +19,7 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
     val operations: MutableLiveData<List<Operation>> = MutableLiveData()
     val income = MutableLiveData<BigDecimal>()
     val outcome = MutableLiveData<BigDecimal>()
+    val totalBalance = MutableLiveData<BigDecimal>()
     val err = MutableLiveData<String>()
 
     init {
@@ -35,6 +36,7 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
                     operations.postValue(response.responseBody)
                     income.postValue(response.responseBody.income())
                     outcome.postValue(response.responseBody.outcome())
+                    totalBalance.postValue(response.responseBody.income().minus(response.responseBody.outcome()))
                 } else {
                     err.postValue((response as Response.Error).errorMessage)
                 }

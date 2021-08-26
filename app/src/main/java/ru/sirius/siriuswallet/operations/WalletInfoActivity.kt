@@ -74,10 +74,13 @@ class WalletInfoActivity : AppCompatActivity() {
 
     private fun setupBalanceInfo() {
         viewModel.income.observe(this) {
-            binding.walletIncomeExpense.income.text = resources.getString(R.string.income_wallet_balance_format, it.formatForDisplay())
+            binding.walletIncomeExpense.income.text = resources.getString(R.string.wallet_balance_format, it.formatForDisplay())
         }
         viewModel.outcome.observe(this) {
-            binding.walletIncomeExpense.outcome.text = resources.getString(R.string.outcome_wallet_balance_format, it.formatForDisplay())
+            binding.walletIncomeExpense.outcome.text = resources.getString(R.string.wallet_balance_format, it.formatForDisplay())
+        }
+        viewModel.totalBalance.observe(this) {
+            binding.walletBalance.text = resources.getString(R.string.wallet_balance_format, it.formatForDisplay())
         }
     }
 
