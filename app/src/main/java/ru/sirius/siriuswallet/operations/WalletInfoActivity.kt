@@ -42,8 +42,6 @@ class WalletInfoActivity : AppCompatActivity() {
     }
 
     private fun setupListeners() {
-        binding.backArrowBtn.setOnClickListener { onBackClick() }
-        binding.settingsBtn.setOnClickListener { onSettingsClick() }
         binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick() }
     }
 
