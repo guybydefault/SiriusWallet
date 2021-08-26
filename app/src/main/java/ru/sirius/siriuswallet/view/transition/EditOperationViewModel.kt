@@ -1,34 +1,35 @@
-package ru.sirius.siriuswallet
+package ru.sirius.siriuswallet.view.transition
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.sirius.siriuswallet.SiriusWalletContainer
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryType
 
-class CategoriesViewModel(container: SiriusWalletContainer) : ViewModel() {
+class EditOperationViewModel(container: SiriusWalletContainer) : ViewModel() {
     var categoryType: CategoryType? = null
         set(value) {
             field = value
             updateCategories(value!!)
         }
 
+    val err = MutableLiveData<String>()
+
     val categories = MutableLiveData<List<Category>>()
     private val categoriesService = container.categoriesService
 
     private fun updateCategories(categoryType: CategoryType) {
         viewModelScope.launch {
-            //TODO get category type
-            val resp = categoriesService.getCategories(categoryType) { response ->
+            categoriesService.getCategories(categoryType) { response ->
                 if (response is Response.Success) {
                     categories.postValue(response.responseBody)
                 } else {
-                    // TODO
+                    err.postValue((response as Response.Error).errorMessage)
                 }
             }
-
         }
     }
 }

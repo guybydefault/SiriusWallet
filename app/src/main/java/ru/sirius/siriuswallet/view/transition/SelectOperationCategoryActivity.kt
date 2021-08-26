@@ -2,27 +2,31 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.sirius.siriuswallet.*
+import ru.sirius.siriuswallet.CategoryAdapter
+import ru.sirius.siriuswallet.OnCategoryClickListener
+import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
-import ru.sirius.siriuswallet.model.Category
-import ru.sirius.siriuswallet.model.CategoryItem
-import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.getContainer
 import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.RESULT_OPERATION_COMPONENT_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.SELECT_OPERATION_CATEGORY_FLAG
+import ru.sirius.siriuswallet.model.Category
+import ru.sirius.siriuswallet.model.CategoryItem
+import ru.sirius.siriuswallet.model.CategoryType
 
 class SelectOperationCategoryActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationCategoryBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivitySelectOperationCategoryBinding.inflate(layoutInflater)
     }
 
-    private val categoriesViewModel: CategoriesViewModel by lazy(LazyThreadSafetyMode.NONE) {
-        getContainer().categoriesViewModel
+    private val editOperationViewModel: EditOperationViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        getContainer().editOperationViewModel
     }
     private var checkActivity = false
     private var enterSum = ""
@@ -48,30 +52,53 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initInputParameters()
+        setupViewModel()
+        setupErrorToasts()
+        setupNavigation()
+        setupRecyclerView()
+        setupDoneButton()
+    }
+
+    private fun initInputParameters() {
         checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
         if (!checkActivity) {
             enterSum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG)!!
             typeOfOperation = intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG)!! as CategoryType
-            categoriesViewModel.categoryType = typeOfOperation
         }
+    }
 
+    private fun setupViewModel() {
+        editOperationViewModel.categoryType = typeOfOperation
+    }
+
+    private fun setupNavigation() {
         binding.categoryToolbar.setNavigationIcon(R.drawable.ic_arrow_left)
         binding.categoryToolbar.setNavigationOnClickListener {
             finish()
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
+    }
 
-        binding.doneButtonBlack.setOnClickListener {
-            goToEditOperationActivity()
-        }
-
+    private fun setupRecyclerView() {
         binding.operationListRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = recyclerViewAdapter
         }
-
-        categoriesViewModel.categories.observe(this) { it ->
+        editOperationViewModel.categories.observe(this) { it ->
             recyclerViewAdapter.updateList(it.map { CategoryItem(it, false) })
+        }
+    }
+
+    private fun setupErrorToasts() {
+        editOperationViewModel.err.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupDoneButton() {
+        binding.doneButtonBlack.setOnClickListener {
+            goToEditOperationActivity()
         }
     }
 
