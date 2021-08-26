@@ -20,6 +20,7 @@ class OperationNetworkRepository : OperationRepository {
                 it.map {
                     Operation(
                         it.id,
+                        it.accountId,
                         LocalDateTime.ofInstant(it.creationDate, ZoneId.of("UTC")),
                         it.amount.toBigDecimal(),
                         categoryDtoMapper.mapToObj(it.categoryDto)

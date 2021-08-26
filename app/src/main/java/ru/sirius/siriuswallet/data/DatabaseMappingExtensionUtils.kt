@@ -27,11 +27,11 @@ fun DatabaseCategoryType.toCategoryType(): CategoryType {
 }
 
 fun Operation.toOperationEntity(): OperationEntity {
-    return OperationEntity(this.id, this.operationDate, this.amount, this.operationCategory.id)
+    return OperationEntity(this.id, this.accountId, this.operationDate, this.amount, this.operationCategory.id)
 }
 
 fun OperationEntity.toOperation(categoryEntity: CategoryEntity): Operation {
-    return Operation(this.id, this.operationDate, this.amount, categoryEntity.toCategory())
+    return Operation(this.id, this.accountId, this.operationDate, this.amount, categoryEntity.toCategory())
 }
 
 fun CategoryEntity.toCategory(): Category {

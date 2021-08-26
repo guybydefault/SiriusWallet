@@ -20,11 +20,14 @@ import java.time.LocalDateTime
             onUpdate = RESTRICT
         )
     ],
-    indices = [Index("operationCategoryId", unique = false)]
+    indices = [
+        Index("operationCategoryId", unique = false),
+        Index("accountId", unique = false)]
 )
 data class OperationEntity
     (
     @PrimaryKey val id: Int,
+    val accountId: Int,
     val operationDate: LocalDateTime,
     val amount: BigDecimal,
     val operationCategoryId: Int

@@ -14,12 +14,12 @@ class CategoryService(
 ) {
     suspend fun getCategories(categoryType: CategoryType, accountId: Int, onLoad: (Response<List<Category>>, Boolean) -> Unit): Response<List<Category>> =
         withContext(Dispatchers.IO) {
-            val localResp = categoryLocalRepository.getCategoriesByType(categoryType, accountId)
+            val localResp = categoryLocalRepository.getCategoriesByTypeAndAccountId(categoryType, accountId)
             onLoad(localResp, false)
             if (ApplicationConstants.TEST_DELAY > 0) {
                 delay(ApplicationConstants.TEST_DELAY)
             }
-            val networkResp = categoryNetworkRepository.getCategoriesByType(categoryType, accountId)
+            val networkResp = categoryNetworkRepository.getCategoriesByTypeAndAccountId(categoryType, accountId)
             onLoad(networkResp, true)
             if (networkResp is Response.Success) {
                 networkResp.responseBody.forEach {

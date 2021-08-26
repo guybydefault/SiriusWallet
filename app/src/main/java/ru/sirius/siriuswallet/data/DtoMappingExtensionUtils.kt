@@ -13,6 +13,7 @@ import java.time.ZoneOffset
 fun OperationDto.toOperation(categoryDtoMapper: CategoryDtoMapper): Operation {
     return Operation(
         this.id,
+        this.accountId,
         LocalDateTime.ofInstant(this.creationDate, ZoneId.of("UTC")),
         this.amount.toBigDecimal(),
         categoryDtoMapper.mapToObj(this.categoryDto)

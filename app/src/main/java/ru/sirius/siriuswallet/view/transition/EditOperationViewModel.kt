@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.sirius.siriuswallet.ApplicationConstants
 import ru.sirius.siriuswallet.data.CategoryService
 import ru.sirius.siriuswallet.data.OperationService
 import ru.sirius.siriuswallet.data.Response
@@ -36,7 +37,7 @@ class EditOperationViewModel(val operationService: OperationService, val categor
         viewModelScope.launch {
             isCreationInProgress.postValue(true)
             val response = operationService.createOperation(
-                Operation(0, dateTime, amount, category.value!!)
+                Operation(0, ApplicationConstants.WALLET_ID, dateTime, amount, category.value!!)
             )
             isCreationInProgress.postValue(false)
             if (response is Response.Success) {
