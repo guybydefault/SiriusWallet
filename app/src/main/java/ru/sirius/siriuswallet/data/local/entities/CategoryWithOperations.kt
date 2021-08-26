@@ -10,6 +10,5 @@ data class CategoryWithOperations(
         entity = OperationEntity::class,
         parentColumn = "id",
         entityColumn = "operationCategoryId"
-    )
-    val operations: List<OperationEntity>
+    ) val operations: List<OperationEntity>
 )

@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
 import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
+import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
 
 class WalletInfoActivity : AppCompatActivity() {
 
@@ -37,6 +37,7 @@ class WalletInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupListeners()
         setupOperationList()
+        setupErrorToasts()
         setContentView(binding.root)
     }
 
@@ -61,6 +62,12 @@ class WalletInfoActivity : AppCompatActivity() {
                 binding.noRecords.visibility = View.GONE
             }
             recyclerViewAdapter.dataset = it
+        }
+    }
+
+    private fun setupErrorToasts() {
+        viewModel.err.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }
 

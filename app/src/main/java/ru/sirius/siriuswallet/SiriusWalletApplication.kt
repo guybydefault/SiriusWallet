@@ -6,7 +6,7 @@ class SiriusWalletApplication: Application()  {
     lateinit var container: SiriusWalletContainer
 
     override fun onCreate() {
-        container = SiriusWalletContainer()
+        container = SiriusWalletContainer(applicationContext)
         super.onCreate()
     }
 }

@@ -13,6 +13,7 @@ import ru.sirius.siriuswallet.model.Operation
 @SuppressLint("NewApi")
 class OperationsViewModel(container: SiriusWalletContainer) : ViewModel() {
     val operations: MutableLiveData<List<Operation>> = MutableLiveData()
+    val err = MutableLiveData<String>()
 
     init {
         viewModelScope.launch {
@@ -20,13 +21,12 @@ class OperationsViewModel(container: SiriusWalletContainer) : ViewModel() {
                 mutableListOf<Operation>()
             )
             delay(1000)
-            operations.postValue(container.operationsService.placeholderDataset)
-            delay(1000)
-            val result = container.operationsService.getOperations(103)
-            if (result is Response.Success) {
-                operations.postValue(result.responseBody)
-            } else {
-                // TODO
+            container.operationsService.loadOperations(103) { response ->
+                if (response is Response.Success) {
+                    operations.postValue(response.responseBody)
+                } else {
+                    err.postValue((response as Response.Error).errorMessage)
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package ru.sirius.siriuswallet.data.local.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
+import androidx.room.ForeignKey.RESTRICT
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.math.BigDecimal
@@ -15,10 +16,11 @@ import java.time.LocalDateTime
             entity = CategoryEntity::class,
             parentColumns = ["id"],
             childColumns = ["operationCategoryId"],
-            onDelete = CASCADE
+            onDelete = CASCADE,
+            onUpdate = RESTRICT
         )
     ],
-    indices = [Index("operationCategoryId")]
+    indices = [Index("operationCategoryId", unique = false)]
 )
 data class OperationEntity
     (

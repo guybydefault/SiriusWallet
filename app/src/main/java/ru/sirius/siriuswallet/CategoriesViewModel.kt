@@ -21,12 +21,14 @@ class CategoriesViewModel(container: SiriusWalletContainer) : ViewModel() {
     private fun updateCategories(categoryType: CategoryType) {
         viewModelScope.launch {
             //TODO get category type
-            val resp = categoriesService.getCategories(categoryType)
-            if (resp is Response.Success) {
-                categories.postValue(resp.responseBody)
-            } else {
-                // TODO
+            val resp = categoriesService.getCategories(categoryType) { response ->
+                if (response is Response.Success) {
+                    categories.postValue(response.responseBody)
+                } else {
+                    // TODO
+                }
             }
+
         }
     }
 }
