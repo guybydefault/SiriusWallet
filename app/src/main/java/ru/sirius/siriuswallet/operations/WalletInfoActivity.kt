@@ -7,6 +7,7 @@ import android.view.View
 import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.sirius.siriuswallet.databinding.ActivityWalletInfoBinding
@@ -14,8 +15,6 @@ import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 import ru.sirius.siriuswallet.utils.formatForDisplay
 import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
-import android.view.animation.TranslateAnimation
-import androidx.core.content.ContextCompat
 
 
 class WalletInfoActivity : AppCompatActivity() {
