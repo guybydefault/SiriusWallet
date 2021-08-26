@@ -14,6 +14,8 @@ import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 import ru.sirius.siriuswallet.utils.formatForDisplay
 import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
+import android.view.animation.TranslateAnimation
+import androidx.core.content.ContextCompat
 
 
 class WalletInfoActivity : AppCompatActivity() {
@@ -106,13 +108,13 @@ class WalletInfoActivity : AppCompatActivity() {
     private fun setupProgressBar() {
         viewModel.operationsLoadingInProgress.observe(this) { inProgress ->
             if (inProgress) {
-                binding.addOperationBtn.text = ""
-                binding.addOperationBtn.background.setTint(resources.getColor(R.color.btn_disabled_color, theme))
+                binding.addOperationBtn.text = "Получаем данные..."
                 binding.operationsProgressBar.visibility = View.VISIBLE
             } else {
                 binding.addOperationBtn.text = resources.getString(R.string.btn_add_operation)
-                binding.addOperationBtn.background.setTint(resources.getColor(R.color.blackColorButton, theme))
+                binding.addOperationBtn.setTextColor(ContextCompat.getColor(this, R.color.white))
                 binding.operationsProgressBar.visibility = View.INVISIBLE
+                binding.addOperationBtn.isEnabled = true
             }
         }
     }

@@ -15,4 +15,5 @@
     <color name="income_category_background_color">#00B92D</color>
     <color name="outcome_category_background_color">#7765C0</color>
     <color name="btn_disabled_color">#808080</color>
+    <color name="progres_bar_color">#5833EE</color>
 </resources>

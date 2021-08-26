@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import es.dmoral.toasty.Toasty
@@ -29,7 +30,9 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val err = Toasty.error(this, "Some trouble", Toasty.LENGTH_LONG).show()
+        val toast: Toast? = Toasty.custom(this, "Some trouble", R.drawable.ic_cog, R.color.blackColorButton, Toasty.LENGTH_LONG, true, true)
+        toast?.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 0)
+        toast?.show()
 
         initNavigation()
 

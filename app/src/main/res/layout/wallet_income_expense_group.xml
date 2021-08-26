@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
+            android:fontFamily="@font/roboto"
             android:alpha="0.6"
             android:text="@string/income_label"
             android:textColor="@color/white"
