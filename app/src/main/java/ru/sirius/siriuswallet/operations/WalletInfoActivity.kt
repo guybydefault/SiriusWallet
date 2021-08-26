@@ -4,8 +4,7 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +14,6 @@ import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 import ru.sirius.siriuswallet.utils.formatForDisplay
 import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
-import android.view.animation.TranslateAnimation
-
 
 
 class WalletInfoActivity : AppCompatActivity() {
@@ -137,8 +134,6 @@ class WalletInfoActivity : AppCompatActivity() {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
     }
-
-
 
     fun onAddOperationBtnClick() {
         val intent = Intent(this, EnterOperationSumActivity::class.java)

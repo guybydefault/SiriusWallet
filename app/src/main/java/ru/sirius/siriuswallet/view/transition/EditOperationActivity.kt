@@ -55,8 +55,7 @@ class EditOperationActivity : AppCompatActivity() {
         val categoryContainer: ConstraintLayout = findViewById(R.id.category_container)
         val dateContainer: ConstraintLayout = findViewById(R.id.date_container)
 
-        val sum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG)
-        editOperationViewModel.amount = sum!!.toDouble().toBigDecimal()
+        val sum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG)!!
         updateSum(sum)
         binding.typeContainer.type.text = getString(R.string.type_text)
         binding.typeContainer.value.text = (intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG) as CategoryType).typeLocalizedName
@@ -113,6 +112,7 @@ class EditOperationActivity : AppCompatActivity() {
     }
 
     private fun updateSum(sum: String) {
+        editOperationViewModel.amount = sum!!.toDouble().toBigDecimal()
         binding.sumContainer.value.text = sum + " " + getString(R.string.rub_symbol)
     }
 
