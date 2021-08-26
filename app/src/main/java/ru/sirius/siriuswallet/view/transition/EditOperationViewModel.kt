@@ -17,7 +17,9 @@ class EditOperationViewModel(val operationService: OperationService, val categor
     var selectedCategoryId: Int = 0
         set(value) {
             field = value
-            updateCategory(field)
+            if (field != 0) {
+                updateCategory(field)
+            }
         }
     var amount: BigDecimal = BigDecimal.ZERO
     var dateTime: LocalDateTime = LocalDateTime.now()
@@ -29,7 +31,7 @@ class EditOperationViewModel(val operationService: OperationService, val categor
     var category: MutableLiveData<Category> = MutableLiveData()
     private fun updateCategory(id: Int) {
         viewModelScope.launch {
-            category.postValue(categoriesService.getCachedCategoryById(selectedCategoryId))
+            category.postValue(categoriesService.getCachedCategoryById(id))
         }
     }
 

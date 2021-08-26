@@ -17,7 +17,6 @@ import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.RESULT_OPERATION_COMPONENT_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.SELECT_OPERATION_CATEGORY_FLAG
-import ru.sirius.siriuswallet.model.Category
 import ru.sirius.siriuswallet.model.CategoryItem
 import ru.sirius.siriuswallet.model.CategoryType
 
@@ -35,14 +34,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     private var typeOfOperation: CategoryType? = null
     private var selectedCategoryId: Int = 0
 
-    private val listOfCategoryPlaceholder = listOf(
-        CategoryItem(Category(0, 0, "Зарплата", CategoryType.INCOME, R.drawable.ic_salary), false),
-        CategoryItem(Category(0, 0, "Подработка", CategoryType.INCOME, R.drawable.ic_salary), false),
-        CategoryItem(Category(0, 0, "Перевод", CategoryType.INCOME, R.drawable.ic_salary), false),
-        CategoryItem(Category(0, 0, "Подарок", CategoryType.INCOME, R.drawable.ic_gift), false)
-    )
-
-    private val recyclerViewAdapter = CategoryAdapter(listOfCategoryPlaceholder, object : OnCategoryClickListener {
+    private val recyclerViewAdapter = CategoryAdapter(mutableListOf(), object : OnCategoryClickListener {
         override fun onCategoryClicked(categoryItem: CategoryItem) {
             binding.doneButtonBlack.isEnabled = true
             binding.doneButtonBlack.setTextColor(ContextCompat.getColor(applicationContext, R.color.white))
@@ -67,8 +59,8 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
         checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
         if (!checkActivity) {
             enterSum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG)!!
-            typeOfOperation = intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG)!! as CategoryType
         }
+        typeOfOperation = intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG)!! as CategoryType
     }
 
     private fun setupViewModel() {

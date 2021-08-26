@@ -43,6 +43,8 @@ class EditOperationActivity : AppCompatActivity() {
         )
     val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
 
+    lateinit var categoryType: CategoryType
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -59,7 +61,8 @@ class EditOperationActivity : AppCompatActivity() {
         val sum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG)!!
         updateSum(sum)
         binding.typeContainer.type.text = getString(R.string.type_text)
-        binding.typeContainer.value.text = (intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG) as CategoryType).typeLocalizedName
+        categoryType = intent.getSerializableExtra(ENTER_TYPE_OPERATION_FLAG) as CategoryType
+        binding.typeContainer.value.text = (categoryType).typeLocalizedName
         binding.categoryContainer.type.text = getString(R.string.category)
         updateCategoryId(intent.getIntExtra(SELECT_OPERATION_CATEGORY_FLAG, 0))
         binding.dateContainer.type.text = getString(R.string.date_operation)
@@ -143,7 +146,7 @@ class EditOperationActivity : AppCompatActivity() {
 
         launcherCategory = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                val categoryId = result.data!!.getIntExtra(RESULT_OPERATION_COMPONENT_FLAG, 0)
+                val categoryId = result.data!!.getIntExtra(RESULT_OPERATION_COMPONENT_FLAG, 0)!!
                 updateCategoryId(categoryId)
             }
         }
@@ -192,6 +195,7 @@ class EditOperationActivity : AppCompatActivity() {
         launcherCategory?.launch(
             Intent(this, SelectOperationCategoryActivity::class.java)
                 .putExtra(CHECKED_ACTIVITY_FLAG, true)
+                .putExtra(ENTER_TYPE_OPERATION_FLAG, categoryType)
                 .putExtra(BACK_SUM_COMPONENT_FLAG, binding.sumContainer.value.toString())
         )
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)

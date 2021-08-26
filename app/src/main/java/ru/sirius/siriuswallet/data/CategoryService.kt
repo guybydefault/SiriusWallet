@@ -31,6 +31,7 @@ class CategoryService(
         }
 
     suspend fun getCachedCategoryById(categoryId: Int): Category = withContext(Dispatchers.IO) {
+        println("LOOKING UP CATEGORY ${categoryId}")
         return@withContext categoryLocalRepository.getCategoryById(categoryId)
     }
 }
