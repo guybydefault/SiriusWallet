@@ -6,7 +6,6 @@ import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryDtoMapper
 import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryResourceIdResolver
 import ru.sirius.siriuswallet.data.toCreateOperationDto
-import ru.sirius.siriuswallet.data.toOperation
 import ru.sirius.siriuswallet.model.Operation
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -30,10 +29,10 @@ class OperationNetworkRepository : OperationRepository {
         }
     }
 
-    override suspend fun insertOperation(operation: Operation): Response<Operation> {
+    override suspend fun insertOperation(operation: Operation): Response<Int> {
         return retrofitRequestExceptionHandler {
             retrofit.OPERATIONS_API.postOperation(operation.toCreateOperationDto()).handleResponse {
-                it.toOperation(categoryDtoMapper)
+                it.id
             }
         }
     }

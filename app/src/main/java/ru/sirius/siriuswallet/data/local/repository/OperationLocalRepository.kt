@@ -24,12 +24,12 @@ class OperationLocalRepository(private val db: Database) : OperationCacheReposit
                 .flatMap { cat -> cat.operations.map { op -> op.toOperation(cat.category) } })
     }
 
-    override suspend fun insertOperation(operation: Operation): Response<Operation> {
+    override suspend fun insertOperation(operation: Operation): Response<Int> {
         db.categoryWithOperationsDao().insertOperationWithCategory(
             operation.toOperationEntity(),
             operation.operationCategory.toCategoryEntity()
         )
-        return Response.Success(operation)
+        return Response.Success(operation.id)
     }
 
 }

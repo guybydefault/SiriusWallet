@@ -6,7 +6,7 @@ import ru.sirius.siriuswallet.data.network.serialization.InstantSerializer
 import java.time.Instant
 
 @Serializable
-data class OperationCreateRequestDto(
+data class OperationCreateDto(
     @SerialName("id")
     val id: Int,
     @SerialName("accountId")

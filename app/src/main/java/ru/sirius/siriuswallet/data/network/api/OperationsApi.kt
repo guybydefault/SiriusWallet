@@ -5,7 +5,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.sirius.siriuswallet.data.network.dto.OperationCreateRequestDto
+import ru.sirius.siriuswallet.data.network.dto.OperationCreateDto
 import ru.sirius.siriuswallet.data.network.dto.OperationDto
 
 interface OperationsApi {
@@ -14,6 +14,6 @@ interface OperationsApi {
     suspend fun getOperations(@Query("accountId") accountId: Int): Response<List<OperationDto>>
 
     @POST("operations/")
-    suspend fun postOperation(@Body operationDto: OperationCreateRequestDto): Response<OperationDto>
+    suspend fun postOperation(@Body operationDto: OperationCreateDto): Response<OperationCreateDto>
 
 }

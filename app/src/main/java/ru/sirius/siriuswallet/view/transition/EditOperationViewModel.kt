@@ -21,7 +21,7 @@ class EditOperationViewModel(val operationService: OperationService, val categor
     var amount: BigDecimal = BigDecimal.ZERO
     var dateTime: LocalDateTime = LocalDateTime.now()
 
-    val successfullyCreatedOperation = MutableLiveData<Operation>()
+    val successfullyCreatedOperationId = MutableLiveData<Int>()
     val err = MutableLiveData<String>()
 
     var category: MutableLiveData<Category> = MutableLiveData()
@@ -37,7 +37,7 @@ class EditOperationViewModel(val operationService: OperationService, val categor
                 Operation(0, dateTime, amount, category.value!!)
             )
             if (response is Response.Success) {
-                successfullyCreatedOperation.postValue(response.responseBody)
+                successfullyCreatedOperationId.postValue(response.responseBody)
             } else {
                 err.postValue((response as Response.Error).errorMessage)
             }

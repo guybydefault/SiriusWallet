@@ -93,7 +93,7 @@ class EditOperationActivity : AppCompatActivity() {
             editOperationViewModel.createOperation()
         }
 
-        editOperationViewModel.successfullyCreatedOperation.observe(this) {
+        editOperationViewModel.successfullyCreatedOperationId.observe(this) {
             Toast.makeText(this, "Операция успешно добавлена", Toast.LENGTH_LONG).show()
             finish()
         }
