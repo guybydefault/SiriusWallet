@@ -10,7 +10,7 @@ import ru.sirius.siriuswallet.data.network.dto.CategoryDto
 interface CategoriesApi {
 
     @GET("categories/")
-    suspend fun getCategories(@Query("typeDTO") typeDTO: String): Response<List<CategoryDto>>
+    suspend fun getCategories(@Query("type") typeDTO: String, @Query("accountId") accountId: Int): Response<List<CategoryDto>>
 
     @POST("categories/")
     suspend fun postCategory(@Body categoryDto: CategoryDto): Response<CategoryDto>

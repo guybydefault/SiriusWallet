@@ -18,9 +18,9 @@ class CategoryLocalRepository(private val db: Database) : CategoryCacheRepositor
         return db.categoryWithOperationsDao().getCategoryById(id).toCategory()
     }
 
-    override suspend fun getCategoriesByType(categoryType: CategoryType): Response<List<Category>> {
+    override suspend fun getCategoriesByType(categoryType: CategoryType, accountId: Int): Response<List<Category>> {
         return Response.Success(
-            db.categoryWithOperationsDao().getCategoriesByType(categoryType.toCategoryDBType())
+            db.categoryWithOperationsDao().getCategoriesByTypeAndAccountId(categoryType.toCategoryDBType(), accountId)
                 .map { it.toCategory() })
     }
 

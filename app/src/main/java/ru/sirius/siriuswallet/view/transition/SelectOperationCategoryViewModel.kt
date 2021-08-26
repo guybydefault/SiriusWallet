@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.sirius.siriuswallet.ApplicationConstants
 import ru.sirius.siriuswallet.SiriusWalletContainer
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Category
@@ -28,7 +29,7 @@ class SelectOperationCategoryViewModel(container: SiriusWalletContainer) : ViewM
     private fun updateCategories(categoryType: CategoryType) {
         viewModelScope.launch {
             operationsLoadingInProgress.postValue(true)
-            categoriesService.getCategories(categoryType) { response, lastStage ->
+            categoriesService.getCategories(categoryType, ApplicationConstants.USER_ID) { response, lastStage ->
                 if (response is Response.Success) {
                     categories.postValue(response.responseBody)
                 } else {

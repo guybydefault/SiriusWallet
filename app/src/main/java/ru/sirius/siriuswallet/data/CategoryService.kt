@@ -12,22 +12,23 @@ class CategoryService(
     private val categoryNetworkRepository: CategoryRepository,
     private val categoryLocalRepository: CategoryLocalRepository
 ) {
-    suspend fun getCategories(categoryType: CategoryType, onLoad: (Response<List<Category>>, Boolean) -> Unit): Response<List<Category>> = withContext(Dispatchers.IO) {
-        val localResp = categoryLocalRepository.getCategoriesByType(categoryType)
-        onLoad(localResp, false)
-        if (ApplicationConstants.TEST_DELAY > 0) {
-            delay(ApplicationConstants.TEST_DELAY)
-        }
-        val networkResp = categoryNetworkRepository.getCategoriesByType(categoryType)
-        onLoad(networkResp, true)
-        if (networkResp is Response.Success) {
-            networkResp.responseBody.forEach {
-                categoryLocalRepository.deleteCategoriesByType(categoryType)
-                networkResp.responseBody.forEach { categoryLocalRepository.addCategory(it) }
+    suspend fun getCategories(categoryType: CategoryType, accountId: Int, onLoad: (Response<List<Category>>, Boolean) -> Unit): Response<List<Category>> =
+        withContext(Dispatchers.IO) {
+            val localResp = categoryLocalRepository.getCategoriesByType(categoryType, accountId)
+            onLoad(localResp, false)
+            if (ApplicationConstants.TEST_DELAY > 0) {
+                delay(ApplicationConstants.TEST_DELAY)
             }
+            val networkResp = categoryNetworkRepository.getCategoriesByType(categoryType, accountId)
+            onLoad(networkResp, true)
+            if (networkResp is Response.Success) {
+                networkResp.responseBody.forEach {
+                    categoryLocalRepository.deleteCategoriesByType(categoryType)
+                    networkResp.responseBody.forEach { categoryLocalRepository.addCategory(it) }
+                }
+            }
+            return@withContext networkResp
         }
-        return@withContext networkResp
-    }
 
     suspend fun getCachedCategoryById(categoryId: Int): Category = withContext(Dispatchers.IO) {
         return@withContext categoryLocalRepository.getCategoryById(categoryId)

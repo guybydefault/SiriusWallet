@@ -12,8 +12,8 @@ abstract class CategoryWithOperationsDao {
     @Transaction
     abstract fun getCategoriesWithOperationsByUserId(userId: Int): List<CategoryWithOperations>
 
-    @Query("SELECT * FROM category c WHERE c.categoryType = :type")
-    abstract fun getCategoriesByType(type: DatabaseCategoryType): List<CategoryEntity>
+    @Query("SELECT * FROM category c WHERE c.categoryType = :type AND c.userId = :accountId")
+    abstract fun getCategoriesByTypeAndAccountId(type: DatabaseCategoryType, accountId: Int): List<CategoryEntity>
 
     @Query("SELECT * FROM category c WHERE c.id = :id")
     abstract fun getCategoryById(id: Int): CategoryEntity
