@@ -4,6 +4,8 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +15,13 @@ import ru.sirius.siriuswallet.operations.OperationsRecyclerViewAdapter
 import ru.sirius.siriuswallet.operations.OperationsViewModel
 import ru.sirius.siriuswallet.utils.formatForDisplay
 import ru.sirius.siriuswallet.view.transition.EnterOperationSumActivity
+import android.view.animation.TranslateAnimation
+
+
 
 class WalletInfoActivity : AppCompatActivity() {
+
+    var isUp = true
 
     private val binding: ActivityWalletInfoBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityWalletInfoBinding.inflate(
@@ -42,6 +49,18 @@ class WalletInfoActivity : AppCompatActivity() {
         setupErrorToasts()
         setupProgressBar()
         setContentView(binding.root)
+
+        binding.operationListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (isUp && dy > 0) {
+                    slideDown(binding.addOperationBtn)
+                    isUp = !isUp
+                } else if (!isUp && dy < 0) {
+                    slideUp(binding.addOperationBtn)
+                    isUp = !isUp
+                }
+            }
+        })
     }
 
     override fun onResume() {
@@ -49,9 +68,23 @@ class WalletInfoActivity : AppCompatActivity() {
         viewModel.reloadViewModel()
     }
 
+    fun slideUp(view: View) {
+        view.visibility = View.VISIBLE
+        val animate = TranslateAnimation(0.0f, 0.0f, 200.0f, 0.0f)
+        animate.duration = 200
+        animate.fillAfter = true
+        view.startAnimation(animate)
+    }
+
+    fun slideDown(view: View) {
+        val animate = TranslateAnimation(0.0f, 0.0f, 0.0f, 200.0f)
+        animate.duration = 200
+        animate.fillAfter = true
+        view.startAnimation(animate)
+    }
+
+
     private fun setupListeners() {
-        binding.backArrowBtn.setOnClickListener { onBackClick() }
-        binding.settingsBtn.setOnClickListener { onSettingsClick() }
         binding.addOperationBtn.setOnClickListener { onAddOperationBtnClick() }
     }
 
@@ -105,13 +138,7 @@ class WalletInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun onBackClick() {
-        Toast.makeText(this, "Back arrow click", Toast.LENGTH_LONG).show()
-    }
 
-    private fun onSettingsClick() {
-        Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show()
-    }
 
     fun onAddOperationBtnClick() {
         val intent = Intent(this, EnterOperationSumActivity::class.java)
