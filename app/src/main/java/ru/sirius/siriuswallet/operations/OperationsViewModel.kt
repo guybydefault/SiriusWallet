@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.sirius.siriuswallet.WalletAndUserConstants
+import ru.sirius.siriuswallet.ApplicationConstants
 import ru.sirius.siriuswallet.data.OperationService
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Operation
@@ -31,7 +31,7 @@ class OperationsViewModel(val operationService: OperationService) : ViewModel() 
                 mutableListOf<Operation>()
             )
             delay(1000) // TODO remove
-            operationService.loadOperations(WalletAndUserConstants.WALLET_ID) { response ->
+            operationService.loadOperations(ApplicationConstants.WALLET_ID) { response ->
                 if (response is Response.Success) {
                     operations.postValue(response.responseBody)
                     income.postValue(response.responseBody.income())
