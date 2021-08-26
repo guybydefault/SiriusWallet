@@ -10,6 +10,8 @@ import ru.sirius.siriuswallet.data.local.repository.OperationLocalRepository
 import ru.sirius.siriuswallet.data.network.repository.CategoryNetworkRepository
 import ru.sirius.siriuswallet.data.network.repository.OperationNetworkRepository
 import ru.sirius.siriuswallet.operations.OperationsViewModel
+import ru.sirius.siriuswallet.view.transition.EditOperationViewModel
+import ru.sirius.siriuswallet.view.transition.SelectOperationCategoryViewModel
 
 class SiriusWalletContainer(applicationContext: Context) {
     val database = Room.databaseBuilder(applicationContext, Database::class.java, "sirius-wallet").build()
@@ -23,5 +25,6 @@ class SiriusWalletContainer(applicationContext: Context) {
     val categoriesService = CategoryService(categoryNetworkRepository, categoryLocalRepository)
 
     val operationsViewModel: OperationsViewModel by lazy(LazyThreadSafetyMode.NONE) { OperationsViewModel(this) }
-    val categoriesViewModel: CategoriesViewModel by lazy(LazyThreadSafetyMode.NONE) { CategoriesViewModel(this) }
+    val selectOperationCategoryViewModel: SelectOperationCategoryViewModel by lazy(LazyThreadSafetyMode.NONE) { SelectOperationCategoryViewModel(this) }
+    val editOperationViewModel: EditOperationViewModel by lazy(LazyThreadSafetyMode.NONE) { EditOperationViewModel(operationsService, categoriesService) }
 }

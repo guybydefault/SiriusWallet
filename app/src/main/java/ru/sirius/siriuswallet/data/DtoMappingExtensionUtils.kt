@@ -1,6 +1,7 @@
 package ru.sirius.siriuswallet.data
 
 import ru.sirius.siriuswallet.data.network.dto.CategoryDto
+import ru.sirius.siriuswallet.data.network.dto.OperationCreateDto
 import ru.sirius.siriuswallet.data.network.dto.OperationDto
 import ru.sirius.siriuswallet.data.network.dto.mappers.CategoryDtoMapper
 import ru.sirius.siriuswallet.model.Category
@@ -24,6 +25,10 @@ fun CategoryDto.toCategory(categoryDtoMapper: CategoryDtoMapper): Category {
 
 fun Operation.toOperationDto(): OperationDto {
     return OperationDto(this.id, this.accountId, this.amount.toDouble(), this.operationDate.toInstant(ZoneOffset.UTC), this.operationCategory.toCategoryDto())
+}
+
+fun Operation.toCreateOperationDto(): OperationCreateDto {
+    return OperationCreateDto(this.id, this.accountId, this.amount.toDouble(), this.operationDate.toInstant(ZoneOffset.UTC), this.operationCategory.id)
 }
 
 fun Category.toCategoryDto(): CategoryDto {

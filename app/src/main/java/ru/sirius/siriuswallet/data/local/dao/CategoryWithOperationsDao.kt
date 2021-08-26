@@ -15,6 +15,9 @@ abstract class CategoryWithOperationsDao {
     @Query("SELECT * FROM category c WHERE c.categoryType = :type")
     abstract fun getCategoriesByType(type: DatabaseCategoryType): List<CategoryEntity>
 
+    @Query("SELECT * FROM category c WHERE c.id = :id")
+    abstract fun getCategoryById(id: Int): CategoryEntity
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertCategoryIfNotExists(categoryEntity: CategoryEntity): Long
 

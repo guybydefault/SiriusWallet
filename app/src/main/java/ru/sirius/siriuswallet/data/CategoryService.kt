@@ -14,8 +14,9 @@ class CategoryService(
     suspend fun getCategories(categoryType: CategoryType, onLoad: (Response<List<Category>>) -> Unit): Response<List<Category>> = withContext(Dispatchers.IO) {
         val localResp = categoryLocalRepository.getCategoriesByType(categoryType)
         onLoad(localResp)
-        delay(1000)
+        delay(1000) // TODO remove
         val networkResp = categoryNetworkRepository.getCategoriesByType(categoryType)
+        onLoad(networkResp)
         if (networkResp is Response.Success) {
             networkResp.responseBody.forEach {
                 categoryLocalRepository.deleteCategoriesByType(categoryType)
@@ -23,5 +24,9 @@ class CategoryService(
             }
         }
         return@withContext networkResp
+    }
+
+    suspend fun getCachedCategoryById(categoryId: Int): Category = withContext(Dispatchers.IO) {
+        return@withContext categoryLocalRepository.getCategoryById(categoryId)
     }
 }

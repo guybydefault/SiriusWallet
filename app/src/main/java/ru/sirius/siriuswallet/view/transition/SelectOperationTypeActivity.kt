@@ -7,12 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
-import ru.sirius.siriuswallet.model.CategoryType
 import ru.sirius.siriuswallet.model.ActivityConst.BACK_SUM_COMPONENT_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.RESULT_TYPE_COMPONENT_FLAG
+import ru.sirius.siriuswallet.model.CategoryType
 
 class SelectOperationTypeActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationTypeBinding by lazy(LazyThreadSafetyMode.NONE) {
@@ -27,24 +27,10 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        enterOperationSum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG).toString()
-        checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
-        val checkTypeActivity = intent.getStringExtra(RESULT_TYPE_COMPONENT_FLAG).toString()
+        initInputParameters()
+        initNavigation()
 
-        if (checkActivity) {
-            if (checkTypeActivity == "Пополнение") {
-                binding.radioButtonIncome.isChecked = true
-            } else {
-                binding.radioButtonExpense.isChecked = true
-            }
-        }
-
-        binding.selectType.setNavigationIcon(R.drawable.ic_arrow_left)
-        binding.selectType.setNavigationOnClickListener {
-            finish()
-        }
         binding.firstRg.jumpDrawablesToCurrentState()
-
         binding.firstRg.setOnCheckedChangeListener { _, checkedId ->
             findViewById<RadioButton>(checkedId)?.apply {
                 binding.doneButton.isEnabled = true
@@ -56,6 +42,30 @@ class SelectOperationTypeActivity : AppCompatActivity() {
                 }
             }
         }
+        setupDoneButton()
+    }
+
+    private fun initInputParameters() {
+        enterOperationSum = intent.getStringExtra(ENTER_SUM_SESSION_FLAG).toString()
+        checkActivity = intent.getBooleanExtra(CHECKED_ACTIVITY_FLAG, false)
+        val checkTypeActivity = intent.getStringExtra(RESULT_TYPE_COMPONENT_FLAG).toString()
+        if (checkActivity) {
+            if (checkTypeActivity == "Пополнение") {
+                binding.radioButtonIncome.isChecked = true
+            } else {
+                binding.radioButtonExpense.isChecked = true
+            }
+        }
+    }
+
+    private fun initNavigation() {
+        binding.selectType.setNavigationIcon(R.drawable.ic_arrow_left)
+        binding.selectType.setNavigationOnClickListener {
+            finish()
+        }
+    }
+
+    private fun setupDoneButton() {
         binding.doneButton.setOnClickListener {
             goToSelectOperationActivity()
         }

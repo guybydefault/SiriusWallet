@@ -39,7 +39,7 @@ class EnterOperationSumActivity : AppCompatActivity() {
                 goToSelectOperationType()
             } else if (validateEnterSum()) {
                 val i = Intent()
-                i.putExtra(RESULT_SUM_COMPONENT_FLAG, binding.sumOperation.text.toString() + " ₽")
+                i.putExtra(RESULT_SUM_COMPONENT_FLAG, binding.sumOperation.text.toString())
                 setResult(RESULT_OK, i)
                 finish()
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

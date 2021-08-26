@@ -26,4 +26,13 @@ class OperationService(
             }
         }
     }
+
+    suspend fun createOperation(operation: Operation): Response<Int> = withContext(Dispatchers.IO) {
+        val networkResponse = operationNetworkRepository.insertOperation(operation)
+        if (networkResponse is Response.Success) {
+            val operationWithGeneratedId = operation.copy(id = networkResponse.responseBody)
+            operationLocalRepository.insertOperation(operationWithGeneratedId)
+        }
+        return@withContext networkResponse
+    }
 }

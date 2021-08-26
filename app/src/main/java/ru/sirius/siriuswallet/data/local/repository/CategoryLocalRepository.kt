@@ -13,6 +13,11 @@ class CategoryLocalRepository(private val db: Database) : CategoryCacheRepositor
         db.categoryWithOperationsDao().deleteCategoriesByType(categoryType.toCategoryDBType())
     }
 
+    override suspend fun getCategoryById(id: Int): Category {
+        // TODO what if category is not found?
+        return db.categoryWithOperationsDao().getCategoryById(id).toCategory()
+    }
+
     override suspend fun getCategoriesByType(categoryType: CategoryType): Response<List<Category>> {
         return Response.Success(
             db.categoryWithOperationsDao().getCategoriesByType(categoryType.toCategoryDBType())
