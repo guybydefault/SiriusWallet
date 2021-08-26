@@ -30,7 +30,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val toast: Toast? = Toasty.error(this, "Some trouble", Toasty.LENGTH_LONG)
+        val toast: Toast? = Toasty.custom(this, "Some trouble", R.drawable.ic_cog, R.color.blackColorButton, Toasty.LENGTH_LONG, true, true)
         toast?.setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 0)
         toast?.show()
 

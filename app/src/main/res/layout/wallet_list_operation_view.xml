@@ -17,6 +17,8 @@
         android:id="@+id/operation_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/standard"
+        android:fontFamily="@font/roboto"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@id/operation_icon"
         app:layout_constraintTop_toTopOf="@id/operation_icon" />
@@ -25,6 +27,8 @@
         android:id="@+id/operation_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/wallet_name_text_size"
         android:layout_marginTop="4dp"
         android:alpha="0.6"
         app:layout_constraintStart_toStartOf="@id/operation_name"
@@ -34,6 +38,8 @@
     <TextView
         android:id="@+id/operation_sum"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:textSize="@dimen/standard"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/operation_icon" />
@@ -41,7 +47,9 @@
     <TextView
         android:id="@+id/operation_date"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/roboto"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/wallet_name_text_size"
         android:layout_marginTop="4dp"
         android:alpha="0.6"
         app:layout_constraintEnd_toEndOf="@id/operation_sum"
