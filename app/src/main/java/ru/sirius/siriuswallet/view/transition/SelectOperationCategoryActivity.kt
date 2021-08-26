@@ -93,6 +93,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
     private fun setupErrorToasts() {
         selectOperationCategoryViewModel.err.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+
         }
     }
 

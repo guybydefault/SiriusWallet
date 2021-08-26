@@ -87,5 +87,7 @@ dependencies {
 
     //Toasty dependencies
     implementation 'com.github.GrenderG:Toasty:1.5.0'
+    //Ktoasty
+   // implementation 'com.github.shubhamvashisht:KToasty:1.0'
 
 }

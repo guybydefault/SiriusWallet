@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="16dp"
     tools:context=".WalletInfoActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -85,6 +87,7 @@
             android:textSize="@dimen/standard"
             android:fontFamily="@font/roboto"
             android:paddingVertical="14dp"
+            android:layout_marginBottom="16dp"
             app:layout_anchor="@id/operation_list_recycler_view"
             app:layout_anchorGravity="bottom|right|end"
             android:text="@string/btn_add_operation"

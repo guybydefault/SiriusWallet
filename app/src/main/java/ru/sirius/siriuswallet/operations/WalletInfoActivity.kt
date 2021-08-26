@@ -69,14 +69,14 @@ class WalletInfoActivity : AppCompatActivity() {
 
     fun slideUp(view: View) {
         view.visibility = View.VISIBLE
-        val animate = TranslateAnimation(0.0f, 0.0f, 150.0f, 0.0f)
+        val animate = TranslateAnimation(0.0f, 0.0f, 200.0f, 0.0f)
         animate.duration = 200
         animate.fillAfter = true
         view.startAnimation(animate)
     }
 
     fun slideDown(view: View) {
-        val animate = TranslateAnimation(0.0f, 0.0f, 0.0f, 150.0f)
+        val animate = TranslateAnimation(0.0f, 0.0f, 0.0f, 200.0f)
         animate.duration = 200
         animate.fillAfter = true
         view.startAnimation(animate)

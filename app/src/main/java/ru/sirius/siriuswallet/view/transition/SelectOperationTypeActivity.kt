@@ -2,9 +2,11 @@ package ru.sirius.siriuswallet.view.transition
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import es.dmoral.toasty.Toasty
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationTypeBinding
 import ru.sirius.siriuswallet.model.ActivityConst.BACK_SUM_COMPONENT_FLAG
@@ -27,7 +29,7 @@ class SelectOperationTypeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initInputParameters()
+        Toasty.error(this, "Some trouble", Toasty.LENGTH_LONG).setGravity(Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, 0).initInputParameters()
         initNavigation()
 
         binding.firstRg.jumpDrawablesToCurrentState()
