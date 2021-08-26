@@ -41,6 +41,11 @@ class WalletInfoActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.init()
+    }
+
     private fun setupListeners() {
         binding.backArrowBtn.setOnClickListener { onBackClick() }
         binding.settingsBtn.setOnClickListener { onSettingsClick() }

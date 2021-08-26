@@ -6,22 +6,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.sirius.siriuswallet.SiriusWalletContainer
+import ru.sirius.siriuswallet.WalletAndUserConstants
+import ru.sirius.siriuswallet.data.OperationService
 import ru.sirius.siriuswallet.data.Response
 import ru.sirius.siriuswallet.model.Operation
 
 @SuppressLint("NewApi")
-class OperationsViewModel(container: SiriusWalletContainer) : ViewModel() {
+class OperationsViewModel(val operationService: OperationService) : ViewModel() {
     val operations: MutableLiveData<List<Operation>> = MutableLiveData()
     val err = MutableLiveData<String>()
 
-    init {
+    fun init() {
         viewModelScope.launch {
             operations.postValue(
                 mutableListOf<Operation>()
             )
-            delay(1000)
-            container.operationsService.loadOperations(103) { response ->
+            delay(1000) // TODO remove
+            operationService.loadOperations(WalletAndUserConstants.WALLET_ID) { response ->
                 if (response is Response.Success) {
                     operations.postValue(response.responseBody)
                 } else {

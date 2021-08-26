@@ -8,6 +8,8 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import ru.sirius.siriuswallet.WalletAndUserConstants
+import ru.sirius.siriuswallet.data.network.api.AccountsApi
 import ru.sirius.siriuswallet.data.network.api.CategoriesApi
 import ru.sirius.siriuswallet.data.network.api.OperationsApi
 import java.util.concurrent.TimeUnit
@@ -28,13 +30,14 @@ object Retrofit {
         .readTimeout(2, TimeUnit.SECONDS)
         .connectTimeout(2, TimeUnit.SECONDS)
         .callTimeout(3, TimeUnit.SECONDS)
-        .addInterceptor(ApiTokenInterceptor("test"))
+        .addInterceptor(ApiTokenInterceptor(WalletAndUserConstants.USER_TOKEN))
         .addInterceptor(httpLoggingInterceptor)
         .build()
 
     private val retrofit: Retrofit
     val CATEGORIES_API: CategoriesApi
     val OPERATIONS_API: OperationsApi
+    val ACCOUNTS_API: AccountsApi
 
     init {
         retrofit = Retrofit.Builder()
@@ -48,5 +51,6 @@ object Retrofit {
 
         CATEGORIES_API = retrofit.create(CategoriesApi::class.java)
         OPERATIONS_API = retrofit.create(OperationsApi::class.java)
+        ACCOUNTS_API = retrofit.create(AccountsApi::class.java)
     }
 }

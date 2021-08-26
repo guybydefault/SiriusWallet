@@ -24,7 +24,7 @@ class SiriusWalletContainer(applicationContext: Context) {
     val operationsService = OperationService(operationNetworkRepository, operationLocalRepository)
     val categoriesService = CategoryService(categoryNetworkRepository, categoryLocalRepository)
 
-    val operationsViewModel: OperationsViewModel by lazy(LazyThreadSafetyMode.NONE) { OperationsViewModel(this) }
+    val operationsViewModel: OperationsViewModel by lazy(LazyThreadSafetyMode.NONE) { OperationsViewModel(operationsService) }
     val selectOperationCategoryViewModel: SelectOperationCategoryViewModel by lazy(LazyThreadSafetyMode.NONE) { SelectOperationCategoryViewModel(this) }
     val editOperationViewModel: EditOperationViewModel by lazy(LazyThreadSafetyMode.NONE) { EditOperationViewModel(operationsService, categoriesService) }
 }
