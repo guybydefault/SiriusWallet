@@ -9,13 +9,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.sirius.siriuswallet.*
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
-import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
-import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
-import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
-import ru.sirius.siriuswallet.model.ActivityConst.RESULT_OPERATION_COMPONENT_FLAG
-import ru.sirius.siriuswallet.model.ActivityConst.SELECT_OPERATION_CATEGORY_FLAG
 import ru.sirius.siriuswallet.model.CategoryItem
 import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.ENTER_TYPE_OPERATION_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.RESULT_OPERATION_COMPONENT_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.SELECT_OPERATION_CATEGORY_FLAG
 
 class SelectOperationCategoryActivity : AppCompatActivity() {
     private val binding: ActivitySelectOperationCategoryBinding by lazy(LazyThreadSafetyMode.NONE) {

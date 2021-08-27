@@ -1,6 +1,6 @@
-package ru.sirius.siriuswallet.model
+package ru.sirius.siriuswallet.view.transition
 
-object ActivityConst {
+object ActivityConstants {
     const val ENTER_SUM_SESSION_FLAG = "ENTER_SUM_SESSION"
     const val ENTER_TYPE_OPERATION_FLAG = "ENTER_TYPE_OPERATION"
     const val CHECKED_ACTIVITY_FLAG = "CHECKED_ACTIVITY"

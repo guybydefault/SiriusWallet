@@ -8,9 +8,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import ru.sirius.siriuswallet.R
 import ru.sirius.siriuswallet.databinding.ActivityEnterOperationSumBinding
-import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
-import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
-import ru.sirius.siriuswallet.model.ActivityConst.RESULT_SUM_COMPONENT_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.CHECKED_ACTIVITY_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.ENTER_SUM_SESSION_FLAG
+import ru.sirius.siriuswallet.view.transition.ActivityConstants.RESULT_SUM_COMPONENT_FLAG
 
 
 class EnterOperationSumActivity : AppCompatActivity() {
