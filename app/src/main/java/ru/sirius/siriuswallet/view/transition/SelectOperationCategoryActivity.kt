@@ -7,11 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import ru.sirius.siriuswallet.CategoryAdapter
-import ru.sirius.siriuswallet.OnCategoryClickListener
-import ru.sirius.siriuswallet.R
+import ru.sirius.siriuswallet.*
 import ru.sirius.siriuswallet.databinding.ActivitySelectOperationCategoryBinding
-import ru.sirius.siriuswallet.getContainer
 import ru.sirius.siriuswallet.model.ActivityConst.CHECKED_ACTIVITY_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_SUM_SESSION_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.ENTER_TYPE_OPERATION_FLAG
@@ -97,8 +94,7 @@ class SelectOperationCategoryActivity : AppCompatActivity() {
 
     private fun setupErrorToasts() {
         selectOperationCategoryViewModel.err.observe(this) {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-
+            showToast(this, R.drawable.ic_error, it, Toast.LENGTH_LONG)
         }
     }
 

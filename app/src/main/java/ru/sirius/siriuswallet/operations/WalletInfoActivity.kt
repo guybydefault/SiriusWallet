@@ -132,7 +132,7 @@ class WalletInfoActivity : AppCompatActivity() {
 
     private fun setupErrorToasts() {
         viewModel.err.observe(this) {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            showToast(this, R.drawable.ic_error, it, Toast.LENGTH_LONG)
         }
     }
 

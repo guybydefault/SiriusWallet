@@ -22,6 +22,7 @@ import ru.sirius.siriuswallet.model.ActivityConst.RESULT_SUM_COMPONENT_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.RESULT_TYPE_COMPONENT_FLAG
 import ru.sirius.siriuswallet.model.ActivityConst.SELECT_OPERATION_CATEGORY_FLAG
 import ru.sirius.siriuswallet.model.CategoryType
+import ru.sirius.siriuswallet.showToast
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.*
@@ -122,7 +123,7 @@ class EditOperationActivity : AppCompatActivity() {
 
     private fun setupErrorToasts() {
         editOperationViewModel.err.observe(this) {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            showToast(this, R.drawable.ic_error, it, Toast.LENGTH_LONG)
         }
     }
 
