@@ -5,8 +5,8 @@ import ru.sirius.siriuswallet.data.local.entities.*
 
 @Dao
 abstract class CategoryWithOperationsDao {
-    @Query("SELECT o.id as o_id, o.amount as o_amount, o.accountId as o_accountId, o.operationDate as o_operationDate, o.operationCategoryId as o_operationCategoryId, c.id as c_id, c.userId as c_userId, c.categoryType as c_categoryType, c.name as c_name, c.categoryResourceId as c_categoryResourceId FROM operation o JOIN category AS c ON c.id = o.operationCategoryId WHERE c.userId = :userId")
-    abstract fun getOperationsByUserId(userId: Int): List<OperationWithCategory>
+    @Query("SELECT o.id as o_id, o.amount as o_amount, o.accountId as o_accountId, o.operationDate as o_operationDate, o.operationCategoryId as o_operationCategoryId, c.id as c_id, c.userId as c_userId, c.categoryType as c_categoryType, c.name as c_name, c.categoryResourceId as c_categoryResourceId FROM operation o JOIN category AS c ON c.id = o.operationCategoryId WHERE o.accountId = :accountId")
+    abstract fun getOperationsByAccountId(accountId: Int): List<OperationWithCategory>
 
     @Query("SELECT * FROM category WHERE userId = :userId")
     @Transaction

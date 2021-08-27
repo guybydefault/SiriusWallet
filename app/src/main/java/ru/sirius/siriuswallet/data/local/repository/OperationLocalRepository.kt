@@ -14,15 +14,15 @@ class OperationLocalRepository(private val db: Database) : OperationCacheReposit
     }
 
     // TODO make this version of method working (now there's a problem: all operations get ID of category)
-//    override suspend fun getOperationsByAccountId(accountId: Int): Response<List<Operation>> {
-//        return Response.Success(db.categoryWithOperationsDao().getOperationsByUserId(accountId).map { it.toOperation() })
-//    }
-
     override suspend fun getOperationsByAccountId(accountId: Int): Response<List<Operation>> {
-        return Response.Success(
-            db.categoryWithOperationsDao().getCategoriesWithOperationsByUserId(accountId)
-                .flatMap { cat -> cat.operations.map { op -> op.toOperation(cat.category) } })
+        return Response.Success(db.categoryWithOperationsDao().getOperationsByAccountId(accountId).map { it.toOperation() })
     }
+
+//    override suspend fun getOperationsByAccountId(accountId: Int): Response<List<Operation>> {
+//        return Response.Success(
+//            db.categoryWithOperationsDao().getCategoriesWithOperationsByUserId(accountId)
+//                .flatMap { cat -> cat.operations.map { op -> op.toOperation(cat.category) } })
+//    }
 
     override suspend fun insertOperation(operation: Operation): Response<Int> {
         db.categoryWithOperationsDao().insertOperationWithCategory(
