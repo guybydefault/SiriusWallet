@@ -23,7 +23,7 @@ class CategoryService(
             onLoad(networkResp, true)
             if (networkResp is Response.Success) {
                 networkResp.responseBody.forEach {
-                    categoryLocalRepository.deleteCategoriesByType(categoryType)
+//                    categoryLocalRepository.deleteCategoriesByType(categoryType) TODO (this version is working supposing that we cannot delete categories right now)
                     networkResp.responseBody.forEach { categoryLocalRepository.addCategory(it) }
                 }
             }
