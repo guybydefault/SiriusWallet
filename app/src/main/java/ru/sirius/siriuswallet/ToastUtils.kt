@@ -9,7 +9,8 @@ import android.widget.TextView
 import android.widget.Toast
 
 
-fun showToast(context: Context, image: Int, message: String?, duration: Int) {
+fun showToast(context: Context, image: Int, originalMsg: String, duration: Int) {
+    var message = if (originalMsg.contains("timeout")) "Превышено время ожидания от сервера" else "Ошибка получения данных с сервера"
     if (ApplicationConstants.USE_DEFAULT_TOASTS) {
         Toast.makeText(context, message, duration).show()
     } else {
