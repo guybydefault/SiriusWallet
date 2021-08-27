@@ -18,7 +18,7 @@ class CategoryNetworkRepository : CategoryRepository {
 
     override suspend fun getCategoriesByTypeAndUserId(categoryType: CategoryType, accountId: Int): Response<List<Category>> {
         return retrofitRequestExceptionHandler {
-            retrofit.CATEGORIES_API.getCategories(categoryType.name, accountId)
+            retrofit.CATEGORIES_API.getCategories(categoryType.name)
                 .handleResponse { it.map { categoryDtoMapper.mapToObj(it) } }
         }
     }
