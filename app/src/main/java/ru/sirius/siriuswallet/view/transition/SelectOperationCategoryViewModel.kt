@@ -29,7 +29,7 @@ class SelectOperationCategoryViewModel(container: SiriusWalletContainer) : ViewM
     private fun updateCategories(categoryType: CategoryType) {
         viewModelScope.launch {
             operationsLoadingInProgress.postValue(true)
-            categoriesService.getCategories(categoryType, ApplicationConstants.USER_ID) { response, lastStage ->
+            categoriesService.getCategories(categoryType, ApplicationConstants.USER_ID, ApplicationConstants.WALLET_ID) { response, lastStage ->
                 if (response is Response.Success) {
                     categories.postValue(response.responseBody)
                 } else {

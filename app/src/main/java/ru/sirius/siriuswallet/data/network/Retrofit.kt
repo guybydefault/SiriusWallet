@@ -25,9 +25,9 @@ object Retrofit {
     }
 
     private val okHttpClient = OkHttpClient.Builder()
-        .readTimeout(2, TimeUnit.SECONDS)
-        .connectTimeout(2, TimeUnit.SECONDS)
-        .callTimeout(3, TimeUnit.SECONDS)
+        .readTimeout(4, TimeUnit.SECONDS)
+        .connectTimeout(4, TimeUnit.SECONDS)
+        .callTimeout(5, TimeUnit.SECONDS)
         .addInterceptor(ApiTokenInterceptor(ApplicationConstants.USER_TOKEN))
         .addInterceptor(httpLoggingInterceptor)
         .build()

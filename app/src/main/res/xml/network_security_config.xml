@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">bbcc-85-174-236-130.ngrok.io</domain>
+        <domain includeSubdomains="true">5647-178-252-127-237.ngrok.io</domain>
         <domain includeSubdomains="true">34.88.106.159</domain>
     </domain-config>
 </network-security-config>
